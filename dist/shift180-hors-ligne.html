@@ -734,7 +734,17 @@ html[data-theme="system"] .magnet.today::after { color: #26243a; }
 .auth-me .ava { width: 22px; height: 22px; border-radius: 50%; object-fit: cover; display: block; flex: none; background: var(--brand-soft); box-shadow: 0 0 0 1.5px var(--line-strong, rgba(0,0,0,.15)); }
 .auth-me .ava-letter { display: grid; place-items: center; font-size: 11px; font-weight: 800; color: var(--ink); }
 
-/* ---------- responsive des ajouts ---------- */
+/* ---------- bouton retour hors TopBar ---------- */
+.back-bar { padding: 8px 14px 0; }
+.back-bar .chip-btn { font-size: 13px; }
+
+@media (max-width: 700px) {
+  .back-bar { padding: 6px 14px 0; }
+  .auth-me { gap: 5px; padding: 4px 10px 4px 4px; }
+  .auth-me b { font-size: 12px; }
+  .auth-me .ava { width: 20px; height: 20px; }
+  .topbar-inner { flex-wrap: wrap; }
+}
 @media (max-width: 700px) {
   .term-def { font-size: 12.5px; }
   .mode-card { flex: 0 0 88%; }
@@ -2895,6 +2905,18 @@ async function bootCommon() {
   document.documentElement.classList.add('js');
   await Sync.init();
   renderAuth();
+  /* bouton retour hors de la TopBar (toutes les pages sauf l'accueil) */
+  const path = (location.pathname.split('/').pop() || 'index.html').toLowerCase();
+  if (path !== 'index.html' && path !== '' && path !== 'index') {
+    const header = document.querySelector('header.topbar');
+    if (header && !document.getElementById('backBar')) {
+      const bar = document.createElement('div');
+      bar.id = 'backBar';
+      bar.className = 'back-bar';
+      bar.innerHTML = '<button class="chip-btn small" type="button" onclick="if (history.length > 1) history.back(); else location.href=\'index.html\';" aria-label="Retour">← Retour</button>';
+      header.insertAdjacentElement('afterend', bar);
+    }
+  }
 }
 
 // Icônes en ligne (mini-jeux d'emoji SVG inline, légers)

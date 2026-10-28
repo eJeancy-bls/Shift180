@@ -726,7 +726,17 @@ html[data-theme="system"] .magnet.today::after { color: #26243a; }
 .auth-me .ava { width: 22px; height: 22px; border-radius: 50%; object-fit: cover; display: block; flex: none; background: var(--brand-soft); box-shadow: 0 0 0 1.5px var(--line-strong, rgba(0,0,0,.15)); }
 .auth-me .ava-letter { display: grid; place-items: center; font-size: 11px; font-weight: 800; color: var(--ink); }
 
-/* ---------- responsive des ajouts ---------- */
+/* ---------- bouton retour hors TopBar ---------- */
+.back-bar { padding: 8px 14px 0; }
+.back-bar .chip-btn { font-size: 13px; }
+
+@media (max-width: 700px) {
+  .back-bar { padding: 6px 14px 0; }
+  .auth-me { gap: 5px; padding: 4px 10px 4px 4px; }
+  .auth-me b { font-size: 12px; }
+  .auth-me .ava { width: 20px; height: 20px; }
+  .topbar-inner { flex-wrap: wrap; }
+}
 @media (max-width: 700px) {
   .term-def { font-size: 12.5px; }
   .mode-card { flex: 0 0 88%; }

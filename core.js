@@ -384,6 +384,18 @@ async function bootCommon() {
   document.documentElement.classList.add('js');
   await Sync.init();
   renderAuth();
+  /* bouton retour hors de la TopBar (toutes les pages sauf l'accueil) */
+  const path = (location.pathname.split('/').pop() || 'index.html').toLowerCase();
+  if (path !== 'index.html' && path !== '' && path !== 'index') {
+    const header = document.querySelector('header.topbar');
+    if (header && !document.getElementById('backBar')) {
+      const bar = document.createElement('div');
+      bar.id = 'backBar';
+      bar.className = 'back-bar';
+      bar.innerHTML = '<button class="chip-btn small" type="button" onclick="if (history.length > 1) history.back(); else location.href=\'index.html\';" aria-label="Retour">← Retour</button>';
+      header.insertAdjacentElement('afterend', bar);
+    }
+  }
 }
 
 // Icônes en ligne (mini-jeux d'emoji SVG inline, légers)
