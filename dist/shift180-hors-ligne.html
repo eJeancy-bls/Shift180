@@ -727,6 +727,7 @@ html[data-theme="system"] .magnet.today::after { color: #26243a; }
 /* icônes UI (SVG inline) */
 .ico { width: 1.15em; height: 1.15em; vertical-align: -0.18em; display: inline-block; }
 .btn .ico { width: 18px; height: 18px; vertical-align: middle; }
+.flag-cg { width: 1.4em; height: 1.05em; vertical-align: -0.14em; display: inline-block; border-radius: 2.5px; box-shadow: 0 0 0 1px rgba(0,0,0,.08); }
 
 /* ---------- responsive des ajouts ---------- */
 @media (max-width: 700px) {
@@ -2295,7 +2296,7 @@ window.FIGS = {
       <rect x="236" y="72" width="46" height="46" rx="9" fill="var(--peach)" stroke="var(--peach-strong)" stroke-width="3"/>
       <text x="259" y="101" text-anchor="middle" font-size="14" font-weight="800" fill="var(--peach-ink)">F12</text>
       <rect x="290" y="78" width="38" height="34" rx="7" fill="var(--card)" stroke="var(--line-strong)"/>
-      <text x="309" y="100" text-anchor="middle" font-size="12" fill="var(--ink)">💡</text>
+      <g stroke="var(--ink)" stroke-width="1.8" fill="none" stroke-linecap="round"><circle cx="309" cy="92.5" r="6.2"/><path d="M306.5 101.5h5M307.5 104.5h3"/></g>
       <path d="M259 150 q 0 26 30 30" stroke="var(--peach-strong)" stroke-width="3.5" fill="none" stroke-linecap="round"/>
       <text x="240" y="190" text-anchor="middle" font-size="13" font-weight="700" fill="var(--peach-ink)">Presse F12 → l'outillage du navigateur s'ouvre au bas de la page</text>
     </svg>`
@@ -2412,7 +2413,7 @@ window.FIGS = {
       <rect x="30" y="28" width="420" height="150" rx="12" fill="var(--board)" stroke="var(--line-strong)"/>
       <rect x="44" y="40" width="392" height="20" rx="6" fill="var(--card)" stroke="var(--line)"/>
       <rect x="340" y="43" width="34" height="14" rx="4" fill="var(--brand)"/>
-      <text x="357" y="54" text-anchor="middle" font-size="9" fill="#fff" font-weight="700">📱</text>
+      <g fill="none" stroke="#fff" stroke-width="1.4" stroke-linecap="round"><rect x="353" y="44.5" width="8" height="11" rx="2"/><path d="M355.5 53h3"/></g>
       <rect x="150" y="70" width="120" height="94" rx="12" fill="var(--sky)" stroke="var(--sky-ink)"/>
       <rect x="164" y="84" width="92" height="34" rx="7" fill="var(--card)"/>
       <rect x="164" y="128" width="92" height="8" rx="4" fill="var(--card)"/>
@@ -2575,6 +2576,7 @@ const ICONS = {
   '🙌': `<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21v-6"/><path d="M8 15V8.5a1.5 1.5 0 0 1 3 0V14M11 8.5V4a1.5 1.5 0 0 1 3 0v6M14 10V6a1.5 1.5 0 0 1 3 0v8c0 4-2 7-5 7s-5-2-5-4l-2-3c-.8-1.2.6-2.6 1.8-1.7L8 13"/></svg>`,
   '🧲': `<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 15V7a6 6 0 0 1 12 0v8a6 6 0 0 1-12 0z" transform="rotate(90 12 12)"/><path d="M3 9h6M15 9h6" transform="rotate(90 12 12)"/></svg>`,
   '👨🏾‍💻': `<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c0-3.3 2.9-5 6.5-5 1.2 0 2.3.2 3.2.6"/><path d="m15.5 13.5 2 2 4-4.5"/></svg>`,
+  '🇨🇬': `<svg class="flag-cg" viewBox="0 0 24 18" role="img" aria-label="Drapeau de la République démocratique du Congo"><defs><clipPath id="flagCgClip"><rect width="24" height="18" rx="2.5"/></clipPath></defs><g clip-path="url(#flagCgClip)"><rect width="24" height="18" fill="#007FFF"/><path d="M0 11.5 24-4.5v3L0 14.5z" fill="#F7D618"/><path d="M0 14.5 24-1.5v6L0 20.5z" fill="#CE1021"/><path d="M0 20.5 24 4.5v3L0 23.5z" fill="#F7D618"/><path d="M4.6 1.2l.76 2.35h2.47L5.83 5l.77 2.35L4.6 5.9 2.6 7.35l.77-2.35L1.37 3.55h2.47z" fill="#F7D618"/></g></svg>`,
   '📗': `<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V2H6.5A2.5 2.5 0 0 0 4 4.5v15z"/><path d="M4 19.5A2.5 2.5 0 0 0 6.5 22H20v-5"/></svg>`,
   '📚': `<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 4h6a3 3 0 0 1 3 3v13a2.5 2.5 0 0 0-2.5-2.5H2V4z"/><path d="M22 4h-6a3 3 0 0 0-3 3v13a2.5 2.5 0 0 1 2.5-2.5H22V4z"/></svg>`,
   '🗂': `<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6a2 2 0 0 1 2-2h4l2 3h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6z"/><path d="M3 11h18"/></svg>`,

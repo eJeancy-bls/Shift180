@@ -46,7 +46,7 @@ const PAGES = [
 
     const res = await page.evaluate(allow => {
       const txt = document.body.innerText || '';
-      const emojiRe = /\p{Extended_Pictographic}/gu;
+      const emojiRe = /\p{Extended_Pictographic}|[\u{1F1E6}-\u{1F1FF}]{2}/gu;
       const found = [...new Set(txt.match(emojiRe) || [])];
       return {
         found,
@@ -78,7 +78,7 @@ const PAGES = [
     localStorage.setItem('pbd.state.v2', JSON.stringify({ progress, pending: {} }));
   });
   await mp.goto(BASE + '/day.html?d=2', { waitUntil: 'networkidle' });
-  const mobScan = await mp.evaluate(() => [...new Set(((document.body.innerText || '').match(/\p{Extended_Pictographic}/gu) || []))]);
+  const mobScan = await mp.evaluate(() => [...new Set(((document.body.innerText || '').match(/\p{Extended_Pictographic}|[\u{1F1E6}-\u{1F1FF}]{2}/gu) || []))]);
   console.log('mobile day2 · emojis restants:', mobScan.length ? mobScan.join(' ') : '0', merrs.length ? '· ⚠ ' + merrs.join(' | ') : '· OK');
   if (merrs.length) problems.push('mobile → ' + merrs.join(' | '));
   if (mobScan.length) problems.push('mobile → emojis restants : ' + mobScan.join(' '));
