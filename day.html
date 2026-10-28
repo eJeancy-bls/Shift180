@@ -1,33 +1,107 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" data-theme="system">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Jour</title>
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Jour · Shift180</title>
+  <link rel="icon" href="icons/logo.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icons/icon-180.png">
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="theme-color" content="#fbf6ed">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header>
-  <p><b>ProjetBigDev</b> · <a href="index.html">← Tableau de bord</a> · <a id="prev" href="#">Jour précédent</a> · <a id="next" href="#">Jour suivant</a></p>
-  <h1 id="title"></h1>
-  <p id="msg"></p>
-</header>
-<main id="app">
-  <section><h2>📖 Cours</h2><div id="theory"></div></section>
-  <section><h2>🛠 Travaux pratiques</h2><div id="tasks"></div></section>
-  <textarea id="ed" spellcheck="false"></textarea>
-  <div class="row">
-    <button id="run">▶ Exécuter le code</button>
-    <button id="reset" style="background:var(--l)">Réinitialiser</button>
-    <small>Ctrl+Entrée pour exécuter</small>
-  </div>
-  <iframe id="fr" sandbox="allow-scripts"></iframe>
-  <h3>Console</h3>
-  <pre id="con"></pre>
-  <button id="ok">✅ Valider la leçon du jour</button>
-</main>
-<footer style="text-align:center;color:var(--m);padding:24px 16px;font-size:14px">ProjetBigDev · Créé par Emmanuel BILOMBO-SILAHO, développeur congolais</footer>
-<script src="data.js"></script>
-<script src="app.js"></script>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="app.html">
+        <img src="icons/logo.svg" alt="" width="34" height="34">
+        <b>Shift180</b>
+      </a>
+      <span class="sync-badge"><span class="sync-dot"></span></span>
+      <span class="spacer"></span>
+      <span id="topbarAuth"></span>
+      <div class="theme-menu">
+        <button class="chip-btn small theme-toggle" aria-haspopup="true" aria-label="Choisir le thème">
+          🌗<span class="hide-s"> Thème</span>
+        </button>
+        <div class="theme-pop" role="menu" aria-label="Thème">
+          <button data-t="light" aria-checked="false">☀️ Clair</button>
+          <button data-t="dark" aria-checked="false">🌙 Sombre</button>
+          <button data-t="system" aria-checked="false">🖥️ Système</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <div id="lockPage" class="locked-page" hidden>
+      <h2><span id="lockIconWrap"></span> <span id="lockTitle"></span></h2>
+      <p id="lockMsg"></p>
+      <a class="btn lilac" href="app.html">← Retour au tableau</a>
+    </div>
+
+    <div id="app">
+      <div class="day-head">
+        <nav>
+          <a href="app.html">← Tableau</a><span>·</span>
+          <a id="prev" href="#">Jour précédent</a><span>·</span>
+          <a id="next" href="#">Jour suivant</a><span>·</span>
+          <span class="chip-btn small" id="statusChip"></span>
+        </nav>
+        <h1><span id="dayNum"></span> — <span id="title"></span></h1>
+        <p class="dmeta" id="dayMeta"></p>
+      </div>
+
+      <section class="panel rise">
+        <h2><span class="magnetish" style="background:var(--lilac)"></span> Cours du jour</h2>
+        <div class="theory" id="theory"></div>
+      </section>
+
+      <section class="panel rise" style="animation-delay:60ms">
+        <h2><span class="magnetish" style="background:var(--peach)"></span> Travaux pratiques</h2>
+        <div id="tasks"></div>
+      </section>
+
+      <section class="panel rise" style="animation-delay:120ms">
+        <h2><span class="magnetish" style="background:var(--mint)"></span> Éditeur de code</h2>
+        <div class="editor-label"><label for="ed">Écris puis exécute (Ctrl+Entrée)</label><small id="frLabel"></small></div>
+        <textarea id="ed" spellcheck="false" aria-label="Éditeur de code"></textarea>
+        <div class="row">
+          <button class="btn multi" id="run">▶ Exécuter le code</button>
+          <button class="chip-btn" id="reset" type="button">Réinitialiser</button>
+          <small>Le code est gardé automatiquement — même hors ligne.</small>
+        </div>
+        <div class="preview-only">
+          <small style="font-weight:700">Aperçu visuel</small>
+          <iframe id="fr" sandbox="allow-scripts" title="Aperçu de la page générée"></iframe>
+        </div>
+        <small style="font-weight:700">Console</small>
+        <pre class="console" id="con" aria-live="polite"></pre>
+      </section>
+
+      <div class="validate-bar">
+        <div class="inner">
+          <button class="btn mint" id="ok" disabled>✅ Poser ton aimant</button>
+          <small id="okHint"></small>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-foot">
+    <div class="container">Shift180 · Créé par Emmanuel BILOMBO-SILAHO, développeur congolais · <a href="CREDITS.md">Crédits</a></div>
+  </footer>
+
+  <script src="config.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="lessons-d1-15.js"></script>
+  <script src="lessons-d16-30.js"></script>
+  <script src="lessons-d31-45.js"></script>
+  <script src="lessons-d46-60.js"></script>
+  <script src="data.js"></script>
+  <script src="figures.js"></script>
+  <script src="core.js"></script>
+  <script src="day.js"></script>
+  <script>if ('serviceWorker' in navigator && location.protocol.startsWith('http')) { navigator.serviceWorker.register('sw.js').catch(()=>{}); }</script>
 </body>
 </html>

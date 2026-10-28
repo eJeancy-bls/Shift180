@@ -1,5 +1,8 @@
-// Plan : "jour(s)|titre". Les plages sont étendues automatiquement.
-const RAW=`1|Le web et le fonctionnement d'un site
+// Shift180 — plan des 180 jours + fusion des leçons détaillées
+// Les leçons détaillées (jours 1-60) vivent dans lessons-d1-15.js, lessons-d16-30.js,
+// lessons-d31-45.js, lessons-d46-60.js. Les jours 61-180 reçoivent un cours générique enrichi.
+
+const RAW = `1|Le web et le fonctionnement d'un site
 2|Structure HTML et balises
 3|Titres, paragraphes, listes
 4|Liens, images, attributs
@@ -101,28 +104,67 @@ const RAW=`1|Le web et le fonctionnement d'un site
 178|Questions d'entretien
 179-180|Bases du system design`;
 
-const DAYS=[];
-RAW.split('\n').forEach(l=>{
-  const[r,t]=l.split('|'),[a,b=a]=r.split('-').map(Number);
-  for(let d=a;d<=b;d++)DAYS[d]={n:d,title:a==b?t:`${t} (${d-a+1}/${b-a+1})`};
+const DAYS = [];
+RAW.split('\n').forEach(l => {
+  const [r, t] = l.split('|'), [a, b = a] = r.split('-').map(Number);
+  for (let d = a; d <= b; d++) DAYS[d] = { n: d, title: a === b ? t : `${t} (${d - a + 1}/${b - a + 1})` };
 });
 
-// Leçons détaillées (t = cours, s = code de départ, x = travaux pratiques)
-const LESSONS={
-1:{t:`<h3>Comment fonctionne le web</h3>
-<p>Quand tu tapes une adresse, ton <b>navigateur</b> (client) envoie une requête <b>HTTP</b> à un <b>serveur</b>. Celui-ci renvoie des fichiers : <code>HTML</code> (structure), <code>CSS</code> (style), <code>JavaScript</code> (comportement).</p>
-<ul><li><b>DNS</b> : traduit <code>exemple.com</code> en adresse IP</li><li><b>Requête</b> : <code>GET /index.html</code></li><li><b>Réponse</b> : code 200 + fichier, ou 404 si introuvable</li></ul>
-<p>Astuce : ouvre F12 → onglet Réseau, recharge une page et observe les requêtes.</p>`,
-s:`<h1>Mon premier site</h1>\n<p>Bonjour le web !</p>`,
-x:['Observer les requêtes d\'un site dans F12 > Réseau','Expliquer client, serveur, HTTP et DNS avec mes propres mots','Modifier le titre ci-dessus et exécuter le code']},
-2:{t:`<h3>Structure d'une page HTML</h3>
-<p>Une page HTML est un arbre de <b>balises</b>. Une balise s'ouvre <code>&lt;p&gt;</code> et se ferme <code>&lt;/p&gt;</code>.</p>
-<ul><li><code>&lt;!DOCTYPE html&gt;</code> : déclare le HTML5</li><li><code>&lt;head&gt;</code> : infos invisibles (titre, encodage)</li><li><code>&lt;body&gt;</code> : contenu visible</li></ul>
-<p>Les balises s'imbriquent : toujours fermer la dernière ouverte en premier.</p>`,
-s:`<!DOCTYPE html>\n<html lang="fr">\n<head>\n  <meta charset="UTF-8">\n  <title>Ma page</title>\n</head>\n<body>\n  <p>Contenu</p>\n</body>\n</html>`,
-x:['Écrire de mémoire une page complète, sans copier','Provoquer une erreur d\'imbrication et observer le résultat','Ajouter 3 balises différentes dans le body']},
-3:{t:`<h3>Titres, paragraphes, listes</h3>
-<ul><li><code>&lt;h1&gt;</code> à <code>&lt;h6&gt;</code> : titres (un seul h1 par page)</li><li><code>&lt;p&gt;</code> : paragraphe</li><li><code>&lt;ul&gt;</code> liste à puces, <code>&lt;ol&gt;</code> liste numérotée, <code>&lt;li&gt;</code> élément</li><li><code>&lt;strong&gt;</code> / <code>&lt;em&gt;</code> : importance / emphase</li></ul>`,
-s:`<h1>Ma recette</h1>\n<h2>Ingrédients</h2>\n<ul>\n  <li>...</li>\n</ul>\n<h2>Étapes</h2>\n<ol>\n  <li>...</li>\n</ol>`,
-x:['Écrire une page de recette avec h1, h2, ul et ol','Utiliser strong et em au moins une fois','Imbriquer une liste dans une liste']}
-};
+// Noms courts des 6 mois pour le rail du tableau de bord
+const MONTHS = [
+  { n: 1, title: 'Fondamentaux du web', range: [1, 30] },
+  { n: 2, title: 'JavaScript maîtrisé', range: [31, 60] },
+  { n: 3, title: 'Frontend React', range: [61, 90] },
+  { n: 4, title: 'Backend Node & Express', range: [91, 120] },
+  { n: 5, title: 'Bases de données', range: [121, 150] },
+  { n: 6, title: 'Emploi & avancé', range: [151, 180] }
+];
+
+// Fusion des parties de leçons détaillées (définies dans les fichiers lesson-*.js)
+const LESSONS = Object.assign({},
+  window.LESSONS_D1 || {}, window.LESSONS_D2 || {},
+  window.LESSONS_D3 || {}, window.LESSONS_D4 || {});
+
+// Cours générique enrichi pour les jours sans leçon détaillée (61-180)
+// Cadre académique : définition → mécanisme → pratique → vérification (même canevas que les leçons détaillées).
+function generic(D) {
+  const q = encodeURIComponent(D.title);
+  return {
+    t: `<div class="keepnote">📌 Sujet du jour : <b>${D.title}</b> — fiche au canevas académique (définition → mécanisme → pratique → vérification).</div>
+<h3>1. Découvrir — la définition à posséder (25 min)</h3>
+<p>Cherche la référence officielle (MDN, doc Node.js, MongoDB Manual, docs Git) et prends tes notes sous ce triplet :</p>
+<ul>
+<li><b>Définition.</b> Qu'est-ce que <code>${D.title}</code>, en deux phrases, avec les mots du domaine ?</li>
+<li><b>Mécanisme.</b> Comment ça marche sous le capot — entrées, traitement, sorties, ordre d'exécution.</li>
+<li><b>Limites.</b> Dans quels cas ne PAS l'utiliser, et quelles erreurs classiques l'accompagnent.</li>
+</ul>
+<h3>2. Faire — 3 exemples croissants (40 min)</h3>
+<ol>
+<li><b>Trivial</b> : l'exemple minimum qui démontre le mécanisme.</li>
+<li><b>Instrumenté</b> : le même, avec options/conditions et une erreur déclenchée volontairement pour lire le message.</li>
+<li><b>Personnel</b> : un exemple de ta propre invention, connecté aux jours précédents (une notion ne s'acquiert que câblée aux anciennes).</li>
+</ol>
+<h3>3. Consolider — la vérification (25 min)</h3>
+<ul>
+<li><b>Jeu de questions</b> : quand utiliser <code>${D.title}</code>, quand s'en abstenir, quel piège éviter ?</li>
+<li><b>Oral</b> : explique la notion à voix haute en 5 phrases — ce qui ne sort pas proprement de ta bouche n'est pas encore acquis.</li>
+<li><b>Bilan</b> : note 1 acquis + 1 point à revoir dans le journal de bord.</li>
+</ul>
+<h3>4. Pratique selon le jour</h3>
+<ul>
+<li><b>Frontend</b> : fais-le dans l'éditeur ci-dessous, aperçu à l'appui.</li>
+<li><b>Node, Git, MongoDB</b> : fais-le en local dans un terminal, puis note ici ce que tu observes (JSON des commandes, logs, erreurs).</li>
+<li><b>Jours « projet »</b> : découpe en 3-4 étapes, valide un fichier/déploiement fonctionnel à chaque étape, puis publie via GitHub Pages si besoin.</li>
+</ul>
+<p><small style="color:var(--muted)">📚 Sources recommandées : doc officielle du sujet · MDN · OpenClassrooms · Cisco NetAcad (parcours « JavaScript Essentials » et « Networking Basics ») — pour la définition, la pratique et les exercices complémentaires.</small></p>
+<div class="keepnote">🙂 Ce jour sans cours pré-écrit attend son enrichissement : complète-le au fil de ta progression.</div>`,
+    s: `// Espace d'essai — ${D.title}\nconsole.log("Nouveau départ !");\n\n// Décris ce que tu apprends aujourd'hui :`,
+    x: [
+      'Écrire la définition + le mécanisme + 1 limite, avec tes mots',
+      'Écrire 3 exemples personnels croissants sur le sujet',
+      'Casser un exemple volontairement et lire l\'erreur',
+      'Résumer la notion en 5 phrases, à voix haute',
+      'Consigner une source sérieuse (doc officielle) DANS les notes du jour'
+    ]
+  };
+}

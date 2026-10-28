@@ -1,0 +1,21 @@
+# Dépendances (Playwright utilisé uniquement pour les outils dev : icônes, captures)
+node_modules/
+
+# IDE
+.idea/
+.vscode/
+
+# Artefacts de session impeccable (captures, brouillons, build)
+.impeccable/
+
+# OS
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# Divers
+*.log
+release/
+
+# Supports de cours de la formation (© tiers : Morel OYERE / CFI-CIRAS, Wikibooks) — ne pas publier
+resource/

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="system">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Commencer · Shift180</title>
+  <link rel="icon" href="icons/logo.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icons/icon-180.png">
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="theme-color" content="#fbf6ed">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="index.html"><img src="icons/logo.svg" alt="" width="34" height="34"><b>Shift180</b></a>
+      <span class="spacer"></span>
+      <span class="sync-badge"><span class="sync-dot"></span></span>
+      <a class="chip-btn small" href="app.html">Plateforme →</a>
+      <div class="theme-menu">
+        <button class="chip-btn small theme-toggle" aria-haspopup="true" aria-label="Choisir le thème">🌗</button>
+        <div class="theme-pop" role="menu" aria-label="Thème">
+          <button data-t="light" aria-checked="false">☀️ Clair</button>
+          <button data-t="dark" aria-checked="false">🌙 Sombre</button>
+          <button data-t="system" aria-checked="false">🖥️ Système</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="container auth-page">
+    <h1 class="auth-title">Comment veux-tu commencer ?</h1>
+    <p class="auth-sub">Deux modes interchangeables — tu peux commencer hors ligne et connecter un compte plus tard.</p>
+
+    <div class="seg-wrap">
+      <div class="seg" role="tablist" aria-label="Choisir le mode">
+        <button id="tabOffline" role="tab" aria-selected="true">🔌 Hors ligne</button>
+        <button id="tabOnline" role="tab" aria-selected="false">☁️ En ligne</button>
+      </div>
+    </div>
+
+    <!-- ======== MODE HORS LIGNE ======== -->
+    <section class="seg-panel" id="panelOffline" role="tabpanel" aria-label="Mode hors ligne">
+      <p class="device-note" id="deviceNote"></p>
+      <div class="method-steps">
+        <!-- carte file unique (recommandée mobile) -->
+        <div class="method-step" id="stepOneFile">
+          <span class="reco-tag" id="oneFileTag" hidden>Recommandé sur ton appareil</span>
+          <h3>📱 1. Le fichier unique (téléphone, tablette, PC)</h3>
+          <p style="font-size:14px;line-height:1.55;margin:0">Un seul fichier <code>shift180-hors-ligne.html</code> contient <b>toute la plateforme</b> : les 6 mois, les leçons, le lexique, l'éditeur. Ni Internet, ni Git, ni dossier entier.</p>
+          <ol>
+            <li>Télécharge le fichier (bouton ci-dessous depuis la plateforme en ligne, ou sur PC).</li>
+            <li>Ouvre-le dans Chrome / Firefox (sur Android : Fichiers → Ouvrir avec → Chrome ; sur iPhone : Safari sait ouvrir un HTML depuis Fichiers).</li>
+            <li>La plateforme s'ouvre telle quelle : personnalise ton chemin, jour après jour.</li>
+          </ol>
+          <a class="btn mint" href="dist/shift180-hors-ligne.html" download="shift180-hors-ligne.html">⤓ Télécharger le fichier unique</a>
+          <p class="auth-note" style="margin:9px 0 0">⚠️ Sur iPhone/iPad, la sauvegarde de progression dans ce fichier peut être limitée par Safari : le mode en ligne reste la meilleure option iOS. Sur Android/PC, tout est gardé localement.</p>
+        </div>
+        <!-- carte clone PC -->
+        <div class="method-step" id="stepClone">
+          <h3>💻 2. Cloner le dépôt complet (PC obligatoire, le plus fidèle)</h3>
+          <ol>
+            <li>Installe <b>Git</b> (git-scm.com, 5 minutes).</li>
+            <li>Ouvre un terminal et tape : <code>git clone https://github.com/&lt;ton-dep&gt;/Shift180.git</code> → un dossier Shift180 apparaît.</li>
+            <li>Ouvre <code>index.html</code> (double-clic) : c'est prêt 🎉</li>
+          </ol>
+          <p style="font-size:12.5px;color:var(--muted);margin:8px 0 0">💻 pas de PC ? Saute cette étape pour l'instant : elle attendra ta prochaine session PC.</p>
+        </div>
+        <div class="method-step">
+          <h3>🎯 Et ensuite ?</h3>
+          <p style="font-size:14px;line-height:1.55;margin:0">Quand tu te connectes à un compte (mode en ligne), ta progression hors ligne, déjà stockée localement, <b>se synchronise automatiquement</b> — rien ne se perd.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======== MODE EN LIGNE ======== -->
+    <section class="seg-panel" id="panelOnline" role="tabpanel" aria-label="Mode en ligne" hidden>
+      <p class="device-note">Ton tableau suit l'appareil : smartphone, tablette, PC — ta progression est sauvegardée en ligne dès validation. Hors connexion ? File d'attente automatique, retour de réseau inclus.</p>
+      <div class="method-steps">
+        <div class="method-step">
+          <h3>1. Une connexion à 1 clic</h3>
+          <div class="oauth-row">
+            <button class="btn lilac" id="btnGoogle">🌐 Connexion Google</button>
+            <button class="btn lilac" id="btnGithub">🐙 Connexion GitHub</button>
+          </div>
+          <p class="auth-note">Google/GitHub doivent être activés dans Supabase (5 min côté admin) — sinon, la voie classique ci-dessous marche toujours.</p>
+        </div>
+        <div class="method-step">
+          <h3>2. La voie classique : email + mot de passe</h3>
+          <p style="font-size:14px;margin:0 0 10px">Une page dédiée : créer ton compte ou te connecter — ton email reste ton identité, aucun moteur de recherche impliqué.</p>
+          <a class="btn big multi" href="login.html" style="width:100%">Créer un compte / Se connecter →</a>
+        </div>
+        <p class="form-msg" id="fMsg" style="margin-top:12px"></p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-foot">
+    <div class="container">Shift180 · Créé par Emmanuel BILOMBO-SILAHO, développeur congolais</div>
+  </footer>
+
+  <script src="config.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="lessons-d1-15.js"></script>
+  <script src="lessons-d16-30.js"></script>
+  <script src="lessons-d31-45.js"></script>
+  <script src="lessons-d46-60.js"></script>
+  <script src="data.js"></script>
+  <script src="figures.js"></script>
+  <script src="core.js"></script>
+  <script>
+    Theme.init();
+    if ('serviceWorker' in navigator && location.protocol.startsWith('http')) { navigator.serviceWorker.register('sw.js').catch(()=>{}); }
+
+    /* slider offline/online */
+    const tabs = { offline: $('#tabOffline'), online: $('#tabOnline') };
+    const panels = { offline: $('#panelOffline'), online: $('#panelOnline') };
+    function setMode(m) {
+      Object.keys(tabs).forEach(k => {
+        const on = k === m;
+        tabs[k].setAttribute('aria-selected', String(on));
+        panels[k].hidden = !on;
+      });
+    }
+    tabs.offline.onclick = () => setMode('offline');
+    tabs.online.onclick = () => setMode('online');
+    const urlMode = new URLSearchParams(location.search).get('m') || (location.hash.startsWith('#m=') ? location.hash.slice(3) : null);
+    setMode(urlMode || localStorage.getItem('pbd.modeChoice') || 'offline');
+
+    /* détection d'appareil pour ordonner les méthodes */
+    const coarse = matchMedia('(pointer: coarse)').matches && navigator.maxTouchPoints > 0;
+    const narrowScreen = matchMedia('(max-width: 700px)').matches;
+    const isMobileDev = coarse || narrowScreen;
+    $('#deviceNote').textContent = isMobileDev
+      ? 'Ton appareil est un téléphone / tablette : voici les méthodes dans l\'ordre qui te correspond.'
+      : 'Ton appareil ressemble à un PC : la méthode dossier cloné est la plus fidèle, le fichier unique marche aussi.';
+    if (isMobileDev) {
+      $('#stepOneFile').classList.add('reco');
+      $('#oneFileTag').hidden = false;
+      $('#stepClone').style.display = 'block'; /* PC obligatoire visuellement, pas en haut */
+    }
+
+    /* OAuth */
+    const msg = $('#fMsg');
+    async function oauth(provider) {
+      if (!Store.sb) { msg.className = 'form-msg err'; msg.textContent = 'Compte non configuré ici (config.js vide) — utilise le mode hors ligne ou remplis config.js.'; return; }
+      msg.className = 'form-msg'; msg.textContent = 'Connexion ' + provider + '…';
+      try {
+        await Sync.signInOAuth(provider);
+        /* la page va redirecter vers Google/GitHub */
+      } catch (err) {
+        msg.className = 'form-msg err';
+        msg.textContent = 'Connexion ' + provider + ' indisponible : ' + (err.message || err);
+      }
+    }
+    $('#btnGoogle').onclick = () => oauth('google');
+    $('#btnGithub').onclick = () => oauth('github');
+  </script>
+</body>
+</html>

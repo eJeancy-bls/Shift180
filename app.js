@@ -1,71 +1,161 @@
-const K='fs180',L=()=>JSON.parse(localStorage.getItem(K)||'{}'),today=()=>new Date().toLocaleDateString('sv'),$=s=>document.querySelector(s);
-const LAB={locked:'🔒 Verrouillé',open:'Disponible',done:'✓ Terminé',wait:'⏳ Demain'};
+// app.js — tableau de bord (index de la plateforme : app.html)
+/* gère : hero de progression, rail des 6 mois, filière d'aimants du mois,
+   carte de compte (auth Supabase), badge de sync. */
 
-function status(n){
-  const s=L();
-  if(s[n])return'done';
-  const m=Math.max(0,...Object.keys(s).map(Number));
-  if(n>m+1)return'locked';
-  return m&&s[m]>=today()?'wait':'open';
+const LAB = {
+  done: '✓ Terminé',
+  open: 'Poser ton aimant',
+  wait: '⏳ Demain',
+  locked: 'Verrouillé'
+};
+
+function monthDayStats(m) {
+  const [a, b] = MONTHS[m - 1].range;
+  let done = 0;
+  for (let n = a; n <= b; n++) if (Store.progress[n]) done++;
+  return { done, total: b - a + 1 };
 }
 
-const generic=D=>({
-  t:`<p>Sujet du jour : <b>${D.title}</b>.</p><ol><li>Lis la documentation (<a target="_blank" href="https://developer.mozilla.org/fr/search?q=${encodeURIComponent(D.title)}">MDN</a>) pendant 30 min.</li><li>Reproduis chaque exemple à la main, sans copier-coller.</li><li>Casse volontairement le code et lis les erreurs.</li></ol><p><i>Pour Git, Node, React et MongoDB, pratique aussi en local dans ton terminal.</i></p>`,
-  s:'// Ton espace d\'essai\nconsole.log("Prêt !");',
-  x:['Écrire 3 exemples personnels sur le sujet','Résumer la notion en 5 lignes','Faire un mini-exercice et le tester']
-});
-
-function home(){
-  const d=Object.keys(L()).length;
-  $('#pct').textContent=`${d}/180 jours · ${Math.round(d/1.8)}%`;
-  $('#fill').style.width=d/1.8+'%';
-  $('#grid').innerHTML=DAYS.slice(1).map(x=>{
-    const s=status(x.n);
-    return `<a class="card ${s}" href="${s=='locked'?'#':'day.html?d='+x.n}"><b>J${x.n}</b><small>${x.title}</small><span class="badge">${LAB[s]}</span></a>`;
-  }).join('');
-}
-
-function day(){
-  const n=+new URLSearchParams(location.search).get('d')||1,D=DAYS[n];
-  if(!D){location.href='index.html';return}
-  const s=status(n);
-  $('#title').textContent=`Jour ${n} — ${D.title}`;
-  document.title=`J${n} · ProjetBigDev`;
-  $('#prev').href=n>1?'day.html?d='+(n-1):'index.html';
-  $('#next').href=n<180?'day.html?d='+(n+1):'index.html';
-  if(s=='locked'||s=='wait'){
-    $('#app').hidden=true;
-    $('#msg').textContent=s=='wait'?'⏳ Leçon du jour déjà validée. Reviens demain pour la suite.':'🔒 Termine et valide le jour précédent d\'abord.';
-    return;
+function renderHero() {
+  const done = Object.keys(Store.progress).length;
+  const pct = Math.round(done / 1.8);
+  const ring = $('.ring');
+  ring.style.setProperty('--p', pct);
+  $('.ring .value').style.strokeDasharray = `${pct * 2.1991} 999`;
+  countUp($('#pct'), pct, '%');
+  countUp($('#daysDone'), done);
+  countUp($('#streak'), Store.streak());
+  const next = DAYS.find(d => d && Store.status(d.n) === 'open');
+  if (next) {
+    $('#continueBtn').onclick = () => location.href = 'day.html?d=' + next.n;
+    $('#continueBtn').textContent = 'Poser ton aimant · J' + next.n;
+  } else {
+    $('#continueBtn').onclick = () => location.href = '#';
+    $('#continueBtn').textContent = 'Tout est validé pour l\'instant 🎉';
+    $('#continueBtn').disabled = true;
   }
-  const web=n<=18||(n>=46&&n<=55),les=LESSONS[n]||generic(D),ed=$('#ed'),fr=$('#fr'),con=$('#con'),ok=$('#ok');
-  $('#theory').innerHTML=les.t;
-  $('#tasks').innerHTML=les.x.map(t=>`<label><input type="checkbox"> ${t}</label>`).join('');
-  ed.value=localStorage.getItem(K+'c'+n)||les.s;
-  fr.hidden=!web;
-
-  const log=(m,c)=>{const e=document.createElement('div');e.textContent=m;if(c)e.className=c;con.appendChild(e)};
-  window.onmessage=e=>{if(e.source===fr.contentWindow)log((e.data.t=='err'?'✖ ':'› ')+e.data.m,e.data.t=='err'?'err':'')};
-  const hook=`<script>const _p=(t,a)=>parent.postMessage({t,m:a.map(x=>typeof x=='object'?JSON.stringify(x):String(x)).join(' ')},'*');console.log=(...a)=>_p('log',a);console.error=(...a)=>_p('err',a);onerror=m=>_p('err',[m]);addEventListener('unhandledrejection',e=>_p('err',[e.reason]));<\/script>`;
-  const run=()=>{
-    localStorage.setItem(K+'c'+n,ed.value);
-    con.textContent='';
-    fr.srcdoc=hook+(web?ed.value:`<script>${ed.value}<\/script>`);
-  };
-  $('#run').onclick=run;
-  $('#reset').onclick=()=>{ed.value=les.s;con.textContent=''};
-  ed.onkeydown=e=>{
-    if(e.key=='Tab'){e.preventDefault();document.execCommand('insertText',false,'  ')}
-    if(e.key=='Enter'&&(e.ctrlKey||e.metaKey)){e.preventDefault();run()}
-  };
-  ed.oninput=()=>localStorage.setItem(K+'c'+n,ed.value);
-
-  const boxes=[...document.querySelectorAll('#tasks input')];
-  const upd=()=>{ok.disabled=s=='done'||!boxes.every(b=>b.checked)};
-  boxes.forEach(b=>b.onchange=upd);
-  if(s=='done'){ok.textContent='✓ Leçon déjà terminée';boxes.forEach(b=>b.checked=true)}
-  upd();
-  ok.onclick=()=>{const v=L();v[n]=today();localStorage.setItem(K,JSON.stringify(v));location.href='index.html'};
 }
 
-if($('#grid'))home();else day();
+function renderRail(selected) {
+  $('#rail').innerHTML = MONTHS.map(m => {
+    const { done, total } = monthDayStats(m.n);
+    const active = m.n === selected;
+    return `<button class="month-tab" role="tab" aria-selected="${active}" data-m="${m.n}">
+      <b>Mois ${m.n}</b><small>${m.title}</small>
+      <span class="month-mini"><i style="width:${done / total * 100}%"></i></span>
+      <small>${done}/${total}</small>
+    </button>`;
+  }).join('');
+  $$('.month-tab').forEach(t => t.onclick = () => renderMonth(+t.dataset.m));
+}
+
+function renderMonth(selected) {
+  renderRail(selected);
+  const m = MONTHS[selected - 1], [a, b] = m.range;
+  const { done, total } = monthDayStats(selected);
+  $('#boardTitle').textContent = `Mois ${m.n} — ${m.title} (J${a}–${b})`;
+  $('#boardSub').textContent = `${done}/${total} jours posés`;
+  $('#board').innerHTML = Array.from({ length: b - a + 1 }, (_, i) => {
+    const n = a + i, D = DAYS[n], st = Store.status(n);
+    const todayFlag = st === 'open';
+    return `<a class="magnet ${st}${todayFlag ? ' today' : ''}"
+      ${st === 'locked' ? 'aria-disabled="true" tabindex="-1" href="#" onclick="return false"' : 'href="day.html?d=' + n + '"'}
+      title="J${n} — ${D.title}">
+      <span class="dnum">J${n}</span>
+      <span class="dtitle">${D.title}</span>
+      <span class="dbadge">${LAB[st]}</span>
+    </a>`;
+  }).join('');
+  localStorage.setItem('pbd.month', selected);
+  scheduleBoardCollapse();
+}
+
+function renderHint() {
+  const done = Object.keys(Store.progress).length;
+  $('#hint').textContent = done
+    ? 'Continue le mois en cours puis déplace-toi via le rail des mois.'
+    : 'Le Jour 1 est disponible : pose ton premier aimant menthe.';
+  if (!Store.user) $('#hint').textContent += ' Ta progression est gardée en local — connecte-toi (en haut) pour la sauvegarder sur ton compte.';
+}
+
+/* ---------- auth topbar : la page dédiée = login.html (plus de champs de connexion ici) ---------- */
+function authTopbar() {
+  const ta = $('#topbarAuth');
+  const badge = `<span class="sync-badge" data-who="account"><span class="sync-dot"></span><span class="sync-txt"></span></span>`;
+  ta.innerHTML = Store.user
+    ? `${badge}<a class="chip-btn small" href="login.html" title="Ton compte">👤 ${Store.user.email.split('@')[0]}</a>`
+    : `${badge}<a class="chip-btn small" href="login.html">Connexion</a>`;
+  Sync.refreshBadge();
+}
+
+/* ---------- grille repliée : 7 aimants suffisent sur un petit écran ---------- */
+let boardCompact = false, compactTimer = null;
+function collapseBoard() {
+  const board = $('#board'), btn = $('#boardToggle');
+  const cards = $$('#board .magnet');
+  if (!board || btn.hidden === undefined) return;
+  if (cards.length <= 7) { btn.hidden = true; return; }
+  cards.slice(7).forEach(c => c.classList.add('minoring'));
+  setTimeout(() => {
+    cards.slice(7).forEach(c => { c.classList.add('minor'); c.classList.remove('minoring'); });
+    btn.textContent = `⌄ Dérouler les ${cards.length} jours du mois`;
+    btn.hidden = false;
+  }, 270);
+  boardCompact = true;
+}
+function expandBoard() {
+  const btn = $('#boardToggle');
+  sessionStorage.setItem('pbd.boardFull', '1');
+  $$('#board .magnet.minor').forEach(c => c.classList.remove('minor'));
+  btn.hidden = true;
+  boardCompact = false;
+}
+function scheduleBoardCollapse() {
+  const btn = $('#boardToggle');
+  if (!btn) return;
+  clearTimeout(compactTimer);
+  const small = matchMedia('(max-width: 700px)').matches;
+  const full = sessionStorage.getItem('pbd.boardFull') === '1';
+  if (!small) { btn.hidden = true; return; }
+  if (full) { btn.hidden = true; return; }
+  if (boardCompact) { collapseBoard(); btn.hidden = false; return; }
+  btn.hidden = true;
+  compactTimer = setTimeout(() => { collapseBoard(); }, 3000);
+  btn.onclick = expandBoard;
+}
+
+function cleanErr(err) {
+  const raw = (err && (err.message || err.msg)) || String(err);
+  if (/invalid login credentials/i.test(raw)) return 'Email ou mot de passe incorrect.';
+  if (/user already registered/i.test(raw)) return 'Ce compte existe déjà — connecte-toi plutôt.';
+  if (/at least 6/i.test(raw)) return 'Mot de passe : 6 caractères minimum.';
+  if (/email/i.test(raw) && /invalid/i.test(raw)) return 'Adresse email invalide.';
+  if (/fetch|network/i.test(raw)) return 'Réseau indisponible — réessaie en ligne.';
+  return raw;
+}
+
+/* ---------- boot ---------- */
+function renderDashboard() {
+  const saved = +localStorage.getItem('pbd.month') || 0;
+  const openDay = DAYS.find(d => d && Store.status(d.n) !== 'locked');
+  const currentMonth = openDay ? MONTHS.findIndex(m => openDay.n >= m.range[0] && openDay.n <= m.range[1]) + 1 : 6;
+  renderMonth(saved || currentMonth);
+  renderHero();
+  renderHint();
+}
+
+async function main() {
+  await bootCommon();
+  confettiLoad(); // petite entrée en scène
+  // Apparition en cascade des zones
+  $$('.hero, #rail, .board-head, #board, #hint').forEach((el, i) => {
+    el.classList.add('rise');
+    el.style.animationDelay = (i * 80) + 'ms';
+  });
+  authTopbar();
+  renderDashboard();
+}
+
+function confettiLoad() { /* discret : rien au chargement, réservé aux validations */ }
+
+main();

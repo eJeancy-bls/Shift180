@@ -1,21 +1,127 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" data-theme="system">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ProjetBigDev · Fullstack 180 jours</title>
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Shift180 · Deviens fullstack en 180 jours, un aimant à la fois</title>
+  <meta name="description" content="Plateforme d'apprentissage fullstack : 1 jour = 1 leçon, verrouillage anti-saut, sauvegarde en ligne via compte ou en local hors ligne. PWA installable.">
+  <link rel="icon" href="icons/logo.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icons/icon-180.png">
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="theme-color" content="#fbf6ed">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header>
-  <h1>🚀 ProjetBigDev</h1>
-  <p style="margin:0 0 10px;color:var(--m)">Roadmap Fullstack — 180 jours</p>
-  <div class="bar"><i id="fill"></i></div>
-  <p id="pct"></p>
-</header>
-<main><div class="grid" id="grid"></div></main>
-<footer style="text-align:center;color:var(--m);padding:24px 16px;font-size:14px">ProjetBigDev · Créé par Emmanuel BILOMBO-SILAHO, développeur congolais</footer>
-<script src="data.js"></script>
-<script src="app.js"></script>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="index.html"><img src="icons/logo.svg" alt="" width="34" height="34"><b>Shift180</b></a>
+      <span class="spacer"></span>
+      <div class="theme-menu">
+        <button class="chip-btn small theme-toggle" aria-haspopup="true" aria-label="Choisir le thème">🌗<span class="hide-s"> Thème</span></button>
+        <div class="theme-pop" role="menu" aria-label="Thème">
+          <button data-t="light" aria-checked="false">☀️ Clair</button>
+          <button data-t="dark" aria-checked="false">🌙 Sombre</button>
+          <button data-t="system" aria-checked="false">🖥️ Système</button>
+        </div>
+      </div>
+      <a class="chip-btn small" href="login.html">Connexion</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="land-hero container">
+      <h1>Deviens développeur fullstack,<br><em>un aimant à la fois</em>.</h1>
+      <p class="lead"><strong>180 jours · 6 mois · 1 leçon par jour.</strong> <br> <br> <em><b>Aucun prérequis</b></em> <br>on part de zéro, chaque terme est expliqué et chaque action est montrée clic par clic <br>donc aussi sur téléphone.</p>
+    </section>
+
+    <section class="land-section container" id="modes">
+      <h2>Ton mode de démarrage</h2>
+      <p class="sub">Deux façons d'utiliser Shift180 · <span class="mode-hint">↔ glisse les cartes</span></p>
+      <div class="mode-rail" id="modeRail" tabindex="0" aria-label="Choisir un mode d'utilisation — carrousel glissable">
+        <article class="mode-card offline" data-mode="offline" role="group" aria-label="Mode hors ligne">
+          <span class="mode-ok">Posé ✓</span>
+          <span class="tag">Mode hors ligne</span>
+          <h3>Sans compte et sans Internet, via ton propre dossier ou fichier</h3>
+          <p class="mode-body">Tout tourne depuis ton appareil : sur PC tu clones le dépôt GitHub complet ; sur téléphone / tablette tu télécharges <b>un seul fichier HTML</b> à ouvrir — rien d'autre. Ta progression est gardée dans le navigateur de l'appareil.</p>
+        </article>
+        <article class="mode-card online" data-mode="online" role="group" aria-label="Mode en ligne">
+          <span class="mode-ok">Posé ✓</span>
+          <span class="tag">Mode en ligne</span>
+          <h3>Avec un compte : progression synchronisée sur tous tes appareils</h3>
+          <p class="mode-body">Tu crées ton compte (Google, GitHub ou email) et ta progression est sauvegardée dans le cloud. Changé de téléphone ? Ton tableau est déjà là — et le mode hors ligne reste toujours possible en plus.</p>
+        </article>
+      </div>
+
+      <div class="start-cta">
+        <button class="btn big multi" id="startBtn">Commencer →</button>
+        <p class="chosen-strip" id="chosenStrip"><span id="chosenTxt"></span></p>
+      </div>
+    </section>
+
+    <section class="land-section container" id="principe">
+      <h2>Le principe du tableau d'aimants</h2>
+      <p class="sub">Chaque leçon validée est un aimant posé sur ton tableau.</p>
+      <div class="feature-strip">
+        <div class="feature"><span class="fmag" style="background:var(--mint)"></span><span><b>1 jour = 1 leçon</b><small>Théorie + travaux pratiques + éditeur exécuté dans le navigateur.</small></span></div>
+        <div class="feature"><span class="fmag" style="background:var(--peach)"></span><span><b>Verrouillage assumé</b><small>La leçon suivante ne s'ouvre qu'après validation, puis le lendemain.</small></span></div>
+        <div class="feature"><span class="fmag" style="background:var(--butter)"></span><span><b>100 % sans serveur</b><small>HTML, CSS, JavaScript pur : le site marche même hors ligne.</small></span></div>
+        <div class="feature"><span class="fmag" style="background:var(--sky)"></span><span><b>Installable (PWA)</b><small>Ajoute-le à ton écran d'accueil : marche comme une app, même sans réseau.</small></span></div>
+        <div class="feature"><span class="fmag" style="background:var(--lilac)"></span><span><b>Zéro-dev friendly</b><small>Lexique au fil du cours : tape un terme pour lire sa définition.</small></span></div>
+        <div class="feature"><span class="fmag" style="background:var(--mint-strong)"></span><span><b>Mobile-first assumé</b><small>Les actions « PC uniquement » sont signalées : rien n'est bloquant sur téléphone.</small></span></div>
+      </div>
+    </section>
+
+    <section class="land-final container">
+      <h2>Le Jour 1 t'attend sur ton tableau.</h2>
+      <a class="btn big mint" href="start.html">Commencer →</a>
+    </section>
+  </main>
+
+  <footer class="site-foot container">
+    <em><b>Shift180</b></em> · Créé par Emmanuel BILOMBO-SILAHO, développeur congolais 🇨🇬 · « Un jour, une leçon. » · <a href="CREDITS.md">Crédits</a>
+-´.  </footer>
+-
+  <script src="config.js"></script>
+  <script src="lessons-d1-15.js"></script>
+  <script src="lessons-d16-30.js"></script>
+  <script src="lessons-d31-45.js"></script>
+  <script src="lessons-d46-60.js"></script>
+  <script src="data.js"></script>
+  <script src="figures.js"></script>
+  <script src="core.js"></script>
+  <script>
+    Theme.init();
+    if ('serviceWorker' in navigator && location.protocol.startsWith('http')) { navigator.serviceWorker.register('sw.js').catch(()=>{}); }
+
+    /* ----- carrousel des modes : titres d'abord, corps au défilement/clic ----- */
+    const rail = $('#modeRail');
+    const cards = $$('.mode-card', rail);
+    const io = new IntersectionObserver(es => {
+      es.forEach(e => { if (e.isIntersecting && e.intersectionRatio > .6) e.target.classList.add('active'); });
+    }, { root: rail, threshold: .6 });
+    cards.forEach(c => io.observe(c));
+    /* clic partout dans la carte = choisir le mode */
+    let chosen = null;
+    const strip = $('#chosenStrip'), txt = $('#chosenTxt'), startBtn = $('#startBtn');
+    function choose(card) {
+      chosen = card.dataset.mode;
+      cards.forEach(x => x.classList.toggle('selected', x === card));
+      localStorage.setItem('pbd.modeChoice', chosen);
+      const lbl = chosen === 'offline' ? 'hors ligne' : 'en ligne';
+      strip.classList.add('show');
+      txt.innerHTML = `Mode choisi : <b>${lbl}</b> — tu pourras en changer plus tard.`;
+      startBtn.textContent = 'Commencer en mode ' + lbl + ' →';
+    }
+    cards.forEach(c => c.addEventListener('click', () => choose(c)));
+    /* bouton commencer */
+    startBtn.onclick = () => { location.href = 'start.html' + (chosen ? '#m=' + chosen : ''); };
+    /* restore choix mémorisé (sans imposer) */
+    const remembered = localStorage.getItem('pbd.modeChoice');
+    if (remembered) {
+      const card = cards.find(x => x.dataset.mode === remembered);
+      if (card) { card.classList.add('active'); }
+    }
+    /* la carte du mode déjà choisi s'ouvre légèrement au chargement : on l'active */
+  </script>
 </body>
 </html>

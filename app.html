@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="system">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Tableau de bord · Shift180</title>
+  <link rel="icon" href="icons/logo.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icons/icon-180.png">
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="theme-color" content="#fbf6ed">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="app.html">
+        <img src="icons/logo.svg" alt="" width="34" height="34">
+        <b>Shift180</b>
+      </a>
+      <span class="spacer"></span>
+      <span id="topbarAuth"></span>
+      <div class="theme-menu">
+        <button class="chip-btn small theme-toggle" aria-haspopup="true" aria-label="Choisir le thème">
+          <span id="themeIco">🌗</span><span class="hide-s">Thème</span>
+        </button>
+        <div class="theme-pop" role="menu" aria-label="Thème">
+          <button data-t="light" aria-checked="false">☀️ Clair</button>
+          <button data-t="dark" aria-checked="false">🌙 Sombre</button>
+          <button data-t="system" aria-checked="false">🖥️ Système</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero" aria-label="Progression">
+      <div class="ring" id="ring" role="img" aria-label="Pourcentage des jours terminés">
+        <svg viewBox="0 0 80 80">
+          <circle class="track" cx="40" cy="40" r="35"/>
+          <circle class="value" cx="40" cy="40" r="35"/>
+        </svg>
+        <b id="pct">0%</b>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><b id="daysDone">0<sup>/180</sup></b><small>jours terminés</small></div>
+        <div class="stat"><b id="streak">0</b><small>jours de suite 🔥</small></div>
+      </div>
+      <div class="hero-cta">
+        <button class="btn primary" id="continueBtn">Poser ton aimant</button>
+      </div>
+    </section>
+
+    <div class="month-rail rise" id="rail" role="tablist" aria-label="Choisir le mois"></div>
+
+    <div class="board-head">
+      <h2 id="boardTitle"></h2>
+      <small id="boardSub"></small>
+    </div>
+
+    <section class="board risense" id="board" aria-label="Jours du mois"></section>
+
+    <div class="board-footnote">
+      <button class="chip-btn small" id="boardToggle" hidden>⌄ Dérouler les 30 jours</button>
+    </div>
+
+    <p class="after-board"><span id="hint"></span></p>
+  </main>
+
+  <footer class="site-foot">
+    <div class="container">Shift180 · <a href="index.html">À propos du projet</a> · <a href="CREDITS.md">Crédits</a> · Créé par Emmanuel BILOMBO-SILAHO, développeur congolais</div>
+  </footer>
+
+  <script src="config.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="lessons-d1-15.js"></script>
+  <script src="lessons-d16-30.js"></script>
+  <script src="lessons-d31-45.js"></script>
+  <script src="lessons-d46-60.js"></script>
+  <script src="data.js"></script>
+  <script src="figures.js"></script>
+  <script src="core.js"></script>
+  <script src="app.js"></script>
+  <script>if ('serviceWorker' in navigator && location.protocol.startsWith('http')) { navigator.serviceWorker.register('sw.js').catch(()=>{}); }</script>
+</body>
+</html>
