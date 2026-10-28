@@ -347,13 +347,30 @@ const Sync = {
 /* ---------------- chip d'authentification partagée ----------------
    Même rendu sur toutes les pages : badge de sync + chip compte.
    L'accueil expose en plus #goBoard (retour direct au tableau une fois connecté). */
+/* chip de compte : pastille photo de profil + prénom (metadata OAuth) */
+function firstNameOf(user) {
+  const m = user.user_metadata || {};
+  const full = String(m.full_name || m.name || '').trim();
+  if (full) return full.split(/\s+/)[0];
+  return String(m.preferred_username || m.user_name || user.email || '').split('@')[0].split(/\s+/)[0];
+}
+function avatarOf(user) {
+  const m = user.user_metadata || {};
+  return m.avatar_url || m.picture || '';
+}
 function renderAuth() {
   const ta = $('#topbarAuth');
   if (ta) {
-    const badge = `<span class="sync-badge"><span class="sync-dot"></span><span class="sync-txt"></span></span>`;
-    ta.innerHTML = Store.user
-      ? `${badge}<a class="chip-btn small" href="login.html" title="Ton compte">${iconify('👤')} ${Store.user.email.split('@')[0]}</a>`
-      : `${badge}<a class="chip-btn small" href="login.html">Connexion</a>`;
+    if (Store.user) {
+      const name = firstNameOf(Store.user);
+      const url = avatarOf(Store.user);
+      const ava = url
+        ? `<img class="ava" src="${url}" width="22" height="22" alt="" referrerpolicy="no-referrer">`
+        : `<span class="ava ava-letter">${(name[0] || '?').toUpperCase()}</span>`;
+      ta.innerHTML = `<a class="chip-btn small auth-me" href="login.html" title="Ton compte — ${Store.user.email}">${ava}<b>${name}</b></a>`;
+    } else {
+      ta.innerHTML = `<a class="chip-btn small" href="login.html">Connexion</a>`;
+    }
   }
   const go = $('#goBoard');
   if (go) go.hidden = !Store.user;

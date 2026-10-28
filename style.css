@@ -721,6 +721,11 @@ html[data-theme="system"] .magnet.today::after { color: #26243a; }
 .btn .ico { width: 18px; height: 18px; vertical-align: middle; }
 .flag-cg { width: 1.4em; height: 1.05em; vertical-align: -0.14em; display: inline-block; border-radius: 2.5px; box-shadow: 0 0 0 1px rgba(0,0,0,.08); }
 
+/* chip compte : pastille photo + prénom */
+.auth-me { display: inline-flex; align-items: center; gap: 7px; padding-left: 4px; }
+.auth-me .ava { width: 22px; height: 22px; border-radius: 50%; object-fit: cover; display: block; flex: none; background: var(--brand-soft); box-shadow: 0 0 0 1.5px var(--line-strong, rgba(0,0,0,.15)); }
+.auth-me .ava-letter { display: grid; place-items: center; font-size: 11px; font-weight: 800; color: var(--ink); }
+
 /* ---------- responsive des ajouts ---------- */
 @media (max-width: 700px) {
   .term-def { font-size: 12.5px; }

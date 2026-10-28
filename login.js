@@ -83,7 +83,7 @@ function renderConnected() {
     root.innerHTML = iconify(`
       <div class="auth-card">
         <h2 class="auth-title">Connecté ✓</h2>
-        <p class="muted-line">Bienvenue ${Store.user.email.split('@')[0]} — on te ramène à ton tableau…</p>
+        <p class="muted-line">Bienvenue ${firstNameOf(Store.user)} — on te ramène à ton tableau…</p>
       </div>`);
     setTimeout(() => location.replace(nextURL()), 700);
     return;
@@ -91,7 +91,10 @@ function renderConnected() {
   root.innerHTML = iconify(`
     <div class="auth-card">
       <h2 class="auth-title">Compte connecté ✓</h2>
-      <p class="muted-line"><b>${Store.user.email}</b> — ta progression est synchronisée sur tous tes appareils.</p>
+      <p class="muted-line" style="display:flex;align-items:center;gap:10px;justify-content:center">
+        ${avatarOf(Store.user) ? `<img class="ava" src="${avatarOf(Store.user)}" width="34" height="34" alt="" referrerpolicy="no-referrer" style="border-radius:50%;object-fit:cover">` : ''}
+        <span style="text-align:left"><b>${firstNameOf(Store.user)}</b> · ${Store.user.email}<br>ta progression est synchronisée sur tous tes appareils.</span>
+      </p>
       <div class="auth-row">
         <button class="btn btn-ghost" id="signOut">Se déconnecter</button>
         <button class="btn mint" id="forceSync">Synchroniser maintenant</button>

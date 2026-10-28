@@ -4,7 +4,14 @@ const { chromium } = require('playwright');
 const BASE = 'http://localhost:8642';
 
 const STUB = () => {
-  const user = { id: 'u1', email: 'test@exemple.com' };
+  const user = {
+    id: 'u1',
+    email: 'emmanuel.bilombo@exemple.com',
+    user_metadata: {
+      full_name: 'Emmanuel Jeancy Bilombo-Silaho',
+      avatar_url: 'https://avatars.githubusercontent.com/eJeancy-bls?size=48'
+    }
+  };
   window.supabase = {
     createClient: () => ({
       auth: {
@@ -37,17 +44,24 @@ const STUB = () => {
     if (m.type() === 'error' && !/net::ERR_FAILED/.test(m.text())) errs.push('CONSOLE: ' + m.text());
   });
 
-  // accueil connecté : chip + bouton retour + CTA adaptées
+  // accueil connecté : pastille photo + prénom, bouton retour, CTA adaptées
   await page.goto(BASE + '/index.html', { waitUntil: 'networkidle' });
-  await page.waitForTimeout(300);
-  const ix = await page.evaluate(() => ({
-    chip: (document.querySelector('#topbarAuth') || {}).innerText || '',
-    goBoardVisible: !((document.querySelector('#goBoard') || {}).hidden ?? true),
-    startBtn: (document.querySelector('#startBtn') || {}).textContent || '',
-    ctaBottom: (document.querySelector('#ctaBottom') || {}).textContent || ''
-  }));
-  console.log('index connecté   · chip:', JSON.stringify(ix.chip), '· goBoard visible:', ix.goBoardVisible, '· startBtn:', ix.startBtn, '· ctaBottom:', ix.ctaBottom);
-  if (!ix.chip.includes('test@exemple.com'.split('@')[0]) && !ix.chip.includes('test')) problems.push('index: chip absent → ' + ix.chip);
+  await page.waitForTimeout(400);
+  const ix = await page.evaluate(() => {
+    const me = document.querySelector('#topbarAuth .auth-me');
+    const img = me && me.querySelector('img.ava');
+    return {
+      me: me ? me.innerText.trim() : '',
+      hasImg: !!img,
+      imgOk: img ? img.complete && img.naturalWidth > 0 : false,
+      goBoardVisible: !((document.querySelector('#goBoard') || {}).hidden ?? true),
+      startBtn: (document.querySelector('#startBtn') || {}).textContent || '',
+      ctaBottom: (document.querySelector('#ctaBottom') || {}).textContent || ''
+    };
+  });
+  console.log('index connecté   · pastille+prénom:', JSON.stringify(ix.me), '· photo chargée:', ix.imgOk + '/' + ix.hasImg, '· goBoard:', ix.goBoardVisible, '· startBtn:', ix.startBtn, '· ctaBottom:', ix.ctaBottom);
+  if (!/Emmanuel/.test(ix.me)) problems.push('index: prénom absent du chip → ' + ix.me);
+  if (!ix.hasImg || !ix.imgOk) problems.push('index: photo de profil non chargée');
   if (!ix.goBoardVisible) problems.push('index: #goBoard non visible alors que connecté');
   if (!/Reprendre mon tableau/.test(ix.startBtn + ix.ctaBottom)) problems.push('index: CTA non adaptée à la session');
   await page.screenshot({ path: '.impeccable/review/auth-index-connecte.png', fullPage: false });
