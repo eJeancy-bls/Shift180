@@ -55,7 +55,7 @@ window.FIGS = {
       <rect x="236" y="72" width="46" height="46" rx="9" fill="var(--peach)" stroke="var(--peach-strong)" stroke-width="3"/>
       <text x="259" y="101" text-anchor="middle" font-size="14" font-weight="800" fill="var(--peach-ink)">F12</text>
       <rect x="290" y="78" width="38" height="34" rx="7" fill="var(--card)" stroke="var(--line-strong)"/>
-      <text x="309" y="100" text-anchor="middle" font-size="12" fill="var(--ink)">💡</text>
+      <g stroke="var(--ink)" stroke-width="1.8" fill="none" stroke-linecap="round"><circle cx="309" cy="92.5" r="6.2"/><path d="M306.5 101.5h5M307.5 104.5h3"/></g>
       <path d="M259 150 q 0 26 30 30" stroke="var(--peach-strong)" stroke-width="3.5" fill="none" stroke-linecap="round"/>
       <text x="240" y="190" text-anchor="middle" font-size="13" font-weight="700" fill="var(--peach-ink)">Presse F12 → l'outillage du navigateur s'ouvre au bas de la page</text>
     </svg>`
@@ -172,7 +172,7 @@ window.FIGS = {
       <rect x="30" y="28" width="420" height="150" rx="12" fill="var(--board)" stroke="var(--line-strong)"/>
       <rect x="44" y="40" width="392" height="20" rx="6" fill="var(--card)" stroke="var(--line)"/>
       <rect x="340" y="43" width="34" height="14" rx="4" fill="var(--brand)"/>
-      <text x="357" y="54" text-anchor="middle" font-size="9" fill="#fff" font-weight="700">📱</text>
+      <g fill="none" stroke="#fff" stroke-width="1.4" stroke-linecap="round"><rect x="353" y="44.5" width="8" height="11" rx="2"/><path d="M355.5 53h3"/></g>
       <rect x="150" y="70" width="120" height="94" rx="12" fill="var(--sky)" stroke="var(--sky-ink)"/>
       <rect x="164" y="84" width="92" height="34" rx="7" fill="var(--card)"/>
       <rect x="164" y="128" width="92" height="8" rx="4" fill="var(--card)"/>

@@ -19,13 +19,13 @@ function oauthBtns() {
       <button class="btn lilac has-logo" id="btnGoogle">${LOGO_GOOGLE}Google</button>
       <button class="btn lilac has-logo" id="btnGithub">${LOGO_GITHUB}GitHub</button>
     </div>
-    <p class="auth-note" id="oauthNote">🔒 Connexion en 1 clic via ton compte Google ou GitHub (si activés côté Supabase — voir README).</p>`;
+    <p class="auth-note" id="oauthNote">🔒 Connexion en 1 clic via ton compte Google ou GitHub.</p>`;
 }
 
 function render() {
   if (Store.user) return renderConnected();
   const noCfg = !CONFIG.url || !CONFIG.key;
-  root.innerHTML = `
+  root.innerHTML = iconify(`
     <h1 class="auth-title">Ton compte Shift180</h1>
     <p class="auth-sub">Ta progression locale actuelle sera automatiquement envoyée à ce compte après connexion.</p>
     ${
@@ -56,7 +56,7 @@ function render() {
       <p class="form-msg" id="fMsg"></p>
       <p class="auth-note">💡 Mot de passe : 6 caractères minimum · ta progression hors ligne (file d'attente) partira au compte dès la reconnexion réseau.</p>
     </div>
-    <p style="text-align:center;margin-top:18px"><a class="btn btn-ghost" href="app.html">← Revenir au tableau (mode local, sans compte)</a></p>`;
+    <p style="text-align:center;margin-top:18px"><a class="btn btn-ghost" href="app.html">← Revenir au tableau (mode local, sans compte)</a></p>`);
   wire();
   bindOAuth();
   setMode(location.hash === '#signup' ? 'up' : 'in');  // lien direct possible : login.html#signup
@@ -78,7 +78,7 @@ function setMode(mode) {
 }
 
 function renderConnected() {
-  root.innerHTML = `
+  root.innerHTML = iconify(`
     <div class="auth-card">
       <h2 class="auth-title">Compte connecté ✓</h2>
       <p class="muted-line"><b>${Store.user.email}</b> — ta progression est synchronisée sur tous tes appareils.</p>
@@ -89,15 +89,15 @@ function renderConnected() {
       <p class="muted-line" id="offlineStat" style="margin-top:12px"></p>
       <p class="auth-note">Sans réseau, tout est enregistré localement, puis renvoyé au compte automatiquement au retour de la connexion.</p>
     </div>
-    <p style="text-align:center;margin-top:18px"><a class="btn" href="${nextURL()}">← Retour à la plateforme</a></p>`;
+    <p style="text-align:center;margin-top:18px"><a class="btn" href="${nextURL()}">← Retour à la plateforme</a></p>`);
   $('#signOut').onclick = async () => { await Sync.signOut(); render(); };
   $('#forceSync').onclick = async () => {
     await Sync.pull(); await Sync.pushSoon(true); toast('Progression synchronisée ✓'); render();
   };
   const p = Object.keys(Store.pending).length;
   $('#offlineStat').innerHTML = p
-    ? `⏳ ${p} jour${p > 1 ? 's' : ''} en file d'attente pour le compte (hors ligne récemment).`
-    : '✓ Rien en attente : tout est déjà en ligne.';
+    ? iconify(`⏳ ${p} jour${p > 1 ? 's' : ''} en file d'attente pour le compte (hors ligne récemment).`)
+    : iconify('✓ Rien en attente : tout est déjà en ligne.');
 }
 
 function wire() {

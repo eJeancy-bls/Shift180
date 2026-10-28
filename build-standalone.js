@@ -31,11 +31,11 @@ ${safe(read('style.css'))}
     <a class="brand" href="#"><b>Shift180 · hors ligne</b></a>
     <span class="spacer"></span>
     <div class="theme-menu">
-      <button class="chip-btn small theme-toggle" aria-haspopup="true" aria-label="Choisir le thème">🌗</button>
+      <button class="chip-btn small theme-toggle" aria-haspopup="true" aria-label="Choisir le thème"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 1 0 18z" fill="currentColor" stroke="none"/></svg></button>
       <div class="theme-pop" role="menu" aria-label="Thème">
-        <button data-t="light" aria-checked="false">☀️ Clair</button>
-        <button data-t="dark" aria-checked="false">🌙 Sombre</button>
-        <button data-t="system" aria-checked="false">🖥️ Système</button>
+        <button data-t="light" aria-checked="false"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg> Clair</button>
+        <button data-t="dark" aria-checked="false"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"/></svg> Sombre</button>
+        <button data-t="system" aria-checked="false"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg> Système</button>
       </div>
     </div>
   </div>
@@ -69,7 +69,7 @@ ${safe(read('style.css'))}
       <div class="editor-label"><label for="ed">Écris puis exécute (Ctrl+Entrée)</label></div>
       <textarea id="ed" spellcheck="false" aria-label="Éditeur de code"></textarea>
       <div class="row">
-        <button class="btn multi" id="run">▶ Exécuter le code</button>
+        <button class="btn multi" id="run"><svg class="ico" viewBox="0 0 24 24" fill="currentColor" stroke="none" aria-hidden="true"><path d="M7 4.8v14.4c0 .8.9 1.3 1.6.9l11-7.2c.6-.4.6-1.4 0-1.8l-11-7.2c-.7-.4-1.6.1-1.6.9z"/></svg> Exécuter le code</button>
         <button class="chip-btn" id="reset" type="button">Réinitialiser</button>
       </div>
       <div id="previewWrap">
@@ -80,7 +80,7 @@ ${safe(read('style.css'))}
       <pre class="console" id="con" aria-live="polite"></pre>
       <div class="validate-bar" style="position:static;margin-top:14px">
         <div class="inner">
-          <button class="btn mint" id="ok">✅ Poser ton aimant</button>
+          <button class="btn mint" id="ok"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m8.5 12.5 2.5 2.5 4.5-5.5"/></svg> Poser ton aimant</button>
           <small id="okHint"></small>
         </div>
       </div>

@@ -49,7 +49,7 @@ function theoryHTML(les) {
       ${figs}<ol class="pc-steps">${les.pc.steps.map(s => `<li>${s}</li>`).join('')}</ol>
       ${les.pc.note ? `<p class="pc-note">${les.pc.note}</p>` : ''}</details>`;
   }
-  return t;
+  return iconify(t);   // emojis de l'interface → icônes SVG
 }
 
 /* ---------- rendu ---------- */
@@ -119,6 +119,7 @@ function renderDashboard() {
     return `<a class="magnet ${st}${st === 'open' ? ' today' : ''}" ${st === 'locked' ? 'aria-disabled="true"' : ''} data-d="${n}" href="#d=${n}">
       <span class="dnum">J${n}</span><span class="dtitle">${D.title}</span><span class="dbadge">${LABS[st]}</span></a>`;
   }).join('');
+  $('#board').innerHTML = iconify($('#board').innerHTML);
   $$('#board .magnet').forEach(x => x.onclick = e => {
     e.preventDefault();
     openDay(+x.dataset.d);
@@ -148,14 +149,14 @@ function openDay(n) {
   /* TP */
   const savedTicks = JSON.parse(localStorage.getItem('pbd.tick.' + n) || '[]');
   $('#tasks').innerHTML = les.x.map((t, i) =>
-    `<label class="task${savedTicks[i] ? ' checked' : ''}"><input type="checkbox" data-i="${i}"${savedTicks[i] ? ' checked' : ''}><span>${t}</span></label>`).join('');
+    `<label class="task${savedTicks[i] ? ' checked' : ''}"><input type="checkbox" data-i="${i}"${savedTicks[i] ? ' checked' : ''}><span>${iconify(t)}</span></label>`).join('');
 
   /* éditeur */
   const ed = $('#ed'), con = $('#con'), fr = $('#fr');
   ed.value = Store.code[n] !== undefined ? Store.code[n] : String(les.s).replace(/\\n/g, '\n');
   fr.hidden = !WEB_AWARE(n);
   if (!WEB_AWARE(n)) $('#previewWrap').hidden = true; else $('#previewWrap').hidden = false;
-  con.innerHTML = '<span class="hint">Exécute ton code (▶) pour voir la sortie ici…</span>';
+  con.innerHTML = iconify('<span class="hint">Exécute ton code (▶) pour voir la sortie ici…</span>');
   window.onmessage = e => { if (e.source === fr.contentWindow) { const d = document.createElement('div'); d.textContent = (e.data.t === 'err' ? '✖ ' : '› ') + e.data.m; if (e.data.t === 'err') d.className = 'err'; con.appendChild(d); } };
   ed.onkeydown = e => {
     if (e.key === 'Tab') { e.preventDefault(); document.execCommand('insertText', false, '  '); }
@@ -186,7 +187,7 @@ function openDay(n) {
   const ok = $('#ok');
   ok.onclick = () => {
     Store.validate(n);
-    ok.textContent = '✓ Aimant posé !';
+    ok.innerHTML = iconify('✓ Aimant posé !');
     try { confetti(); } catch {}
     toast('Leçon validée ✓ — progression gardée sur cet appareil.');
     setTimeout(renderDashboard, 700);

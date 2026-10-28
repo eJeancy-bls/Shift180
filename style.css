@@ -716,6 +716,10 @@ html[data-theme="system"] .magnet.today::after { color: #26243a; }
   .auth-panel.entering { animation: none; }
 }
 
+/* icônes UI (SVG inline) */
+.ico { width: 1.15em; height: 1.15em; vertical-align: -0.18em; display: inline-block; }
+.btn .ico { width: 18px; height: 18px; vertical-align: middle; }
+
 /* ---------- responsive des ajouts ---------- */
 @media (max-width: 700px) {
   .term-def { font-size: 12.5px; }

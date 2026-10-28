@@ -63,12 +63,12 @@ async function main() {
   $('#next').href = n < 180 ? 'day.html?d=' + (n + 1) : 'app.html';
 
   const st = Store.status(n);
-  $('#statusChip').textContent = LABD[st] || '';
+  $('#statusChip').innerHTML = iconify(LABD[st] || '');
 
   if (st === 'locked' || st === 'wait') {
     $('#app').hidden = true;
     $('#lockPage').hidden = false;
-    $('#lockIconWrap').innerHTML = st === 'wait' ? '⏳' : '🔒';
+    $('#lockIconWrap').innerHTML = iconify(st === 'wait' ? '⏳' : '🔒');
     $('#lockTitle').textContent = st === 'wait' ? 'Aimant déjà posé aujourd\'hui' : 'Prochain aimant verrouillé';
     $('#lockMsg').textContent = st === 'wait'
       ? 'Jour validé ! Ton prochain aimant se débloque demain : la règle anti-précipitation garde ton rythme durable.'
@@ -89,10 +89,11 @@ function renderDay(n, D, st) {
   /* théorie + figures + lexique
      NB : le lexique s'applique AVANT les figures — jamais à l'intérieur des SVG
      (un <button class="term"> injecté dans <text> ferait casser le SVG par le parser). */
-  let theoryHTML = glossify(les.t);
+  let theoryHTML = glossify(les.t);            // lexique AVANT les figures (jamais dans les SVG)
   if (les.figs && les.figs.length) {
-    theoryHTML += `<h3 class="figs-title">🖼️ Figures du jour</h3>` + les.figs.map(figHTML).join('');
+    theoryHTML += `<h3 class="figs-title">🖼 Figures du jour</h3>` + les.figs.map(figHTML).join('');
   }
+  theoryHTML = iconify(theoryHTML);            // emojis de l'interface → icônes SVG
   $('#theory').innerHTML = theoryHTML;
 
   /* bloc « actions à reproduire sur un ordinateur » (déroulé, dédié mobile) */
@@ -100,14 +101,14 @@ function renderDay(n, D, st) {
     const title = les.pc.title || 'Actions à reproduire sur un ordinateur';
     const steps = les.pc.steps.map(s => `<li>${s}</li>`).join('');
     const figs = (les.pc.figs || []).map(figHTML).join('');
-    $('#theory').insertAdjacentHTML('afterend', `
+    $('#theory').insertAdjacentHTML('afterend', iconify(`
       <details class="pconly">
-        <summary>🖱️ ${title}${les.pc.figs && les.pc.figs.length ? ' · <small>' + les.pc.figs.length + ' figure' + (les.pc.figs.length > 1 ? 's' : '') + '</small>' : ''}</summary>
+        <summary>🖱 ${title}${les.pc.figs && les.pc.figs.length ? ' · <small>' + les.pc.figs.length + ' figure' + (les.pc.figs.length > 1 ? 's' : '') + '</small>' : ''}</summary>
         <p class="pcwhy">💾 Sur téléphone ou tablette tu peux tout suivre en lecture : ces actions demandent un vrai clavier / OS, elles attendent ta prochaine session PC.</p>
         ${figs}
         <ol class="pc-steps">${steps}</ol>
         ${les.pc.note ? `<p class="pc-note">${les.pc.note}</p>` : ''}
-      </details>`);
+      </details>`));
   }
 
   /* lexique interactif : déplier la définition */
@@ -125,7 +126,7 @@ function renderDay(n, D, st) {
   /* TP */
   const savedTicks = JSON.parse(localStorage.getItem('pbd.tick.' + n) || '[]');
   $('#tasks').innerHTML = les.x.map((t, i) =>
-    `<label class="task${savedTicks[i] ? ' checked' : ''}"><input type="checkbox" data-i="${i}"${savedTicks[i] ? ' checked' : ''}><span>${t}</span></label>`).join('');
+    `<label class="task${savedTicks[i] ? ' checked' : ''}"><input type="checkbox" data-i="${i}"${savedTicks[i] ? ' checked' : ''}><span>${iconify(t)}</span></label>`).join('');
 
   /* éditeur */
   const ed = $('#ed'), fr = $('#fr'), con = $('#con');
@@ -171,11 +172,11 @@ function renderDay(n, D, st) {
   };
   boxes.forEach(b => b.onchange = updTasks);
   updTasks();
-  if (st === 'done') { $('#ok').textContent = '✓ Aimant déjà posé'; boxes.forEach(b => b.checked = true); updTasks(); }
+  if (st === 'done') { $('#ok').innerHTML = iconify('✓ Aimant déjà posé'); boxes.forEach(b => b.checked = true); updTasks(); }
 
   $('#ok').onclick = () => {
     const r = Store.validate(n);
-    $('#ok').textContent = '✓ Aimant posé !';
+    $('#ok').innerHTML = iconify('✓ Aimant posé !');
     confetti();
     toast(r.pushed ? 'Leçon validée — mise en ligne sur ton compte ✓' : 'Leçon validée ✓ (en attente de réseau pour la sync)');
     setTimeout(() => { location.href = 'app.html'; }, 900);

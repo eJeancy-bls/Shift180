@@ -31,7 +31,7 @@ function renderHero() {
     $('#continueBtn').textContent = 'Poser ton aimant · J' + next.n;
   } else {
     $('#continueBtn').onclick = () => location.href = '#';
-    $('#continueBtn').textContent = 'Tout est validé pour l\'instant 🎉';
+    $('#continueBtn').innerHTML = iconify('Tout est validé pour l\'instant 🎉');
     $('#continueBtn').disabled = true;
   }
 }
@@ -66,6 +66,7 @@ function renderMonth(selected) {
       <span class="dbadge">${LAB[st]}</span>
     </a>`;
   }).join('');
+  $('#board').innerHTML = iconify($('#board').innerHTML);
   localStorage.setItem('pbd.month', selected);
   scheduleBoardCollapse();
 }
@@ -83,7 +84,7 @@ function authTopbar() {
   const ta = $('#topbarAuth');
   const badge = `<span class="sync-badge" data-who="account"><span class="sync-dot"></span><span class="sync-txt"></span></span>`;
   ta.innerHTML = Store.user
-    ? `${badge}<a class="chip-btn small" href="login.html" title="Ton compte">👤 ${Store.user.email.split('@')[0]}</a>`
+    ? `${badge}<a class="chip-btn small" href="login.html" title="Ton compte">${iconify('👤')} ${Store.user.email.split('@')[0]}</a>`
     : `${badge}<a class="chip-btn small" href="login.html">Connexion</a>`;
   Sync.refreshBadge();
 }
