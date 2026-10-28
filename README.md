@@ -205,7 +205,7 @@ Les leçons des 60 premiers jours s'appuient sur un socle à quatre sources, ave
 - **« Chapitre I WEB »** (support de cours fourni : définitions du HTML, balises simples/doubles, DOCTYPE — mode Standard vs Quirks, hiérarchie des titres, images, zones réactives `map`/`area`, `<audio>`, liens externes/internes/ancres/mailto) — intégré aux jours 1–7, modernisé (`<font>`, `<marquee>` et autres attributs obsolètes remplacés par CSS).
 - **Exercices « Chaînes de caractères »** (support fourni, exercices C++ transposés en JavaScript) : validation de format « 12h55 », voyelles, palindrome, conjugaison du 1ᵉʳ groupe, lettre la plus fréquente → jour 34 et jour 30.
 - **OpenClassrooms** (« Écrivez du HTML5 et du CSS3 », design responsive) + **MDN Web Docs**.
-- **Cisco NetAcad** (JavaScript Essentials 1/2) + **Merise** (fiche fournie) : approche d'analyse fonctionnelle des flux avant tout mini-projet (jours 7 et 41–45).
+- **Cisco NetAcad** (JavaScript Essentials 1/2) + **Merise** (module de KITOKO Roland, CFI-CIRAS) : approche d'analyse fonctionnelle des flux avant tout mini-projet (jours 7 et 41–45).
 
 ---
 
