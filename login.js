@@ -102,7 +102,7 @@ function renderConnected() {
       <p class="muted-line" id="offlineStat" style="margin-top:12px"></p>
       <p class="auth-note">Sans réseau, tout est enregistré localement, puis renvoyé au compte automatiquement au retour de la connexion.</p>
     </div>
-    <p style="text-align:center;margin-top:18px"><a class="btn" href="${nextURL()}">← Retour à la plateforme</a></p>`);
+    <p style="text-align:center;margin-top:18px"><a class="btn" href="${nextURL()}">Tableau de bord →</a></p>`);
   $('#signOut').onclick = async () => { await Sync.signOut(); render(); };
   $('#forceSync').onclick = async () => {
     await Sync.pull(); await Sync.pushSoon(true); toast('Progression synchronisée ✓'); render();
