@@ -65,6 +65,7 @@ async function main() {
     $('#lockPage').hidden = false;
     $('#lockIconWrap').innerHTML = iconify(st === 'wait' ? '⏳' : '🔒');
     $('#lockTitle').textContent = st === 'wait' ? 'Aimant déjà posé aujourd\'hui' : 'Prochain aimant verrouillé';
+    const dm = Store.maxDone() + 1;
     $('#lockMsg').textContent = st === 'wait'
       ? 'Jour validé ! Ton prochain aimant se débloque demain : la règle anti-précipitation garde ton rythme durable.'
       : `Termine d'abord le Jour ${dm} pour poser celui-ci.`;
