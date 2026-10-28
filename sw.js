@@ -1,5 +1,5 @@
 // sw.js — PWA service worker : app-shell cache-first (marche hors ligne), stale-while-revalidate pour les CDN
-const V = 'pbd-v6';   // v6 : chip de compte = pastille photo de profil + prénom
+const V = 'pbd-v7';   // v7 : onglet par defaut intelligent + boutons OAuth visibles
 const SHELL = [
   'index.html', 'app.html', 'day.html', 'start.html', 'login.html', 'credits.html',
   'style.css', 'core.js', 'app.js', 'day.js', 'data.js', 'figures.js', 'config.js', 'login.js',

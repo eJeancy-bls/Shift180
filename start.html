@@ -126,7 +126,7 @@
     tabs.offline.onclick = () => setMode('offline');
     tabs.online.onclick = () => setMode('online');
     const urlMode = new URLSearchParams(location.search).get('m') || (location.hash.startsWith('#m=') ? location.hash.slice(3) : null);
-    setMode(urlMode || localStorage.getItem('pbd.modeChoice') || 'offline');
+    setMode(urlMode || localStorage.getItem('pbd.modeChoice') || (navigator.onLine ? 'online' : 'offline'));
 
     /* détection d'appareil pour ordonner les méthodes */
     const coarse = matchMedia('(pointer: coarse)').matches && navigator.maxTouchPoints > 0;
