@@ -696,6 +696,34 @@ html[data-theme="system"] .magnet.today::after { color: #26243a; }
 .magnet.minoring { animation: mini-out .28s ease both; }
 .board-footnote { display: flex; justify-content: center; margin-top: 12px; }
 
+/* ---------- login.html : slider connexion / inscription ---------- */
+.auth-tabs {
+  position: relative; display: grid; grid-template-columns: 1fr 1fr; gap: 0;
+  background: var(--board); border: 1.5px solid var(--line); border-radius: 14px;
+  padding: 5px; margin: 16px 0 6px; user-select: none;
+}
+.auth-thumb {
+  position: absolute; top: 5px; left: 5px; bottom: 5px; width: calc(50% - 5px);
+  background: var(--card); border-radius: 10px; box-shadow: var(--shadow);
+  transition: transform .28s cubic-bezier(.3, 1.2, .4, 1);
+}
+.auth-tabs[data-mode="up"] .auth-thumb { transform: translateX(100%); }
+.auth-tab {
+  position: relative; z-index: 1; border: 0; background: none; cursor: pointer;
+  font: 700 14.5px var(--font); color: var(--muted); padding: 10px 8px; border-radius: 10px;
+  transition: color .2s ease;
+}
+.auth-tab[aria-selected="true"] { color: var(--brand-strong); }
+.auth-panel[hidden] { display: none; }
+.auth-panel.entering { animation: panel-in .25s ease both; }
+@keyframes panel-in { from { opacity: 0; transform: translateY(6px); } }
+.btn.has-logo { display: inline-flex; align-items: center; justify-content: center; gap: 8px; }
+.btn-logo { width: 18px; height: 18px; flex: none; }
+@media (prefers-reduced-motion: reduce) {
+  .auth-thumb { transition: none; }
+  .auth-panel.entering { animation: none; }
+}
+
 /* ---------- responsive des ajouts ---------- */
 @media (max-width: 700px) {
   .term-def { font-size: 12.5px; }
