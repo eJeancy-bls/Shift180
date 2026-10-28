@@ -11,7 +11,7 @@
 ![Supabase](https://img.shields.io/badge/Compte-Supabase-3ECF8E)
 ![Hors ligne](https://img.shields.io/badge/Fonctionne-hors_ligne-3ecf8e)
 
-*Créé par **Emmanuel BILOMBO-SILAHO**, développeur congolais 🇨🇬🇨🇩*
+*Créé par **Emmanuel Jeancy BILOMBO-SILAHO**, développeur congolais 🇨🇬🇨🇩*
 
 </div>
 
@@ -225,7 +225,7 @@ Les leçons des 60 premiers jours s'appuient sur un socle à quatre sources, ave
 
 Tu es libre d'utiliser, copier, modifier et redistribuer Shift180, y compris dans un usage commercial, à condition de conserver la note de copyright. Le texte complet des permissions et de la garantie limitée est dans le fichier `LICENSE`.
 
-> 💡 Droit moral : la MIT ne le couvre pas (il est inaliénable) — tu restes reconnu comme **l'auteur** (« Shift180 · Créé par Emmanuel BILOMBO-SILAHO »), ce que le footer des pages fait déjà naturellement.
+> 💡 Droit moral : la MIT ne le couvre pas (il est inaliénable) — tu restes reconnu comme **l'auteur** (« Shift180 · Créé par Emmanuel Jeancy BILOMBO-SILAHO »), ce que le footer des pages fait déjà naturellement.
 
 Voir aussi [`CREDITS.md`](CREDITS.md) : tous les crédits des supports et sources qui ont nourri le projet.
 
@@ -233,6 +233,6 @@ Voir aussi [`CREDITS.md`](CREDITS.md) : tous les crédits des supports et source
 
 ## 👤 Auteur
 
-**Emmanuel BILOMBO-SILAHO**, développeur congolais, étudiant en génie logiciel.
+**Emmanuel Jeancy BILOMBO-SILAHO**, développeur congolais, étudiant en génie logiciel.
 
 > *« Un jour, une leçon. 180 jours pour devenir développeur Fullstack. »*

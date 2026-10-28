@@ -4,7 +4,7 @@ Shift180 est un projet personnel d'apprentissage, mais il ne serait pas aussi so
 
 ## 👤 Création & conception
 
-- **Emmanuel BILOMBO-SILAHO** — créateur, design, contenu, code de la plateforme (ex-ProjetBigDev / Shift180).
+- **Emmanuel Jeancy BILOMBO-SILAHO** — créateur, design, contenu, code de la plateforme (ex-ProjetBigDev / Shift180).
 
 ## 📖 Auteurs des supports pédagogiques utilisés
 
