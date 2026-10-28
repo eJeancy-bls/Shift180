@@ -1,5 +1,5 @@
 // sw.js — PWA service worker : network-first pour les pages (toujours frais), cache-first pour les assets, hors ligne géré
-const V = 'pbd-v11';   // v11 : adaptations mobile des pages de cours + interface
+const V = 'pbd-v12';   // v12 : mise a jour auto (controllerchange reload) + core.js network-first
 const SHELL = [
   'index.html', 'app.html', 'day.html', 'start.html', 'login.html', 'credits.html',
   'style.css', 'core.js', 'app.js', 'day.js', 'data.js', 'figures.js', 'config.js', 'login.js',
@@ -48,6 +48,18 @@ self.addEventListener('fetch', e => {
         }
       }
       // Assets : cache-first (hors ligne), mise à jour en arrière-plan
+      // Exception : core.js est critique pour la mise à jour auto -> network-first
+      const isCore = url.pathname.endsWith('/core.js') || url.pathname === 'core.js';
+      if (isCore) {
+        try {
+          const net = await fetch(e.request);
+          if (net && net.ok) c.put(e.request, net.clone());
+          return net;
+        } catch {
+          const hit = await c.match(e.request);
+          if (hit) return hit;
+        }
+      }
       const hit = await c.match(e.request);
       if (hit) {
         fetch(e.request).then(r => { if (r && r.ok) c.put(e.request, r.clone()); }).catch(() => {});

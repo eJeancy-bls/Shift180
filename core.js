@@ -377,6 +377,25 @@ function renderAuth() {
   Sync.refreshBadge();
 }
 
+/* ---------------- mise à jour automatique (PWA) ----------------
+   Dès qu'une nouvelle version du service worker prend le contrôle,
+   la page se recharge seule pour afficher la dernière version. */
+function setupAutoUpdate() {
+  if (!('serviceWorker' in navigator)) return;
+  let refreshing = false;
+  navigator.serviceWorker.addEventListener('controllerchange', () => {
+    if (refreshing) return;
+    refreshing = true;
+    window.location.reload();
+  });
+  navigator.serviceWorker.register('sw.js').then(reg => {
+    if (!reg) return;
+    const check = () => { try { reg.update(); } catch (e) {} };
+    setInterval(check, 60 * 60 * 1000); // vérification toutes les heures
+    document.addEventListener('visibilitychange', () => { if (!document.hidden) check(); });
+  }).catch(() => {});
+}
+
 /* ---------------- Démarrage commun ---------------- */
 async function bootCommon() {
   Store.load();
@@ -384,6 +403,7 @@ async function bootCommon() {
   document.documentElement.classList.add('js');
   await Sync.init();
   renderAuth();
+  setupAutoUpdate();
   /* bouton retour hors de la TopBar (toutes les pages sauf l'accueil) */
   const path = (location.pathname.split('/').pop() || 'index.html').toLowerCase();
   if (path !== 'index.html' && path !== '' && path !== 'index') {
