@@ -16,6 +16,7 @@
       <a class="brand" href="index.html"><img src="icons/logo.svg" alt="" width="34" height="34"><b>Shift180</b></a>
       <span class="spacer"></span>
       <span class="sync-badge"><span class="sync-dot"></span></span>
+      <span id="topbarAuth"></span>
       <a class="chip-btn small" href="app.html">Plateforme →</a>
       <div class="theme-menu">
         <button class="chip-btn small theme-toggle" aria-haspopup="true" aria-label="Choisir le thème"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 1 0 18z" fill="currentColor" stroke="none"/></svg></button>
@@ -109,7 +110,7 @@
   <script src="figures.js"></script>
   <script src="core.js"></script>
   <script>
-    Theme.init();
+    bootCommon();
     if ('serviceWorker' in navigator && location.protocol.startsWith('http')) { navigator.serviceWorker.register('sw.js').catch(()=>{}); }
 
     /* slider offline/online */

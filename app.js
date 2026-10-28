@@ -79,14 +79,9 @@ function renderHint() {
   if (!Store.user) $('#hint').textContent += ' Ta progression est gardée en local — connecte-toi (en haut) pour la sauvegarder sur ton compte.';
 }
 
-/* ---------- auth topbar : la page dédiée = login.html (plus de champs de connexion ici) ---------- */
+/* ---------- auth topbar : rendu partagé (core.js renderAuth) ---------- */
 function authTopbar() {
-  const ta = $('#topbarAuth');
-  const badge = `<span class="sync-badge" data-who="account"><span class="sync-dot"></span><span class="sync-txt"></span></span>`;
-  ta.innerHTML = Store.user
-    ? `${badge}<a class="chip-btn small" href="login.html" title="Ton compte">${iconify('👤')} ${Store.user.email.split('@')[0]}</a>`
-    : `${badge}<a class="chip-btn small" href="login.html">Connexion</a>`;
-  Sync.refreshBadge();
+  renderAuth();
 }
 
 /* ---------- grille repliée : 7 aimants suffisent sur un petit écran ---------- */

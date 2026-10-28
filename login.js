@@ -78,6 +78,16 @@ function setMode(mode) {
 }
 
 function renderConnected() {
+  /* retour OAuth (Google/GitHub) : session échangée par supabase-js → on repart vers la plateforme */
+  if (new URLSearchParams(location.search).get('code')) {
+    root.innerHTML = iconify(`
+      <div class="auth-card">
+        <h2 class="auth-title">Connecté ✓</h2>
+        <p class="muted-line">Bienvenue ${Store.user.email.split('@')[0]} — on te ramène à ton tableau…</p>
+      </div>`);
+    setTimeout(() => location.replace(nextURL()), 700);
+    return;
+  }
   root.innerHTML = iconify(`
     <div class="auth-card">
       <h2 class="auth-title">Compte connecté ✓</h2>

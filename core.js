@@ -224,6 +224,7 @@ const Sync = {
       const was = Store.user;
       Store.user = session?.user || null;
       if (Store.user && !was) this.pull().then(() => this.pushSoon());
+      renderAuth();
     });
     this.refreshBadge();
   },
@@ -339,8 +340,25 @@ const Sync = {
     await this.sb?.auth.signOut();
     Store.user = null;
     this.refreshBadge();
+    renderAuth();
   }
 };
+
+/* ---------------- chip d'authentification partagée ----------------
+   Même rendu sur toutes les pages : badge de sync + chip compte.
+   L'accueil expose en plus #goBoard (retour direct au tableau une fois connecté). */
+function renderAuth() {
+  const ta = $('#topbarAuth');
+  if (ta) {
+    const badge = `<span class="sync-badge"><span class="sync-dot"></span><span class="sync-txt"></span></span>`;
+    ta.innerHTML = Store.user
+      ? `${badge}<a class="chip-btn small" href="login.html" title="Ton compte">${iconify('👤')} ${Store.user.email.split('@')[0]}</a>`
+      : `${badge}<a class="chip-btn small" href="login.html">Connexion</a>`;
+  }
+  const go = $('#goBoard');
+  if (go) go.hidden = !Store.user;
+  Sync.refreshBadge();
+}
 
 /* ---------------- Démarrage commun ---------------- */
 async function bootCommon() {
@@ -348,6 +366,7 @@ async function bootCommon() {
   Theme.init();
   document.documentElement.classList.add('js');
   await Sync.init();
+  renderAuth();
 }
 
 // Icônes en ligne (mini-jeux d'emoji SVG inline, légers)

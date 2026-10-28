@@ -1,5 +1,5 @@
 // sw.js — PWA service worker : app-shell cache-first (marche hors ligne), stale-while-revalidate pour les CDN
-const V = 'pbd-v4';   // v4 : emojis d'interface remplacés par icônes SVG inline (+ logos OAuth sur start.html)
+const V = 'pbd-v5';   // v5 : chip d'authentification partagée sur toutes les pages + retour OAuth automatique
 const SHELL = [
   'index.html', 'app.html', 'day.html', 'start.html', 'login.html', 'credits.html',
   'style.css', 'core.js', 'app.js', 'day.js', 'data.js', 'figures.js', 'config.js', 'login.js',

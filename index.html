@@ -24,7 +24,8 @@
           <button data-t="system" aria-checked="false"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg> Système</button>
         </div>
       </div>
-      <a class="chip-btn small" href="login.html">Connexion</a>
+      <span id="topbarAuth"></span>
+      <a class="chip-btn small" id="goBoard" href="app.html" hidden>← Mon tableau</a>
     </div>
   </header>
 
@@ -73,7 +74,7 @@
 
     <section class="land-final container">
       <h2>Le Jour 1 t'attend sur ton tableau.</h2>
-      <a class="btn big mint" href="start.html">Commencer →</a>
+      <a class="btn big mint" id="ctaBottom" href="start.html">Commencer →</a>
     </section>
   </main>
 
@@ -82,6 +83,7 @@
 -´.  </footer>
 -
   <script src="config.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="lessons-d1-15.js"></script>
   <script src="lessons-d16-30.js"></script>
   <script src="lessons-d31-45.js"></script>
@@ -90,7 +92,15 @@
   <script src="figures.js"></script>
   <script src="core.js"></script>
   <script>
-    Theme.init();
+    bootCommon().then(() => {
+      /* connecté : l'accueil ramène directement vers la plateforme */
+      const cta = $('#ctaBottom');
+      if (Store.user) {
+        $('#startBtn').onclick = () => location.href = 'app.html';
+        $('#startBtn').textContent = 'Reprendre mon tableau →';
+        if (cta) { cta.href = 'app.html'; cta.textContent = 'Reprendre mon tableau →'; }
+      }
+    });
     if ('serviceWorker' in navigator && location.protocol.startsWith('http')) { navigator.serviceWorker.register('sw.js').catch(()=>{}); }
 
     /* ----- carrousel des modes : titres d'abord, corps au défilement/clic ----- */

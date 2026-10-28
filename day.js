@@ -45,12 +45,7 @@ function figHTML(id) {
 }
 
 async function main() {
-  await bootCommon();
-
-  const ta = $('#topbarAuth');
-  if (ta) ta.innerHTML = Store.user
-    ? `<span class="chip-btn small" title="Connecté — progression synchronisée">👤 ${Store.user.email.split('@')[0]}</span>`
-    : `<a class="chip-btn small" href="login.html">Connexion</a>`;
+  await bootCommon();   // remplit aussi le chip d'authentification (renderAuth)
 
   const n = +new URLSearchParams(location.search).get('d') || 1;
   const D = DAYS[n];
