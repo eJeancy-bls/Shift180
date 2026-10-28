@@ -8,10 +8,10 @@ Shift180 est un projet personnel d'apprentissage, mais il ne serait pas aussi so
 
 ## 📖 Auteurs des supports pédagogiques utilisés
 
+- **KITOKO Roland** (CFI-CIRAS) — **architecte solutions chez CIRAS** ([LinkedIn](https://cg.linkedin.com/in/roland-kitoko-156018152)), auteur du **module Merise** (fiche d'introduction à la méthode d'analyse et de conception des systèmes d'information + cas pratique de modélisation fonctionnelle des flux) : son approche « comprendre qui échange quoi avec qui avant de coder » structure les mini-projets de la plateforme (jours 7 et 41–45).
 - **ILOKI-NGATSONGO Alphonse** — ingénieur informatique, professeur et membre de l'administration du CFI-CIRAS. **Auteur du module WEB** (« Chapitre I : les instructions de base du langage HTML ») qui a fourni le socle des jours 1 à 7 de la plateforme.
 - **Morel Garvey OYERE** (CFI-CIRAS) — auteur des supports du module **Algorithmique** (présentation du module, récursivité, introduction aux algorithmes, tableaux, structures & énumérations, chaînes de caractères, fichiers) : métadonnées des documents fournis dans `resource/`.
 - **Wikibooks** — le support *« Programmation C++ (débutant) / Les tableaux de char »* à l'origine des exercices de chaînes de caractères adaptés au jour 34 (validation de format, palindrome, conjugaison…) — [fr.wikibooks.org](https://fr.wikibooks.org) (licence CC BY-SA).
-- **KITOKO Roland** (CFI-CIRAS) — auteur du **module Merise** (fiche d'introduction à la méthode + cas pratique des certificats de scolarité) : il a inspiré la démarche d'analyse avant codage des mini-projets (jours 7 et 41–45). [LinkedIn](https://cg.linkedin.com/in/roland-kitoko-156018152)
 - **Support « Chapitre I WEB »** (auteur : **ILOKI-NGATSONGO Alphonse**, CFI-CIRAS) — cours d'introduction au HTML (balises, DOCTYPE, titres, images, zones réactives, liens) : intégré et modernisé aux jours 1–7.
 
 ## 🎓 Sources académiques d'inspiration
