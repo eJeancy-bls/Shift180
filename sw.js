@@ -1,5 +1,5 @@
-// sw.js — PWA service worker : app-shell cache-first (marche hors ligne), stale-while-revalidate pour les CDN
-const V = 'pbd-v7';   // v7 : onglet par defaut intelligent + boutons OAuth visibles
+// sw.js — PWA service worker : network-first pour les pages (toujours frais), cache-first pour les assets, hors ligne géré
+const V = 'pbd-v8';   // v8 : correction page d'erreur (network-first documents) + robustesse try/catch
 const SHELL = [
   'index.html', 'app.html', 'day.html', 'start.html', 'login.html', 'credits.html',
   'style.css', 'core.js', 'app.js', 'day.js', 'data.js', 'figures.js', 'config.js', 'login.js',
@@ -8,7 +8,6 @@ const SHELL = [
   'icons/icon-192.png', 'icons/icon-512.png', 'icons/icon-180.png',
   'icons/icon-maskable-192.png', 'icons/icon-maskable-512.png'
 ];
-
 self.addEventListener('install', e => {
   e.waitUntil((async () => {
     const c = await caches.open(V);
@@ -16,43 +15,54 @@ self.addEventListener('install', e => {
     self.skipWaiting();
   })());
 });
-
 self.addEventListener('activate', e => {
   e.waitUntil(caches.keys().then(keys =>
     Promise.all(keys.filter(k => k !== V).map(k => caches.delete(k)))
   ).then(() => self.clients.claim()));
 });
-
 self.addEventListener('fetch', e => {
   const url = new URL(e.request.url);
   if (e.request.method !== 'GET') return;
   // API Supabase : réseau d'abord, pas de cache des données privées
   if (/supabase\.co|supabase\.in/.test(url.host)) return;
 
-  // CDNs : stale-while-revalidate (permet le mode hors ligne après 1re visite en ligne)
-  if (url.origin !== location.origin) {
-    e.respondWith((async () => {
-      const c = await caches.open(V);
-      const hit = await c.match(e.request);
-      const net = fetch(e.request).then(r => { c.put(e.request, r.clone()); return r; }).catch(() => hit);
-      return hit || net;
-    })());
-    return;
-  }
-
-  // App shell : cache-first (instant, hors ligne)
   e.respondWith((async () => {
     const c = await caches.open(V);
-    const hit = await c.match(e.request, { ignoreSearch: true });
-    if (hit) {
-      fetch(e.request).then(r => c.put(e.request, r.clone())).catch(() => {});
-      return hit;
+    try {
+      // CDNs : stale-while-revalidate
+      if (url.origin !== location.origin) {
+        const hit = await c.match(e.request);
+        const net = fetch(e.request).then(r => { if (r && r.ok) c.put(e.request, r.clone()); return r; }).catch(() => hit);
+        return hit || await net;
+      }
+      // Pages HTML : network-first (toujours frais en ligne, cache en secours hors ligne)
+      const isDoc = e.request.destination === 'document' || (e.request.headers.get('accept') || '').includes('text/html');
+      if (isDoc) {
+        try {
+          const net = await fetch(e.request);
+          if (net && net.ok) c.put(e.request, net.clone());
+          return net;
+        } catch {
+          const hit = await c.match(e.request, { ignoreSearch: true });
+          return hit || await c.match('index.html');
+        }
+      }
+      // Assets : cache-first (hors ligne), mise à jour en arrière-plan
+      const hit = await c.match(e.request);
+      if (hit) {
+        fetch(e.request).then(r => { if (r && r.ok) c.put(e.request, r.clone()); }).catch(() => {});
+        return hit;
+      }
+      const net = await fetch(e.request).catch(() => null);
+      if (net && net.ok) { c.put(e.request, net.clone()); return net; }
+      return new Response('', { status: 504 });
+    } catch (err) {
+      // Dernier recours : ne jamais renvoyer une page d'erreur brute
+      if (e.request.destination === 'document') {
+        const hit = await c.match('index.html');
+        if (hit) return hit;
+      }
+      return new Response('', { status: 504 });
     }
-    const net = await fetch(e.request).catch(() => null);
-    if (net) { c.put(e.request, net.clone()); return net; }
-    if (e.request.destination === 'document') {
-      return (await c.match('app.html')) || (await c.match('index.html'));
-    }
-    return new Response('', { status: 504 });
   })());
 });

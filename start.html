@@ -144,7 +144,10 @@
     /* OAuth */
     const msg = $('#fMsg');
     async function oauth(provider) {
-      if (!Store.sb) { msg.className = 'form-msg err'; msg.textContent = 'Compte non configuré ici (config.js vide) — utilise le mode hors ligne ou remplis config.js.'; return; }
+      if (!Sync.sb) {
+        try { await Sync.init(); } catch (e) { /* ignore */ }
+      }
+      if (!Sync.sb) { msg.className = 'form-msg err'; msg.textContent = 'Compte non configuré ici (config.js vide) — utilise le mode hors ligne ou remplis config.js.'; return; }
       msg.className = 'form-msg'; msg.textContent = 'Connexion ' + provider + '…';
       try {
         await Sync.signInOAuth(provider);
