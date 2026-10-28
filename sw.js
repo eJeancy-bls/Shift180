@@ -1,5 +1,5 @@
 // sw.js — PWA service worker : network-first pour les pages (toujours frais), cache-first pour les assets, hors ligne géré
-const V = 'pbd-v8';   // v8 : correction page d'erreur (network-first documents) + robustesse try/catch
+const V = 'pbd-v9';   // v9 : suppression du bouton de confirmation du mode sur l'accueil
 const SHELL = [
   'index.html', 'app.html', 'day.html', 'start.html', 'login.html', 'credits.html',
   'style.css', 'core.js', 'app.js', 'day.js', 'data.js', 'figures.js', 'config.js', 'login.js',

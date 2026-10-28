@@ -52,11 +52,6 @@
           <p class="mode-body">Tu crées ton compte (Google, GitHub ou email) et ta progression est sauvegardée dans le cloud. Changé de téléphone ? Ton tableau est déjà là — et le mode hors ligne reste toujours possible en plus.</p>
         </article>
       </div>
-
-      <div class="start-cta">
-        <button class="btn big multi" id="startBtn">Commencer →</button>
-        <p class="chosen-strip" id="chosenStrip"><span id="chosenTxt"></span></p>
-      </div>
     </section>
 
     <section class="land-section container" id="principe">
@@ -95,24 +90,18 @@
     bootCommon().then(() => {
       /* connecté : l'accueil ramène directement vers la plateforme */
       const cta = $('#ctaBottom');
-      if (Store.user) {
-        $('#startBtn').onclick = () => location.href = 'app.html';
-        $('#startBtn').textContent = 'Reprendre mon tableau →';
-        if (cta) { cta.href = 'app.html'; cta.textContent = 'Reprendre mon tableau →'; }
-      }
+      if (Store.user && cta) { cta.href = 'app.html'; cta.textContent = 'Reprendre mon tableau →'; }
     });
     if ('serviceWorker' in navigator && location.protocol.startsWith('http')) { navigator.serviceWorker.register('sw.js').catch(()=>{}); }
 
     /* ----- carrousel des modes : titres d'abord, corps au défilement/clic ----- */
     const rail = $('#modeRail');
+    /* clic partout dans la carte = choisir le mode (redirection directe) */
     const cards = $$('.mode-card', rail);
     const io = new IntersectionObserver(es => {
       es.forEach(e => { if (e.isIntersecting && e.intersectionRatio > .6) e.target.classList.add('active'); });
     }, { root: rail, threshold: .6 });
     cards.forEach(c => io.observe(c));
-    /* clic partout dans la carte = choisir le mode */
-    let chosen = null;
-    const strip = $('#chosenStrip'), txt = $('#chosenTxt'), startBtn = $('#startBtn');
     function choose(card) {
       const mode = card.dataset.mode;
       localStorage.setItem('pbd.modeChoice', mode);
@@ -120,8 +109,6 @@
       else location.href = 'login.html';
     }
     cards.forEach(c => c.addEventListener('click', () => choose(c)));
-    /* bouton commencer */
-    startBtn.onclick = () => { location.href = 'start.html' + (chosen ? '#m=' + chosen : ''); };
     /* restore choix mémorisé (sans imposer) */
     const remembered = localStorage.getItem('pbd.modeChoice');
     if (remembered) {
