@@ -1,7 +1,7 @@
 // sw.js — PWA service worker : app-shell cache-first (marche hors ligne), stale-while-revalidate pour les CDN
 const V = 'pbd-v3';   // v3 : leçons 1-60 actualisées (source « Chapitre I WEB » + banque d'exercices chaînes)
 const SHELL = [
-  'index.html', 'app.html', 'day.html', 'start.html', 'login.html',
+  'index.html', 'app.html', 'day.html', 'start.html', 'login.html', 'credits.html',
   'style.css', 'core.js', 'app.js', 'day.js', 'data.js', 'figures.js', 'config.js', 'login.js',
   'lessons-d1-15.js', 'lessons-d16-30.js', 'lessons-d31-45.js', 'lessons-d46-60.js',
   'manifest.webmanifest', 'icons/logo.svg',

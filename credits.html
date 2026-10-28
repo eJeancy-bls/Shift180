@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="system">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Crédits · Shift180</title>
+  <link rel="icon" href="icons/logo.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icons/icon-180.png">
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="theme-color" content="#fbf6ed">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* page crédits — même monde « tableau d'aimants », styles scoped à cette page */
+    .cr-page { max-width: 860px; margin: 0 auto; padding: 26px 16px 40px; }
+    .cr-hero { text-align: center; margin-bottom: 26px; }
+    .cr-hero h1 { margin: 0 0 6px; font-size: clamp(24px, 5vw, 32px); }
+    .cr-hero p { margin: 0 auto; max-width: 560px; color: var(--muted); font-size: 15px; }
+    .cr-card { background: var(--card); border: 1.5px solid var(--line); border-radius: var(--r-l);
+               box-shadow: var(--shadow); padding: 20px 20px 16px; margin: 0 0 18px; }
+    .cr-card h2 { display: flex; align-items: center; gap: 10px; margin: 0 0 12px; font-size: 18px; }
+    .cr-magnet { display: inline-flex; align-items: center; justify-content: center; width: 34px; height: 34px;
+                 border-radius: 10px; background: var(--lilac); color: var(--lilac-ink);
+                 box-shadow: var(--shadow); flex: none; }
+    .cr-person { display: flex; gap: 14px; align-items: flex-start; padding: 12px 0; }
+    .cr-person + .cr-person { border-top: 1.5px dashed var(--line); }
+    .cr-ava { flex: none; width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center;
+              font-size: 22px; background: var(--brand-soft); box-shadow: var(--shadow); }
+    .cr-person b { display: block; }
+    .cr-person small { color: var(--muted); display: block; margin-top: 2px; line-height: 1.5; }
+    .cr-chip { display: inline-block; margin-top: 6px; padding: 3px 10px; border-radius: 99px;
+               font-size: 12px; font-weight: 700; }
+    .chip-mint  { background: var(--mint);   color: var(--mint-ink); }
+    .chip-peach { background: var(--peach);  color: var(--peach-ink); }
+    .chip-sky   { background: var(--sky);    color: var(--sky-ink); }
+    .chip-butter{ background: var(--butter); color: var(--butter-ink); }
+    .cr-refs { display: flex; flex-wrap: wrap; gap: 10px; }
+    .cr-ref { flex: 1 1 180px; background: var(--board); border: 1.5px solid var(--line);
+              border-radius: var(--r-m); padding: 12px 14px; }
+    .cr-ref b { display: block; margin-bottom: 2px; }
+    .cr-ref small { color: var(--muted); line-height: 1.45; display: block; }
+    .cr-note { background: var(--brand-soft); border-radius: var(--r-m); padding: 12px 16px;
+               font-size: 14px; margin: 14px 0 0; }
+    .cr-foot-links { text-align: center; margin-top: 22px; display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="index.html"><img src="icons/logo.svg" alt="" width="34" height="34"><b>Shift180</b></a>
+      <span class="spacer"></span>
+      <a class="chip-btn small" href="app.html">Plateforme →</a>
+      <div class="theme-menu">
+        <button class="chip-btn small theme-toggle" aria-haspopup="true" aria-label="Choisir le thème">🌗</button>
+        <div class="theme-pop" role="menu" aria-label="Thème">
+          <button data-t="light" aria-checked="false">☀️ Clair</button>
+          <button data-t="dark" aria-checked="false">🌙 Sombre</button>
+          <button data-t="system" aria-checked="false">🖥️ Système</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="cr-page">
+    <div class="cr-hero">
+      <h1>🙌 Crédits &amp; remerciements</h1>
+      <p>Shift180 est un projet personnel, mais il ne serait pas aussi solide sans les personnes et les sources qui l'ont nourri. À chacun, merci.</p>
+    </div>
+
+    <section class="cr-card">
+      <h2><span class="cr-magnet">🧲</span> Création &amp; conception</h2>
+      <div class="cr-person">
+        <span class="cr-ava">👨🏾‍💻</span>
+        <div>
+          <b>Emmanuel Jeancy BILOMBO-SILAHO</b>
+          <small>Créateur de Shift180 — design, contenu pédagogique, code de la plateforme (ex-ProjetBigDev). Développeur congolais, étudiant en génie logiciel.</small>
+          <span class="cr-chip chip-mint">Auteur &amp; développeur</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="cr-card">
+      <h2><span class="cr-magnet">📗</span> Auteurs des supports pédagogiques</h2>
+      <div class="cr-person">
+        <span class="cr-ava">🎓</span>
+        <div>
+          <b>ILOKI-NGATSONGO Alphonse</b>
+          <small>Ingénieur informatique, professeur et membre de l'administration du CFI-CIRAS. Auteur du <b>module WEB</b> (« Chapitre I : les instructions de base du langage HTML ») — le socle qui a servi à bâtir les jours 1 à 7 de la plateforme.</small>
+          <span class="cr-chip chip-peach">Module WEB · CFI-CIRAS</span>
+        </div>
+      </div>
+      <div class="cr-person">
+        <span class="cr-ava">🧮</span>
+        <div>
+          <b>Morel Garvey OYERE</b>
+          <small>CFI-CIRAS. Auteur des supports du <b>module Algorithmique</b> (récursivité, tableaux, structures &amp; énumérations, chaînes de caractères, fichiers) — identifié via les métadonnées des documents.</small>
+          <span class="cr-chip chip-sky">Module Algorithmique</span>
+        </div>
+      </div>
+      <div class="cr-person">
+        <span class="cr-ava">📚</span>
+        <div>
+          <b>Wikibooks</b>
+          <small>Support « Programmation C++ (débutant) / Les tableaux de char » — à l'origine des exercices de chaînes de caractères transposés en JavaScript au jour 34 (palindrome, validation de format, conjugaison…). Licence CC BY-SA.</small>
+          <span class="cr-chip chip-butter">CC BY-SA</span>
+        </div>
+      </div>
+      <div class="cr-person">
+        <span class="cr-ava">🗂️</span>
+        <div>
+          <b>Supports « Merise » de la formation</b>
+          <small>Fiche d'introduction à Merise + cas pratique des certificats de scolarité (supports non signés) — ils ont inspiré la démarche d'analyse avant codage des mini-projets (jours 7 et 41–45).</small>
+        </div>
+      </div>
+    </section>
+
+    <section class="cr-card">
+      <h2><span class="cr-magnet">🎓</span> Sources académiques d'inspiration</h2>
+      <div class="cr-refs">
+        <div class="cr-ref"><b>MDN Web Docs</b><small>Référence citée dans la quasi-totalité des leçons — le standard des développeurs web.</small></div>
+        <div class="cr-ref"><b>OpenClassrooms</b><small>Cours « Écrivez du HTML5 et du CSS3 » et démarche de design responsive.</small></div>
+        <div class="cr-ref"><b>Cisco NetAcad</b><small>Parcours JavaScript Essentials 1/2 — la rigueur des exercices progressifs.</small></div>
+        <div class="cr-ref"><b>Merise</b><small>Méthode française d'analyse des systèmes d'information (années 1970) — la « séparation des préoccupations » structure l'approche projet.</small></div>
+      </div>
+    </section>
+
+    <section class="cr-card">
+      <h2><span class="cr-magnet">🛠️</span> Outils &amp; bibliothèques</h2>
+      <div class="cr-refs">
+        <div class="cr-ref"><b>Supabase JS v2</b><small>Authentification (email + Google + GitHub) et synchronisation de progression.</small></div>
+        <div class="cr-ref"><b>Playwright</b><small>Tests end-to-end et QA visuelle pendant le développement.</small></div>
+        <div class="cr-ref"><b>Les outils F12</b><small>Le « professeur quotidien » des 180 jours — inspecteur, réseau, console.</small></div>
+      </div>
+      <p class="cr-note">📄 Shift180 est publié sous licence <b>MIT</b> (voir <a href="LICENSE">LICENSE</a>) — utilise, modifie et partage librement en conservant la note de copyright. La version détaillée textuelle vit dans <a href="CREDITS.md">CREDITS.md</a>.</p>
+    </section>
+
+    <div class="cr-foot-links">
+      <a class="btn btn-ghost" href="index.html">← Accueil</a>
+      <a class="btn btn-ghost" href="app.html">Tableau d'aimants →</a>
+    </div>
+  </main>
+
+  <footer class="site-foot">
+    <div class="container">Shift180 · Créé par Emmanuel Jeancy BILOMBO-SILAHO, développeur congolais</div>
+  </footer>
+
+  <script src="config.js"></script>
+  <script src="core.js"></script>
+  <script>Theme.init();</script>
+  <script>if ('serviceWorker' in navigator && location.protocol.startsWith('http')) { navigator.serviceWorker.register('sw.js').catch(()=>{}); }</script>
+</body>
+</html>
