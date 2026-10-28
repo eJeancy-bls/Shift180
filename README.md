@@ -143,14 +143,14 @@ Le mode hors ligne s'adapte à l'appareil :
 
 1. Branche tes clés Supabase ci-dessus et push tout.
 2. **Settings → Pages** → *Deploy from a branch* → `main` → `/ (root)`.
-3. Ouvre `https://<ton-pseudo>.github.io/Shift180/` → **Commencer** → mode « En ligne » → **Créer ton compte / Se connecter** (page `login.html` dédiée — plus aucun champ de connexion dans l'app).
+3. Ouvre `https://shift180.pages.dev/` → **Commencer** → mode « En ligne » → **Créer ton compte / Se connecter** (page `login.html` dédiée — plus aucun champ de connexion dans l'app).
 
 #### Connexions Google & GitHub (OAuth)
 
 Dans la page Compte (et sur `start.html`), les boutons **Google** / **GitHub** utilisent `supabase.auth.signInWithOAuth`. Pour les activer :
 
 1. **Dashboard Supabase** → *Authentication → Providers* → active **Google** et/ou **GitHub**, colle les `Client ID`/`Secret` (créés sur <https://console.cloud.google.com/> et <https://github.com/settings/developers>).
-2. Dans **Authentication → URL Configuration**, ajoute `https://<ton-pseudo>.github.io/Shift180/login.html` aux **Redirect URLs** (et `http://localhost:8642/login.html` pour les tests locaux).
+2. Dans **Authentication → URL Configuration** : **Site URL** = `https://shift180.pages.dev/` et **Redirect URLs** = `https://shift180.pages.dev/login.html` (+ `http://localhost:8642/login.html` pour les tests locaux).
 
 ---
 
