@@ -2,8 +2,8 @@
 // tout pictogramme restant dans le texte rendu, + comptage des icônes SVG injectées.
 const { chromium } = require('playwright');
 const BASE = 'http://localhost:8642';
-// ↔ et ↗ sont des flèches typographiques (assumées), pas des emojis colorés
-const ALLOW = new Set(['↔', '↗']);
+// ↔ et ↗ sont des flèches typographiques (assumées) ; 🇨🇬 du pied de page voulu par l'auteur
+const ALLOW = new Set(['↔', '↗', '🇨🇬']);
 
 const PAGES = [
   { url: '/index.html', seed: false, minIcons: 1 },
