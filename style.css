@@ -116,6 +116,7 @@ h1, h2, h3 { line-height: 1.25; letter-spacing: -.01em; }
 .chip-btn:active { transform: translateY(0) scale(.97); }
 .chip-btn.small { padding: 5px 11px; font-size: 13px; }
 .chip-btn[disabled] { opacity: .55; cursor: not-allowed; transform: none; box-shadow: none; }
+#topbarAuth { display: inline-flex; align-items: center; gap: 6px; vertical-align: middle; }
 
 /* theme menu */
 .theme-menu { position: relative; }
