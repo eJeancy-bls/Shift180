@@ -17,7 +17,12 @@ const SCENE = 'file:///' + path.join(__dirname, 'index.html').replace(/\\/g, '/'
 const TOTAL = Math.round(T_END * FPS);
 const G0 = Math.floor(TOTAL * (PI - 1) / PN);
 const G1 = Math.floor(TOTAL * PI / PN);
-const N = G1 - G0;
+/* --f-start/--f-end : capture d'un sous-intervalle (rattrapage après
+   interruption — les frames déjà écrites ne sont pas recapturées) */
+const av = n => process.argv.includes(n) ? Number(process.argv[process.argv.indexOf(n) + 1]) : undefined;
+const F0 = Math.max(G0, av('--f-start') ?? G0);
+const F1 = Math.min(G1, av('--f-end') ?? G1);
+const N = F1 - F0;
 const TAG = PN > 1 ? `[part ${PI}/${PN}] ` : '';
 
 (async () => {
@@ -53,20 +58,20 @@ const TAG = PN > 1 ? `[part ${PI}/${PN}] ` : '';
 
   /* ---- capture ---- */
   let last = Date.now();
-  for (let f = G0; f < G1; f++) {
+  for (let f = F0; f < F1; f++) {
     const t = f / FPS;
     await page.evaluate(tt => window.__seek(tt), t);
     /* double rAF avant capture : garantit que le compositeur a peint la frame
        (les calques transformés 4K sinon perdent des tuiles de raster) */
     await page.evaluate(() => new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r))));
     await page.screenshot({ type: 'jpeg', quality: 90, path: path.join(FRAMES, 'f' + String(f).padStart(6, '0') + '.jpg'), animations: 'disabled' });
-    if ((f - G0) % 120 === 0) {
+    if ((f - F0) % 120 === 0) {
       const dt = (Date.now() - last) / 120 / 1000;
       last = Date.now();
-      const remain = ((G1 - f) * dt / 60).toFixed(1);
-      console.log(TAG + `frame ${f}/${G1} · ${dt.toFixed(2)}s/img · reste ≈ ${remain} min`);
+      const remain = ((F1 - f) * dt / 60).toFixed(1);
+      console.log(TAG + `frame ${f}/${F1} · ${dt.toFixed(2)}s/img · reste ≈ ${remain} min`);
     }
   }
   await browser.close();
-  console.log(TAG + 'CAPTURE OK ·', N, 'images [' + G0 + '..' + (G1 - 1) + '] →', FRAMES, '·', ((Date.now() - t0) / 60000).toFixed(1), 'min');
+  console.log(TAG + 'CAPTURE OK ·', N, 'images [' + F0 + '..' + (F1 - 1) + '] →', FRAMES, '·', ((Date.now() - t0) / 60000).toFixed(1), 'min');
 })().catch(e => { console.error('FATAL', e); process.exit(1); });
