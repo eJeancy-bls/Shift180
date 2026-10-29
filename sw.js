@@ -1,5 +1,5 @@
 // sw.js — PWA service worker : network-first pour les pages (toujours frais), cache-first pour les assets, hors ligne géré
-const V = 'pbd-v13';   // v13 : pastilles vidéo YouTube (Grafikart/Graven) dans les pages de cours
+const V = 'pbd-v15';   // v15 : pastille dépôt GitHub disponible même sans connexion
 const SHELL = [
   'index.html', 'app.html', 'day.html', 'start.html', 'login.html', 'credits.html',
   'style.css', 'core.js', 'app.js', 'day.js', 'data.js', 'figures.js', 'videos.js', 'config.js', 'login.js',

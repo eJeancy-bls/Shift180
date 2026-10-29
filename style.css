@@ -736,6 +736,7 @@ html[data-theme="system"] .magnet.today::after { color: #26243a; }
   .auth-me b { font-size: 12px; }
   .auth-me .ava { width: 20px; height: 20px; }
   .topbar-inner { flex-wrap: wrap; }
+  .hide-s { display: none; }
 }
 @media (max-width: 700px) {
   .term-def { font-size: 12.5px; }
