@@ -26,7 +26,9 @@ const N = F1 - F0;
 const TAG = PN > 1 ? `[part ${PI}/${PN}] ` : '';
 
 (async () => {
-  if (PI === 1) fs.rmSync(FRAMES, { recursive: true, force: true });
+  /* effacement explicite seul (--clean) : jamais automatique, sinon un simple
+     rattrapage --part 1/n vide le dossier partagé des autres parts */
+  if (process.argv.includes('--clean')) fs.rmSync(FRAMES, { recursive: true, force: true });
   fs.mkdirSync(FRAMES, { recursive: true });
 
   const browser = await chromium.launch();
