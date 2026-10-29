@@ -112,13 +112,22 @@ function renderDay(n, D, st) {
   if (vids.length) {
     const YT_ICON = '<svg class="ico yt-ico" viewBox="0 0 24 24" aria-hidden="true"><path fill="#ff4d4d" d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31.3 31.3 0 0 0 0 12a31.3 31.3 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31.3 31.3 0 0 0 24 12a31.3 31.3 0 0 0-.5-5.8z"/><path fill="#fff" d="M9.6 15.6V8.4L15.8 12z"/></svg>';
     const pills = vids.map(([c, t, id]) =>
-      `<a class="yt-pill" href="https://www.youtube.com/watch?v=${id}" target="_blank" rel="noopener" title="Ouvrir la vidéo sur YouTube">${YT_ICON}<span class="yt-t">${t}</span><span class="yt-ch">${c === 'v' ? 'Graven' : 'Grafikart'}</span></a>`).join('');
+      `<button class="yt-pill" type="button" data-yt="${id}" title="Lire la vidéo sur la plateforme">${YT_ICON}<span class="yt-t">${t}</span><span class="yt-ch">${c === 'v' ? 'Graven' : 'Grafikart'}</span></button>`).join('');
     $('#theory').closest('section.panel').insertAdjacentHTML('afterend', `
       <section class="panel rise vidpan" style="animation-delay:30ms">
         <h2><span class="magnetish" style="background:#ff8a8a"></span> Vidéos complémentaires</h2>
         <div class="yt-pills">${pills}</div>
-        <p class="vid-note">Sélection de vidéos des chaînes <b>Grafikart.fr</b> et <b>Graven — Développement</b>, classées selon le thème du jour.</p>
+        <p class="vid-note">Sélection de vidéos des chaînes <b>Grafikart.fr</b> et <b>Graven — Développement</b>, classées selon le thème du jour. Clique pour lire directement ici.</p>
       </section>`);
+    document.querySelectorAll('.yt-pill').forEach(b => b.addEventListener('click', () => {
+      const sec = b.closest('.vidpan');
+      let emb = sec.querySelector('.yt-embed');
+      if (emb) { emb.remove(); return; }
+      emb = document.createElement('div');
+      emb.className = 'yt-embed';
+      emb.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${b.dataset.yt}?rel=0" title="Vidéo YouTube" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>`;
+      sec.querySelector('.yt-pills').after(emb);
+    }));
   }
 
   /* lexique interactif : déplier la définition */
