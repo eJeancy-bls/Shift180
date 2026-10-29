@@ -25,6 +25,9 @@ if (!shots.length || shots.some(s => !s.out || Number.isNaN(s.t))) {
   await page.waitForTimeout(600);
   for (const { t, out } of shots) {
     await page.evaluate(tt => window.__seek(tt), t);
+    /* double rAF : laisse le compositeur peindre avant la capture
+       (sinon les tuiles raster des calques transformés peuvent manquer) */
+    await page.evaluate(() => new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r))));
     await page.screenshot({ type: 'png', path: out, animations: 'disabled' });
     console.log('OK', t + 's →', out);
   }

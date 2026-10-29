@@ -8,7 +8,7 @@ const path = require('path');
 const FRAMES = path.join(process.env.TEMP || '/tmp', 'opencode', 'frames');
 const FFMPEG = path.join(process.env.TEMP || '/tmp', 'opencode', 'ffmpeg', 'ffmpeg-9.0.2-essentials_build', 'bin', 'ffmpeg.exe');
 const OUT = path.join(__dirname, 'out');
-const FPS = 60, DUR = 24;
+const FPS = 60, DUR = 80;
 
 fs.mkdirSync(OUT, { recursive: true });
 if (!fs.existsSync(FFMPEG)) { console.error('ffmpeg introuvable :', FFMPEG); process.exit(1); }
@@ -18,8 +18,8 @@ const run = cmd => { console.log('>', cmd.slice(0, 160) + '…'); execSync(cmd, 
 const mp4 = path.join(OUT, 'Shift180-teaser-4K60.mp4');
 run(`"${FFMPEG}" -y -f image2 -framerate ${FPS} -i "${path.join(FRAMES, 'f%06d.jpg')}" -frames:v ${DUR * FPS} -c:v libx264 -preset medium -crf 17 -pix_fmt yuv420p -movflags +faststart "${mp4}"`);
 
-/* 2) poster (miniature) — frame à t=12s (captures d'interface) */
-run(`"${FFMPEG}" -y -i "${mp4}" -ss 12 -frames:v 1 -q:v 2 "${path.join(OUT, 'Shift180-teaser-poster.jpg')}"`);
+/* 2) poster (miniature) — frame à t=62s (compteur 180 + badge validé) */
+run(`"${FFMPEG}" -y -i "${mp4}" -ss 62 -frames:v 1 -q:v 2 "${path.join(OUT, 'Shift180-teaser-poster.jpg')}"`);
 
 /* 3) version légère 1080p 60 fps (partage rapide) */
 run(`"${FFMPEG}" -y -i "${mp4}" -vf scale=1920:1080:flags=lanczos -c:v libx264 -preset medium -crf 20 -pix_fmt yuv420p -movflags +faststart "${path.join(OUT, 'Shift180-teaser-1080p60.mp4')}"`);

@@ -32,18 +32,37 @@ const OUT = path.join(__dirname, 'assets');
     if (opts.seed || opts.theme) await page.reload({ waitUntil: 'domcontentloaded' });
     await page.waitForTimeout(opts.wait || 1800);
     await page.evaluate(fakeAuth);
+    if (opts.fill) await page.evaluate(v => { const ed = document.querySelector('#ed'); if (ed) ed.value = v; }, opts.fill);
+    if (opts.click) { await page.click(opts.click); await page.waitForTimeout(opts.clickWait || 1500); }
+    if (opts.edHeight) await page.evaluate(h => { const ed = document.querySelector('#ed'); if (ed) ed.style.height = h + 'px'; }, opts.edHeight);
+    if (opts.sel) {
+      await page.evaluate(s => {
+        const e = document.querySelector(s);
+        if (e) window.scrollTo(0, e.getBoundingClientRect().top + window.scrollY - 70);
+      }, opts.sel);
+    }
     if (opts.scroll) await page.evaluate(y => window.scrollTo(0, y), opts.scroll || 0);
-    await page.waitForTimeout(350);
+    await page.waitForTimeout(450);
     await page.screenshot({ type: 'jpeg', quality: 92, path: path.join(OUT, file) });
     console.log('✓', file);
   };
+
+  const seedDay = (() => { const p = {}; for (let i = 1; i <= 11; i++) p[i] = '2020-01-01'; return p; })();
 
   await shot('home.jpg', '/index.html');
   await shot('start.jpg', '/start.html');
   await shot('login.jpg', '/login.html');
   await shot('board-light.jpg', '/app.html', { seed: progress });
   await shot('board-dark.jpg', '/app.html', { seed: progress, theme: 'dark' });
-  await shot('day.jpg', '/day.html?d=12', { seed: (() => { const p = {}; for (let i = 1; i <= 11; i++) p[i] = '2020-01-01'; return p; })() });
+  await shot('day.jpg', '/day.html?d=12', { seed: seedDay, theme: 'light' });
+  // console : code exécuté (aperçu + sortie console visibles)
+  await shot('day-console.jpg', '/day.html?d=12', {
+    seed: seedDay, theme: 'dark',
+    fill: '<div style="display:flex; gap:12px; justify-content:center">\n  <span style="background:#e6e1f9; padding:10px 22px; border-radius:12px">A</span>\n  <span style="background:#d5ecd9; padding:10px 22px; border-radius:12px">B</span>\n  <span style="background:#ffe3c2; padding:10px 22px; border-radius:12px">C</span>\n</div>\n<script>console.log("Flexbox : 3 boîtes alignées — jour 12 validé");<\/script>',
+    click: '#run', clickWait: 1800, edHeight: 230, sel: '#ed'
+  });
+  // vidéos : lecteur YouTube ouvert dans le panneau
+  await shot('videos.jpg', '/day.html?d=12', { seed: seedDay, theme: 'dark', click: '.yt-pill', clickWait: 5000, sel: '.vidpan' });
   await shot('credits.jpg', '/credits.html');
 
   await browser.close();

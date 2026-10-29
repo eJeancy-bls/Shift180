@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<title>Shift180 — teaser 4K</title>
+<title>Shift180 — teaser 4K (80 s)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&display=swap" rel="stylesheet">
@@ -40,7 +40,7 @@
     background: radial-gradient(ellipse 82% 78% at 50% 46%, transparent 62%, rgba(63,62,82,.10) 100%); }
 
   .headline { position: absolute; left: 0; right: 0; text-align: center; font-weight: 700;
-    font-size: 88px; letter-spacing: -.01em; color: var(--ink); }
+    font-size: 96px; letter-spacing: -.01em; color: var(--ink); }
   .kicker { display: inline-flex; align-items: center; gap: 18px; padding: 20px 44px;
     border: 2.5px solid var(--line-strong); border-radius: 999px; background: var(--card);
     font-weight: 700; font-size: 40px; letter-spacing: .14em; color: var(--muted); text-transform: uppercase; }
@@ -68,7 +68,7 @@
   .tile .lbl { font-size: 30px; font-weight: 700; color: var(--ink); letter-spacing: .01em; }
   .glyph { position: absolute; font-weight: 800; color: var(--brand-strong); will-change: transform, opacity; }
 
-  /* ============ S3 · interface ============ */
+  /* ============ captures d'interface (S3, S5, S7) ============ */
   .shot { position: absolute; border-radius: 40px; overflow: hidden;
     background: var(--card); border: 2.5px solid var(--line);
     box-shadow: 0 60px 140px -40px rgba(63,62,82,.45), 0 12px 30px -12px rgba(63,62,82,.25);
@@ -77,11 +77,60 @@
   .shot img { width: 100%; height: 100%; object-fit: cover; object-position: top center; display: block; will-change: transform; }
   .caption { position: absolute; left: 50%; transform: translateX(-50%);
     padding: 22px 46px; border-radius: 999px; background: var(--card); border: 2.5px solid var(--line);
-    font-size: 44px; font-weight: 700; color: var(--ink); white-space: nowrap;
+    font-size: 48px; font-weight: 700; color: var(--ink); white-space: nowrap;
     box-shadow: 0 18px 40px -16px rgba(63,62,82,.30); will-change: opacity, transform; }
   .caption i { display: inline-block; width: 18px; height: 18px; border-radius: 6px; margin-right: 16px; vertical-align: -2px; }
 
-  /* ============ S4 · progression ============ */
+  /* ============ S4 · connexion OAuth ============ */
+  .badge { position: absolute; top: 960px; width: 620px; height: 175px; border-radius: 36px;
+    background: var(--card); border: 2.5px solid var(--line);
+    display: flex; align-items: center; justify-content: center; gap: 28px;
+    box-shadow: 0 26px 60px -20px rgba(63,62,82,.32); will-change: transform, opacity, filter; }
+  .badge svg { width: 92px; height: 92px; flex: none; }
+  .badge b { font-size: 48px; font-weight: 700; color: var(--ink); }
+  .subpill { position: absolute; left: 50%; padding: 20px 48px; border-radius: 999px;
+    background: var(--board); border: 2.5px solid var(--line); transform: translateX(-50%);
+    font-size: 40px; font-weight: 600; color: var(--ink); white-space: nowrap;
+    box-shadow: 0 14px 34px -14px rgba(63,62,82,.25); will-change: opacity, transform; }
+
+  /* ============ S6 · hors ligne / PWA ============ */
+  .mcard { position: absolute; left: 700px; top: 760px; width: 560px; height: 300px; border-radius: 40px;
+    background: linear-gradient(150deg, #ffe9d2, var(--peach)); border: 2.5px solid #f2c193;
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 18px;
+    box-shadow: 0 26px 60px -20px rgba(146,84,26,.35); will-change: transform, opacity; }
+  .mcard img { width: 110px; height: 110px; }
+  .mcard .t1 { font-size: 42px; font-weight: 800; color: var(--peach-ink); }
+  .mcard .t2 { font-size: 30px; font-weight: 600; color: #a96a2e; }
+  #tray { position: absolute; left: 660px; top: 1230px; width: 640px; height: 190px; border-radius: 30px;
+    border: 3.5px dashed var(--line-strong); background: rgba(255,253,247,.55);
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px;
+    will-change: opacity; }
+  #tray .tlab { font-size: 27px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+  #tray .chips { display: flex; gap: 20px; }
+  .chipq { padding: 12px 30px; border-radius: 999px; background: var(--card); border: 2.5px solid var(--line);
+    font-size: 32px; font-weight: 800; color: var(--ink); will-change: transform, opacity; }
+  #syncsvg { position: absolute; left: 1300px; top: 900px; width: 1060px; height: 420px; overflow: visible; }
+  #cloudwrap { position: absolute; left: 2320px; top: 800px; width: 460px; will-change: transform, opacity; }
+  #cloudwrap svg { width: 460px; height: 330px; display: block; }
+  #cloudwrap .clab { margin-top: 14px; text-align: center; font-size: 40px; font-weight: 800; color: var(--ink); }
+  #cloud-check { position: absolute; left: 2700px; top: 760px; width: 110px; height: 110px; border-radius: 50%;
+    background: var(--mint-strong); display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 16px 40px -12px rgba(46,107,70,.5); will-change: transform, opacity; }
+  #cloud-check svg { width: 60px; height: 60px; }
+  #phone { position: absolute; left: 3140px; top: 690px; width: 350px; height: 720px; border-radius: 56px;
+    background: var(--card); border: 4px solid var(--line-strong);
+    box-shadow: 0 40px 90px -30px rgba(63,62,82,.45);
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 26px;
+    will-change: transform, opacity; }
+  #phone img { width: 120px; height: 120px; }
+  #phone .pname { font-size: 42px; font-weight: 800; }
+  #phone .pinst { margin-top: 10px; padding: 18px 44px; border-radius: 999px; background: var(--peach);
+    color: var(--peach-ink); font-size: 30px; font-weight: 800; will-change: transform, opacity;
+    box-shadow: 0 14px 34px -12px rgba(146,84,26,.45); }
+  #phone .pnotch { position: absolute; top: 20px; left: 50%; transform: translateX(-50%);
+    width: 110px; height: 12px; border-radius: 999px; background: var(--board); border: 2px solid var(--line); }
+
+  /* ============ S8 · progression ============ */
   #s-prog .panel { position: absolute; left: 570px; top: 0; width: 2700px; }
   #counter { position: absolute; left: 0; right: 0; top: 610px; text-align: center; line-height: 1; }
   #counter .num { display: inline-block; font-size: 330px; font-weight: 800; letter-spacing: -.02em; }
@@ -107,7 +156,7 @@
   #prog-sub { position: absolute; left: 0; right: 0; top: 1490px; text-align: center;
     font-size: 50px; font-weight: 600; color: var(--muted); will-change: opacity; }
 
-  /* ============ S5 · outro ============ */
+  /* ============ S9 · outro ============ */
   #s-outro .wrap { position: absolute; left: 0; right: 0; top: 520px; text-align: center; }
   #logo { width: 240px; height: 240px; margin-bottom: 40px; will-change: transform, opacity; }
   #brand-name { font-size: 230px; font-weight: 800; letter-spacing: -.02em; line-height: 1; will-change: transform, opacity, filter; }
@@ -130,7 +179,7 @@
   <div class="blob" id="blob-lilac"></div>
 
   <div id="world">
-    <!-- S1 · INTRO -->
+    <!-- S1 · INTRO (0–6.2) -->
     <section class="scene" id="s-intro">
       <div class="wrap">
         <div><span class="kicker" id="intro-kicker">Parcours intensif · 180 jours</span></div>
@@ -144,7 +193,7 @@
       </div>
     </section>
 
-    <!-- S2 · CONSTELLATION -->
+    <!-- S2 · CONSTELLATION (5.9–14.6) -->
     <section class="scene" id="s-const">
       <div class="headline" id="const-h" style="top:180px">Les technologies du parcours s'assemblent</div>
       <svg id="lines" viewBox="0 0 3840 2160" fill="none"></svg>
@@ -154,18 +203,104 @@
       <div class="glyph" id="g3" style="font-size:100px;">;</div>
     </section>
 
-    <!-- S3 · INTERFACE -->
+    <!-- S3 · INTERFACE (14.4–23.3) -->
     <section class="scene" id="s-ui">
       <div class="headline" id="ui-h" style="top:250px">Une plateforme qui te suit jour après jour</div>
       <article class="shot" id="shotA"><div class="imgwrap"><img src="assets/board-light.jpg" alt=""></div></article>
       <article class="shot" id="shotB"><div class="imgwrap"><img src="assets/board-dark.jpg" alt=""></div></article>
       <article class="shot" id="shotC"><div class="imgwrap"><img src="assets/day.jpg" alt=""></div></article>
-      <div class="caption" id="capA"><i style="background:var(--peach-strong)"></i>Ton tableau d'aimants — 180 magnets à poser</div>
-      <div class="caption" id="capB"><i style="background:var(--brand-strong)"></i>Mode sombre inclus</div>
-      <div class="caption" id="capC"><i style="background:var(--mint-strong)"></i>Leçon du jour · éditeur de code intégré</div>
+      <div class="caption" id="capA" style="top:1810px"><i style="background:var(--peach-strong)"></i>Ton tableau d'aimants — 180 magnets à poser</div>
+      <div class="caption" id="capB" style="top:1810px"><i style="background:var(--brand-strong)"></i>Mode sombre inclus</div>
+      <div class="caption" id="capC" style="top:1810px"><i style="background:var(--mint-strong)"></i>La leçon du jour, claire et guidée</div>
     </section>
 
-    <!-- S4 · PROGRESSION -->
+    <!-- S4 · CONNEXION 1 CLIC (23.15–31.5) -->
+    <section class="scene" id="s-auth">
+      <div class="headline" id="auth-h" style="top:250px">Connecte-toi en un clic</div>
+      <div class="badge" id="bd0" style="left:584px">
+        <svg viewBox="0 0 48 48" aria-hidden="true"><path fill="#FFC107" d="M43.611 20.083H42V20H24v8h11.303c-1.649 4.657-6.08 8-11.303 8-6.627 0-12-5.373-12-12s5.373-12 12-12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 12.955 4 4 12.955 4 24s8.955 20 20 20 20-8.955 20-20c0-1.341-.138-2.65-.389-3.917z"/><path fill="#FF3D00" d="M6.306 14.691l6.571 4.819C14.655 15.108 18.961 12 24 12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 16.318 4 9.656 8.337 6.306 14.691z"/><path fill="#4CAF50" d="M24 44c5.166 0 9.86-1.977 13.409-5.192l-6.19-5.238A11.91 11.91 0 0 1 24 36c-5.202 0-9.619-3.317-11.283-7.946l-6.522 5.025C9.505 39.556 16.227 44 24 44z"/><path fill="#1976D2" d="M43.611 20.083H42V20H24v8h11.303a12.04 12.04 0 0 1-4.087 5.571l.003-.002 6.19 5.238C36.971 39.205 44 34 44 24c0-1.341-.138-2.65-.389-3.917z"/></svg>
+        <b>Google</b>
+      </div>
+      <div class="badge" id="bd1" style="left:1268px">
+        <svg viewBox="0 0 16 16" fill="#24292f" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+        <b>GitHub</b>
+      </div>
+      <div class="badge" id="bd2" style="left:1952px">
+        <svg viewBox="0 0 24 24" fill="#1877F2" aria-hidden="true"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+        <b>Facebook</b>
+      </div>
+      <div class="badge" id="bd3" style="left:2636px">
+        <svg viewBox="0 0 24 24" fill="#5865F2" aria-hidden="true"><path d="M20.317 4.37a19.79 19.79 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.74 19.74 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.1 13.1 0 0 1-1.872-.892.077.077 0 0 1-.008-.128c.126-.094.252-.192.372-.292a.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.1.245.198.372.292a.077.077 0 0 1-.006.127 12.3 12.3 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.84 19.84 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
+        <b>Discord</b>
+      </div>
+      <div class="subpill" id="auth-s1" style="top:1330px">Un clic, sans mot de passe à retenir</div>
+      <div class="subpill" id="auth-s2" style="top:1435px">Ta progression te suit sur tous tes appareils</div>
+    </section>
+
+    <!-- S5 · ÉDITEUR + CONSOLE (31.3–39.9) -->
+    <section class="scene" id="s-console">
+      <div class="headline" id="con-h" style="top:200px">Éditeur de code et console, intégrés</div>
+      <article class="shot" id="shotCon" style="left:1920px; top:1100px; width:2460px; height:1384px; margin-left:-1230px; margin-top:-692px;">
+        <div class="imgwrap"><img src="assets/day-console.jpg" alt=""></div>
+      </article>
+      <div class="caption" id="con-c1" style="top:1856px"><i style="background:var(--brand-strong)"></i>Écris, exécute, corrige — sans rien installer</div>
+      <div class="caption" id="con-c2" style="top:1856px">
+        <svg viewBox="0 0 24 40" style="width:26px;height:44px;margin-right:22px;vertical-align:-8px"><rect x="4" y="2" width="16" height="36" rx="4.5" fill="none" stroke="currentColor" stroke-width="2.6"/><circle cx="12" cy="32.5" r="1.7" fill="currentColor"/></svg>
+        <svg viewBox="0 0 34 42" style="width:36px;height:44px;margin-right:22px;vertical-align:-8px"><rect x="2.5" y="2.5" width="29" height="37" rx="5" fill="none" stroke="currentColor" stroke-width="2.6"/><circle cx="17" cy="34.5" r="1.7" fill="currentColor"/></svg>
+        <svg viewBox="0 0 54 40" style="width:56px;height:42px;margin-right:24px;vertical-align:-6px"><rect x="11" y="3" width="32" height="23" rx="3.5" fill="none" stroke="currentColor" stroke-width="2.6"/><path d="M4 36h46l-4.5-7h-37z" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linejoin="round"/></svg>
+        Sur mobile, tablette ou PC
+      </div>
+    </section>
+
+    <!-- S6 · HORS LIGNE + PWA (39.7–48.5) -->
+    <section class="scene" id="s-off">
+      <div class="headline" id="off-h" style="top:200px">Même hors ligne, rien ne se perd</div>
+      <div class="mcard" id="mcard">
+        <img src="../icons/logo.svg" alt="">
+        <div class="t1">Jour 12 validé</div>
+        <div class="t2">aimant posé — enregistré</div>
+      </div>
+      <div id="tray">
+        <div class="tlab">File d'attente locale</div>
+        <div class="chips">
+          <span class="chipq" id="q0">J10</span>
+          <span class="chipq" id="q1">J11</span>
+          <span class="chipq" id="q2">J12</span>
+        </div>
+      </div>
+      <svg id="syncsvg" viewBox="0 0 1060 420" fill="none">
+        <path id="syncpath" d="M20 250 C 380 235, 680 120, 1020 78" stroke="var(--mint-strong)" stroke-width="7" stroke-linecap="round"/>
+        <path d="M1020 78 l-46 -12 m46 12 l-40 26" stroke="var(--mint-strong)" stroke-width="7" stroke-linecap="round"/>
+      </svg>
+      <div id="cloudwrap">
+        <svg viewBox="0 0 200 140"><path d="M55 118c-22 0-40-17-40-38 0-19 14-34 32-37C52 22 70 10 91 10c27 0 49 20 52 46 15 2 27 15 27 31 0 17-14 31-31 31H55z" fill="var(--sky)"/></svg>
+        <div class="clab">Ton compte</div>
+      </div>
+      <div id="cloud-check"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></div>
+      <div id="phone">
+        <div class="pnotch"></div>
+        <img src="../icons/logo.svg" alt="">
+        <div class="pname">Shift180</div>
+        <div class="pinst" id="pinst">Installer</div>
+      </div>
+      <div class="caption" id="off-c1" style="top:1740px"><i style="background:var(--peach-strong)"></i>Chaque jour validé reste sur ton appareil</div>
+      <div class="caption" id="off-c2" style="top:1740px"><i style="background:var(--mint-strong)"></i>Et se synchronise dès le retour du réseau</div>
+      <div class="caption" id="off-c3" style="top:1740px"><i style="background:var(--brand-strong)"></i>S'installe comme une application — en un geste</div>
+    </section>
+
+    <!-- S7 · VIDÉOS YOUTUBE (48.3–55.9) -->
+    <section class="scene" id="s-vid">
+      <div class="headline" id="vid-h" style="top:200px">Des vidéos de cours, intégrées aux leçons</div>
+      <article class="shot" id="shotVid" style="left:1920px; top:1100px; width:2460px; height:1384px; margin-left:-1230px; margin-top:-692px;">
+        <div class="imgwrap"><img src="assets/videos.jpg" alt=""></div>
+      </article>
+      <div class="caption" id="vid-cap" style="top:1856px">
+        <svg viewBox="0 0 28 20" style="width:40px;height:28px;margin-right:18px;vertical-align:-4px"><rect width="28" height="20" rx="5" fill="#ff0000"/><path d="M11 5.5v9l8-4.5z" fill="#fff"/></svg>
+        Grafikart.fr &amp; Graven — classées pour chaque jour
+      </div>
+    </section>
+
+    <!-- S8 · PROGRESSION (55.7–65.4) -->
     <section class="scene" id="s-prog">
       <div class="headline" id="prog-h" style="top:250px">Ta progression, jour après jour</div>
       <div class="panel" id="prog-panel">
@@ -185,7 +320,7 @@
       </div>
     </section>
 
-    <!-- S5 · OUTRO -->
+    <!-- S9 · OUTRO (65.25–80) -->
     <section class="scene" id="s-outro">
       <div class="wrap">
         <img id="logo" src="../icons/logo.svg" alt="">
@@ -205,6 +340,7 @@
 /* ==================================================================
    Moteur de timeline déterministe — window.__seek(t) avec t en secondes.
    Aucune animation CSS : chaque image est une fonction pure de t.
+   Durée : 80 s · 9 scènes · transitions lentes et lisibles.
    ================================================================== */
 const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
 const lerp = (a, b, u) => a + (b - a) * u;
@@ -216,7 +352,6 @@ const E = {
   outQuint: u => 1 - Math.pow(1 - u, 5)
 };
 const smooth = u => { u = clamp(u, 0, 1); return u * u * (3 - 2 * u); };
-/* interpolation lissée entre keyframes [t, v] */
 function keys(kf, t) {
   if (t <= kf[0][0]) return kf[0][1];
   for (let i = 0; i < kf.length - 1; i++) {
@@ -225,7 +360,6 @@ function keys(kf, t) {
   }
   return kf[kf.length - 1][1];
 }
-/* pseudo-aléatoire déterministe */
 function rng(seed) { let s = seed >>> 0; return () => (s = (s * 1664525 + 1013904223) >>> 0) / 4294967296; }
 const $ = s => document.querySelector(s);
 
@@ -261,14 +395,16 @@ const tiles = TILES_DEF.map((d, i) => {
   const jitter = (r1() - .5) * 90;
   return {
     def: d,
-    fx: CX + Math.cos(a) * (RX + jitter),      // position finale (ellipse)
+    fx: CX + Math.cos(a) * (RX + jitter),
     fy: CY + Math.sin(a) * (RY + jitter * .55),
-    z: Math.round((r1() - .35) * 260),          // pseudo-profondeur
-    ph: r1() * Math.PI * 2,                     // phase du flottement
-    ex: CX + (r1() - .5) * 2900,                // point d'entrée (dispersé)
-    ey: CY + (r1() - .5) * 1300,
-    er: (r1() - .5) * 90,                       // rotation d'entrée
-    t0: 3.25 + i * .13                          // délai d'entrée
+    z: Math.round((r1() - .35) * 260),
+    ph: r1() * Math.PI * 2,
+    /* dispersion : anneau elliptique réparti (angles équirépartis + rayon varié)
+       → pas d'amas ni de chevauchements pendant la phase d'entrée */
+    ex: CX + Math.cos(a + (r1() - .5) * .35) * 1300 * (.85 + r1() * .35),
+    ey: CY + 150 + Math.sin(a + (r1() - .5) * .35) * 640 * (.85 + r1() * .35),
+    er: (r1() - .5) * 90,
+    t0: 6.7 + i * .13
   };
 });
 const tilesHost = $('#tiles');
@@ -279,7 +415,6 @@ tiles.forEach(t => {
   tilesHost.appendChild(el);
   t.el = el;
 });
-/* lignes de liaison (paires par thème) */
 const PAIRS = [[0, 1], [1, 2], [2, 5], [2, 6], [6, 7], [7, 8], [2, 3], [3, 4], [9, 2], [10, 8]];
 const svgLines = $('#lines');
 const lineEls = PAIRS.map((p, i) => {
@@ -288,20 +423,20 @@ const lineEls = PAIRS.map((p, i) => {
   l.setAttribute('stroke-width', '3.5');
   l.setAttribute('stroke-linecap', 'round');
   svgLines.appendChild(l);
-  return { l, a: tiles[p[0]], b: tiles[p[1]], t0: 5.7 + i * .17 };
+  return { l, a: tiles[p[0]], b: tiles[p[1]], t0: 10.0 + i * .16 };
 });
 
 /* ---------- S3 : captures interface ---------- */
 const SHOTS = [
   { el: $('#shotA'), img: $('#shotA img'), cap: $('#capA'),
     cx: 1150, cy: 1130, w: 2050, h: 1153,
-    tin: 9.6, tout: 13.75, from: { x: 460, ry: 22, o: 0 }, capT: 10.25 },
+    tin: 15.3, tout: 22.6, from: { x: 460, ry: 22, o: 0 }, capT: 16.0 },
   { el: $('#shotB'), img: $('#shotB img'), cap: $('#capB'),
     cx: 2690, cy: 1130, w: 2050, h: 1153,
-    tin: 11.5, tout: 13.75, from: { x: -460, ry: -20, o: 0 }, capT: 12.15 },
+    tin: 16.8, tout: 22.6, from: { x: -460, ry: -20, o: 0 }, capT: 17.5 },
   { el: $('#shotC'), img: $('#shotC img'), cap: $('#capC'),
     cx: 1920, cy: 1110, w: 2420, h: 1361,
-    tin: 14.05, tout: 15.75, from: { y: 340, rx: 9, o: 0 }, capT: 14.75 }
+    tin: 19.0, tout: 22.6, from: { y: 340, rx: 9, o: 0 }, capT: 19.7 }
 ];
 SHOTS.forEach(s => {
   s.el.style.width = s.w + 'px'; s.el.style.height = s.h + 'px';
@@ -309,36 +444,54 @@ SHOTS.forEach(s => {
   s.el.style.left = s.cx + 'px'; s.el.style.top = s.cy + 'px';
 });
 
-/* ---------- S4 : jalons ---------- */
+/* ---------- S4 : badges ---------- */
+const BADGES = [0, 1, 2, 3].map(i => ({ el: $('#bd' + i), t0: 24.5 + i * .16, ph: i * 1.3 }));
+
+/* ---------- S6 : éléments hors ligne ---------- */
+const QCHIPS = [0, 1, 2].map(i => ({ el: $('#q' + i), t0: 41.0 + i * .15 }));
+const syncPath = $('#syncpath');
+
+/* ---------- S8 : jalons ---------- */
 const MS = [30, 60, 90, 120, 150, 180].map((d, i) => ({ el: $('#ms' + (i + 1)), d, u: d / 180 }));
 MS.forEach(m => { m.el.style.left = (m.u * 100) + '%'; });
 
 /* ---------- éléments fréquents ---------- */
 const el = {
-  world: $('#world'), fade: null,
+  world: $('#world'),
   intro: $('#s-intro'), kicker: $('#intro-kicker'), sub: $('#subtitle'), tags: $('#tags'),
   introWrap: $('#s-intro .wrap'),
   sconst: $('#s-const'), constH: $('#const-h'),
   sui: $('#s-ui'), uiH: $('#ui-h'),
+  sauth: $('#s-auth'), authH: $('#auth-h'), s1: $('#auth-s1'), s2: $('#auth-s2'),
+  scon: $('#s-console'), conH: $('#con-h'), shotCon: $('#shotCon'), conC1: $('#con-c1'), conC2: $('#con-c2'),
+  soff: $('#s-off'), offH: $('#off-h'), mcard: $('#mcard'), tray: $('#tray'),
+  cloud: $('#cloudwrap'), ccheck: $('#cloud-check'), phone: $('#phone'), pinst: $('#pinst'),
+  offC1: $('#off-c1'), offC2: $('#off-c2'), offC3: $('#off-c3'),
+  svid: $('#s-vid'), vidH: $('#vid-h'), shotVid: $('#shotVid'), vidCap: $('#vid-cap'),
   sprog: $('#s-prog'), progH: $('#prog-h'), fill: $('#fill'), knob: $('#knob'),
-  cnt: $('#cnt'), done: $('#done-badge'), progSub: $('#prog-sub'), progPanel: $('#prog-panel'),
+  cnt: $('#cnt'), done: $('#done-badge'), progSub: $('#prog-sub'),
   soutro: $('#s-outro'), logo: $('#logo'), brand: $('#brand-name'), otag: $('#outro-tag'),
   url: $('#url-pill'), cta: $('#cta'), credit: $('#credit'),
   g1: $('#g1'), g2: $('#g2'), g3: $('#g3')
 };
 
-/* helper opacité+visibilité */
 function setO(elm, o) { elm.style.opacity = o; elm.style.visibility = o <= 0.001 ? 'hidden' : 'visible'; }
+/* caption pill centrée */
+function setCap(c, o, rise = 36) {
+  c.style.opacity = o;
+  c.style.visibility = o <= .001 ? 'hidden' : 'visible';
+  c.style.transform = `translateX(-50%) translateY(${((1 - o) * rise).toFixed(1)}px)`;
+}
 
 /* ============================ __seek ============================ */
 window.__seek = function (t) {
-  t = clamp(t, 0, 24);
+  t = clamp(t, 0, 80);
 
   /* ---- caméra ---- */
-  const camS = keys([[0, 1.075], [3.2, 1.0], [9.6, 1.05], [16.2, 1.045], [21.0, 1.0], [24, 1.05]], t);
-  const camX = keys([[0, 0], [3.2, 0], [6.4, -130], [9.6, 120], [12.8, -40], [16.2, 50], [21, 0], [24, 0]], t);
-  const camY = keys([[0, 20], [3.2, 0], [9.6, -10], [16.2, 0], [24, -6]], t);
-  const camR = keys([[0, 0], [4.2, 0], [5.4, 1.6], [8.2, -1.6], [9.6, 0], [24, 0]], t);
+  const camS = keys([[0, 1.075], [6, 1.0], [14.4, 1.05], [23.15, 1.0], [31.3, 1.05], [39.7, 1.03], [48.3, 1.05], [55.7, 1.0], [65.25, 1.03], [77.5, 1.03], [80, 1.065]], t);
+  const camX = keys([[0, 0], [5.9, 0], [10, -120], [14.4, 90], [23.15, 0], [31.3, 60], [39.7, -50], [48.3, 40], [55.7, 0], [80, 0]], t);
+  const camY = keys([[0, 16], [6, 0], [14.4, -10], [23.15, 0], [31.3, 0], [39.7, 0], [48.3, 0], [55.7, -8], [80, 0]], t);
+  const camR = keys([[0, 0], [7, 0], [8.5, 1.4], [10.5, -1.4], [13.5, 0], [80, 0]], t);
   el.world.style.transform = `translate3d(${camX.toFixed(2)}px, ${camY.toFixed(2)}px, 0) rotateY(${camR.toFixed(3)}deg) scale(${camS.toFixed(4)})`;
 
   /* ---- halos ---- */
@@ -349,34 +502,34 @@ window.__seek = function (t) {
   /* ---- S1 intro ---- */
   {
     const oIn = seg(t, .15, .7);
-    const exit = E.inOutCubic(seg(t, 2.65, 3.25));
+    const exit = E.inOutCubic(seg(t, 5.5, 6.25));
     setO(el.intro, exit >= 1 ? 0 : oIn * (1 - exit));
-    el.introWrap.style.transform = `translateY(${(-90 * exit).toFixed(1)}px)`;
-    el.kicker.style.opacity = seg(t, .35, .85);
+    el.introWrap.style.transform = `translateY(${(-110 * exit).toFixed(1)}px)`;
+    el.kicker.style.opacity = seg(t, .35, 1.1);
     LTRS.forEach((s, i) => {
-      const u = E.outCubic(seg(t, .5 + i * .09, 1.15 + i * .09));
-      const uo = seg(t, .5 + i * .09, .78 + i * .09);
+      const u = E.outCubic(seg(t, .55 + i * .11, 1.3 + i * .11));
+      const uo = seg(t, .55 + i * .11, .85 + i * .11);
       s.style.opacity = uo;
       s.style.transform = `translateY(${((1 - u) * 130).toFixed(1)}px)`;
       s.style.filter = `blur(${((1 - u) * 14).toFixed(2)}px)`;
     });
-    const su = seg(t, 1.7, 2.35);
+    const su = seg(t, 2.5, 3.2);
     el.sub.style.opacity = su;
     el.sub.style.transform = `translateY(${((1 - E.outCubic(su)) * 40).toFixed(1)}px)`;
-    const tu = seg(t, 2.05, 2.6);
+    const tu = seg(t, 3.1, 3.8);
     el.tags.style.opacity = tu;
     el.tags.style.transform = `translateY(${((1 - E.outCubic(tu)) * 40).toFixed(1)}px)`;
   }
 
   /* ---- S2 constellation ---- */
   {
-    const oScene = seg(t, 2.95, 3.35) * (1 - seg(t, 8.95, 9.5));
+    const oScene = seg(t, 5.9, 6.45) * (1 - seg(t, 14.0, 14.6));
     setO(el.sconst, oScene);
-    el.constH.style.opacity = seg(t, 3.45, 4.1) * (1 - seg(t, 8.55, 9.1));
-    const contract = E.inOutCubic(seg(t, 8.55, 9.45));
+    el.constH.style.opacity = seg(t, 6.6, 7.3) * (1 - seg(t, 13.4, 13.9));
+    const contract = E.inOutCubic(seg(t, 12.4, 13.6));
     tiles.forEach((tl, i) => {
-      const ui = E.outCubic(seg(t, tl.t0, tl.t0 + .95));            // entrée
-      const cv = E.inOutCubic(seg(t, 4.7 + i * .05, 6.35 + i * .05)); // convergence
+      const ui = E.outCubic(seg(t, tl.t0, tl.t0 + .95));
+      const cv = E.inOutCubic(seg(t, 8.6 + i * .05, 10.6 + i * .05));
       const x = lerp(lerp(tl.ex, tl.fx, cv), CX + (i % 4 - 1.5) * 330, contract);
       const y = lerp(lerp(tl.ey, tl.fy, cv), CY - 60 + Math.floor(i / 4) * 400 - 220, contract);
       const sc0 = lerp(.55, 1 + tl.z * .0006, ui);
@@ -390,9 +543,8 @@ window.__seek = function (t) {
     });
     lineEls.forEach(ln => {
       const u = E.outCubic(seg(t, ln.t0, ln.t0 + .75)) * (1 - contract);
-      /* positions courantes : suivent la convergence + le flottement */
       const p = (tl2) => {
-        const cv = E.inOutCubic(seg(t, 4.7, 6.35));
+        const cv = E.inOutCubic(seg(t, 8.6, 10.6));
         return { x: lerp(tl2.ex, tl2.fx, cv) + camX * .28, y: lerp(tl2.ey, tl2.fy, cv) + Math.sin(t * 1.05 + tl2.ph) * 9 * (1 - contract) - camY * .2 };
       };
       const A = p(ln.a), B = p(ln.b);
@@ -403,9 +555,8 @@ window.__seek = function (t) {
       ln.l.setAttribute('stroke-dashoffset', len * (1 - u));
       ln.l.setAttribute('opacity', u > 0 ? .9 * oScene : 0);
     });
-    /* glyphes code flottants */
     [[el.g1, 700, 1750, 0], [el.g2, 3150, 1800, 2.1], [el.g3, 2650, 420, 4.2]].forEach(([g, gx, gy, ph], i) => {
-      const o = seg(t, 3.6 + i * .3, 4.1 + i * .3) * (1 - seg(t, 8.6, 9.2));
+      const o = seg(t, 7.0 + i * .3, 7.5 + i * .3) * (1 - seg(t, 13.5, 14.0));
       g.style.opacity = o * .5;
       g.style.transform = `translate(${(gx + Math.sin(t * .6 + ph) * 40).toFixed(0)}px, ${(gy + Math.cos(t * .5 + ph) * 34).toFixed(0)}px) rotate(${(Math.sin(t * .4 + ph) * 8).toFixed(1)}deg)`;
     });
@@ -413,46 +564,141 @@ window.__seek = function (t) {
 
   /* ---- S3 interface ---- */
   {
-    const oScene = seg(t, 9.4, 9.8) * (1 - seg(t, 15.75, 16.2));
+    const oScene = seg(t, 14.4, 14.95) * (1 - seg(t, 22.75, 23.3));
     setO(el.sui, oScene);
-    el.uiH.style.opacity = seg(t, 9.7, 10.3) * (1 - seg(t, 15.4, 15.9));
+    el.uiH.style.opacity = seg(t, 14.7, 15.4) * (1 - seg(t, 22.3, 22.7));
     SHOTS.forEach(s => {
-      const uin = E.outCubic(seg(t, s.tin, s.tin + .8));
-      const uout = E.inOutCubic(seg(t, s.tout, s.tout + .7));
-      let tx = 0, ty = 0, rz = 0, rx = 0, sc = 1, o = uin * (1 - uout);
+      const uin = E.outCubic(seg(t, s.tin, s.tin + .85));
+      const uout = E.inOutCubic(seg(t, s.tout, s.tout + .65));
+      let tx = 0, ty = 0, rz = 0, rx = 0, sc = 1;
       if (s.from.x !== undefined) { tx = (1 - uin) * s.from.x; rz = (1 - uin) * s.from.ry; }
       if (s.from.y !== undefined) { ty = (1 - uin) * s.from.y; rx = (1 - uin) * s.from.rx; }
-      const kb = 1.065 - .065 * E.inOutCubic(seg(t, s.tin, s.tout + .4));   // Ken Burns
+      const kb = 1.065 - .065 * E.inOutCubic(seg(t, s.tin, s.tout + .4));
       if (s === SHOTS[2]) sc = 1 + .05 * E.inOutCubic(seg(t, s.tout - .6, s.tout + .5));
+      const o = uin * (1 - uout);
       s.el.style.opacity = o;
       s.el.style.visibility = o <= .001 ? 'hidden' : 'visible';
       s.el.style.transform = `translate3d(${tx.toFixed(1)}px, ${ty.toFixed(1)}px, 0) rotateY(${rz.toFixed(2)}deg) rotateX(${rx.toFixed(2)}deg) scale(${(sc * (1 + .012 * uout)).toFixed(4)})`;
       s.img.style.transform = `scale(${kb.toFixed(4)})`;
       s.img.style.transformOrigin = '50% 0%';
-      const cu = E.outCubic(seg(t, s.capT, s.capT + .5)) * (1 - uout);
-      s.cap.style.opacity = cu;
-      s.cap.style.transform = `translateX(-50%) translateY(${((1 - cu) * 36).toFixed(1)}px)`;
-      s.cap.style.visibility = cu <= .001 ? 'hidden' : 'visible';
+      const cu = E.outCubic(seg(t, s.capT, s.capT + .55)) * (1 - uout);
+      setCap(s.cap, cu);
       s.cap.style.left = s.cx + 'px';
     });
   }
 
-  /* ---- S4 progression ---- */
+  /* ---- S4 connexion OAuth ---- */
   {
-    const oScene = seg(t, 16.1, 16.55) * (1 - seg(t, 21.0, 21.5));
+    const oScene = seg(t, 23.15, 23.7) * (1 - seg(t, 30.9, 31.5));
+    setO(el.sauth, oScene);
+    el.authH.style.opacity = seg(t, 23.5, 24.2) * (1 - seg(t, 30.5, 30.9));
+    BADGES.forEach(b => {
+      const u = E.outBack(seg(t, b.t0, b.t0 + .6));
+      const o = seg(t, b.t0, b.t0 + .25);
+      const float = Math.sin(t * 1.1 + b.ph) * 6 * (1 - E.inOutCubic(seg(t, 30.3, 30.9)));
+      b.el.style.opacity = o;
+      b.el.style.visibility = o <= .001 ? 'hidden' : 'visible';
+      b.el.style.transform = `translateY(${((1 - u) * 90 + float).toFixed(1)}px) scale(${(.7 + .3 * u).toFixed(3)})`;
+      b.el.style.filter = `blur(${((1 - u) * 8).toFixed(2)}px)`;
+    });
+    const u1 = seg(t, 26.3, 26.9), u2 = seg(t, 26.9, 27.5);
+    el.s1.style.opacity = u1;
+    el.s1.style.transform = `translateX(-50%) translateY(${((1 - E.outCubic(u1)) * 30).toFixed(1)}px)`;
+    el.s1.style.visibility = u1 <= .001 ? 'hidden' : 'visible';
+    el.s2.style.opacity = u2;
+    el.s2.style.transform = `translateX(-50%) translateY(${((1 - E.outCubic(u2)) * 30).toFixed(1)}px)`;
+    el.s2.style.visibility = u2 <= .001 ? 'hidden' : 'visible';
+  }
+
+  /* ---- S5 éditeur + console ---- */
+  {
+    const oScene = seg(t, 31.3, 31.85) * (1 - seg(t, 39.35, 39.9));
+    setO(el.scon, oScene);
+    el.conH.style.opacity = seg(t, 31.6, 32.3) * (1 - seg(t, 39.0, 39.35));
+    const uin = E.outCubic(seg(t, 32.5, 33.3));
+    el.shotCon.style.opacity = uin;
+    el.shotCon.style.visibility = uin <= .001 ? 'hidden' : 'visible';
+    el.shotCon.style.transform = `translateY(${((1 - uin) * 200).toFixed(1)}px)`;
+    el.shotCon.querySelector('img').style.transform = `scale(${(1 + .085 * E.inOutCubic(seg(t, 32.5, 39.3))).toFixed(4)})`;
+    el.shotCon.querySelector('img').style.transformOrigin = '50% 30%';
+    const c1 = seg(t, 34.2, 34.8) * (1 - seg(t, 36.5, 37.05));
+    setCap(el.conC1, c1);
+    const c2 = seg(t, 36.9, 37.5);
+    setCap(el.conC2, c2);
+  }
+
+  /* ---- S6 hors ligne + PWA ---- */
+  {
+    const oScene = seg(t, 39.7, 40.25) * (1 - seg(t, 47.9, 48.5));
+    setO(el.soff, oScene);
+    el.offH.style.opacity = seg(t, 40.0, 40.7) * (1 - seg(t, 47.5, 47.9));
+    const mu = E.outCubic(seg(t, 40.5, 41.2));
+    el.mcard.style.opacity = mu;
+    el.mcard.style.visibility = mu <= .001 ? 'hidden' : 'visible';
+    el.mcard.style.transform = `translateY(${((1 - mu) * 140).toFixed(1)}px) scale(${(.9 + .1 * mu).toFixed(3)})`;
+    el.tray.style.opacity = seg(t, 40.9, 41.5);
+    el.tray.style.visibility = seg(t, 40.9, 41.5) <= .001 ? 'hidden' : 'visible';
+    QCHIPS.forEach(q => {
+      const u = E.outBack(seg(t, q.t0, q.t0 + .5));
+      q.el.style.opacity = seg(t, q.t0, q.t0 + .2);
+      q.el.style.transform = `scale(${(.5 + .5 * u).toFixed(3)})`;
+    });
+    /* flèche de synchronisation */
+    const L = syncPath.getTotalLength();
+    const au = E.inOutCubic(seg(t, 43.9, 45.1));
+    syncPath.setAttribute('stroke-dasharray', L);
+    syncPath.setAttribute('stroke-dashoffset', (L * (1 - au)).toFixed(1));
+    syncPath.setAttribute('opacity', seg(t, 43.9, 44.2).toFixed(2));
+    const cu = E.outBack(seg(t, 45.1, 45.6));
+    el.ccheck.style.opacity = seg(t, 45.1, 45.3);
+    el.ccheck.style.transform = `scale(${cu.toFixed(3)})`;
+    /* nuage : léger pulse quand la sync arrive */
+    el.cloud.style.opacity = seg(t, 40.9, 41.5);
+    el.cloud.style.visibility = seg(t, 40.9, 41.5) <= .001 ? 'hidden' : 'visible';
+    el.cloud.style.transform = `scale(${(1 + .04 * E.outCubic(seg(t, 45.1, 45.7))).toFixed(3)})`;
+    el.cloud.style.transformOrigin = '50% 40%';
+    /* téléphone + installer */
+    const pu = E.outCubic(seg(t, 46.5, 47.3));
+    el.phone.style.opacity = seg(t, 46.5, 46.8);
+    el.phone.style.visibility = seg(t, 46.5, 46.8) <= .001 ? 'hidden' : 'visible';
+    el.phone.style.transform = `translateY(${((1 - pu) * 260).toFixed(1)}px) scale(${(.92 + .08 * pu).toFixed(3)})`;
+    const iu = E.outBack(seg(t, 47.0, 47.5));
+    el.pinst.style.opacity = seg(t, 47.0, 47.2);
+    el.pinst.style.transform = `scale(${iu.toFixed(3)})`;
+    /* légendes successives */
+    setCap(el.offC1, seg(t, 41.3, 41.9) * (1 - seg(t, 43.8, 44.2)));
+    setCap(el.offC2, seg(t, 44.2, 44.8) * (1 - seg(t, 46.6, 47.0)));
+    setCap(el.offC3, seg(t, 47.0, 47.55));
+  }
+
+  /* ---- S7 vidéos YouTube ---- */
+  {
+    const oScene = seg(t, 48.3, 48.85) * (1 - seg(t, 55.35, 55.9));
+    setO(el.svid, oScene);
+    el.vidH.style.opacity = seg(t, 48.6, 49.3) * (1 - seg(t, 54.9, 55.3));
+    const uin = E.outCubic(seg(t, 49.4, 50.2));
+    el.shotVid.style.opacity = uin;
+    el.shotVid.style.visibility = uin <= .001 ? 'hidden' : 'visible';
+    el.shotVid.style.transform = `translateY(${((1 - uin) * 200).toFixed(1)}px)`;
+    el.shotVid.querySelector('img').style.transform = `scale(${(1 + .07 * E.inOutCubic(seg(t, 49.4, 55.3))).toFixed(4)})`;
+    el.shotVid.querySelector('img').style.transformOrigin = '50% 45%';
+    setCap(el.vidCap, seg(t, 51.0, 51.6));
+  }
+
+  /* ---- S8 progression ---- */
+  {
+    const oScene = seg(t, 55.7, 56.25) * (1 - seg(t, 64.75, 65.4));
     setO(el.sprog, oScene);
-    el.progH.style.opacity = seg(t, 16.3, 16.9) * (1 - seg(t, 20.5, 20.95));
-    const p = E.inOutCubic(seg(t, 16.6, 20.0));            // 0 → 1
+    el.progH.style.opacity = seg(t, 56.0, 56.7) * (1 - seg(t, 64.3, 64.7));
+    const p = E.inOutCubic(seg(t, 56.9, 61.7));
     const days = Math.round(p * 180);
     const trackW = 2700 - 8;
     el.fill.style.width = (p * trackW).toFixed(1) + 'px';
     const kx = 4 + p * trackW;
     el.knob.style.left = kx.toFixed(1) + 'px';
     el.knob.style.transform = `scale(${(1 + .1 * Math.sin(t * 4) * p * (1 - p) * 4).toFixed(3)})`;
-    /* compteur : spans à chasse fixe */
     const str = String(days);
     el.cnt.innerHTML = str.split('').map(c => `<span>${c}</span>`).join('');
-    /* jalons */
     MS.forEach(m => {
       const passed = p >= m.u - .012;
       const pop = passed ? E.outBack(clamp((p - (m.u - .012)) / .08, 0, 1)) : 0;
@@ -460,36 +706,36 @@ window.__seek = function (t) {
       dot.style.transform = `scale(${(.4 + .6 * pop).toFixed(3)})`;
       if (passed) { dot.style.background = 'var(--mint-strong)'; dot.style.borderColor = 'var(--mint-ink)'; }
       else { dot.style.background = 'var(--card)'; dot.style.borderColor = 'var(--line-strong)'; }
-      const cu = seg(t, 16.9 + m.u * 2.2, 17.35 + m.u * 2.2);
+      const cu = seg(t, 57.2 + m.u * 3.2, 57.65 + m.u * 3.2);
       const cap = m.el.querySelector('.cap');
       cap.style.opacity = cu;
       cap.style.transform = `translateY(${((1 - E.outCubic(cu)) * 22).toFixed(1)}px)`;
     });
-    const du = E.outBack(seg(t, 20.0, 20.45));
-    el.done.style.opacity = seg(t, 20.0, 20.15);
+    const du = E.outBack(seg(t, 61.7, 62.2));
+    el.done.style.opacity = seg(t, 61.7, 61.9);
     el.done.style.transform = `scale(${du.toFixed(3)})`;
-    el.knob.style.opacity = String(1 - seg(t, 20.0, 20.3));
-    el.progSub.style.opacity = seg(t, 20.15, 20.6) * (1 - seg(t, 21.0, 21.4));
+    el.knob.style.opacity = String(1 - seg(t, 61.7, 62.0));
+    el.progSub.style.opacity = seg(t, 62.3, 62.9) * (1 - seg(t, 64.3, 64.7));
   }
 
-  /* ---- S5 outro ---- */
+  /* ---- S9 outro ---- */
   {
-    const oScene = seg(t, 20.9, 21.45) * (1 - seg(t, 23.6, 24));
+    const oScene = seg(t, 65.25, 65.8);
     setO(el.soutro, oScene);
-    const lu = E.outBack(seg(t, 21.05, 21.75));
-    el.logo.style.opacity = seg(t, 21.0, 21.3);
+    const lu = E.outBack(seg(t, 65.9, 66.9));
+    el.logo.style.opacity = seg(t, 65.9, 66.25);
     el.logo.style.transform = `scale(${(.6 + .4 * lu).toFixed(3)})`;
-    el.brand.style.opacity = seg(t, 21.25, 21.6);
-    el.brand.style.transform = `translateY(${((1 - E.outCubic(seg(t, 21.25, 21.85))) * 60).toFixed(1)}px)`;
-    el.brand.style.filter = `blur(${((1 - seg(t, 21.25, 21.85)) * 10).toFixed(1)}px)`;
-    el.otag.style.opacity = seg(t, 21.9, 22.3);
-    const uu = seg(t, 22.15, 22.55);
+    el.brand.style.opacity = seg(t, 66.9, 67.35);
+    el.brand.style.transform = `translateY(${((1 - E.outCubic(seg(t, 66.9, 68.0))) * 60).toFixed(1)}px)`;
+    el.brand.style.filter = `blur(${((1 - seg(t, 66.9, 68.0)) * 10).toFixed(1)}px)`;
+    el.otag.style.opacity = seg(t, 68.8, 69.4);
+    const uu = seg(t, 70.2, 70.8);
     el.url.style.opacity = uu;
     el.url.style.transform = `translateY(${((1 - E.outCubic(uu)) * 34).toFixed(1)}px)`;
-    const cu = seg(t, 22.4, 22.8);
+    const cu = seg(t, 71.4, 72.0);
     el.cta.style.opacity = cu;
-    el.cta.style.transform = `scale(${(1 + .03 * Math.sin(t * 2.4) * seg(t, 22.8, 23.2)).toFixed(4)}) translateY(${((1 - E.outCubic(cu)) * 30).toFixed(1)}px)`;
-    el.credit.style.opacity = seg(t, 22.65, 23.05);
+    el.cta.style.transform = `scale(${(1 + .03 * Math.sin(t * 2.4) * seg(t, 72.3, 72.8)).toFixed(4)}) translateY(${((1 - E.outCubic(cu)) * 30).toFixed(1)}px)`;
+    el.credit.style.opacity = seg(t, 72.4, 72.9);
   }
 
   /* fondu global d'ouverture */
