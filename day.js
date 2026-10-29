@@ -125,7 +125,8 @@ function renderDay(n, D, st) {
       if (emb) { emb.remove(); return; }
       emb = document.createElement('div');
       emb.className = 'yt-embed';
-      emb.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${b.dataset.yt}?rel=0" title="Vidéo YouTube" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>`;
+      emb.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${b.dataset.yt}?rel=0" title="Vidéo YouTube" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+        <a class="yt-open" href="https://www.youtube.com/watch?v=${b.dataset.yt}" target="_blank" rel="noopener">${YT_ICON} Ouvrir sur YouTube</a>`;
       sec.querySelector('.yt-pills').after(emb);
     }));
   }
