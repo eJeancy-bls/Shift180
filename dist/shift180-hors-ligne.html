@@ -811,6 +811,31 @@ button, a, .magnet, .task { -webkit-tap-highlight-color: transparent; touch-acti
   .foot-line { font-size: 11.5px; }
   .foot-contacts { gap: 2px 10px; font-size: 11.5px; }
 }
+/* ---------- pastilles vidéo YouTube ---------- */
+.vidpan { border-left: 4px solid #ff8a8a; }
+.yt-pills { display: flex; flex-wrap: wrap; gap: 8px; }
+.yt-pill {
+  display: inline-flex; align-items: center; gap: 7px;
+  padding: 7px 12px 7px 9px; min-width: 0;
+  background: var(--card); border: 1.5px solid var(--line); border-radius: 999px;
+  color: var(--ink); text-decoration: none; font: 600 13px var(--font);
+  box-shadow: var(--shadow); max-width: 100%;
+  transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+}
+.yt-pill:hover { transform: translateY(-2px); box-shadow: var(--shadow-lift); border-color: #ff8a8a; }
+.yt-ico { width: 20px; height: 20px; flex: none; }
+.yt-t { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.yt-ch {
+  font-size: 11px; font-weight: 700; color: var(--muted); flex: none;
+  background: color-mix(in srgb, var(--line) 55%, var(--card));
+  border-radius: 999px; padding: 2px 8px;
+}
+.vid-note { font-size: 12px; color: var(--muted); margin: 10px 0 0; }
+@media (max-width: 700px) {
+  .yt-pill { font-size: 12.5px; padding: 6px 10px 6px 8px; }
+  .yt-ico { width: 18px; height: 18px; }
+}
+
 </style>
 </head>
 <body>
@@ -847,6 +872,11 @@ button, a, .magnet, .task { -webkit-tap-highlight-color: transparent; touch-acti
     <section class="panel">
       <h2><span class="magnetish" style="background:var(--lilac)"></span> Cours du jour</h2>
       <div class="theory" id="theory"></div>
+    </section>
+    <section class="panel vidpan" id="vidPan" hidden>
+      <h2><span class="magnetish" style="background:#ff8a8a"></span> Vidéos complémentaires</h2>
+      <div class="yt-pills" id="vidPills"></div>
+      <p class="vid-note">Sélection de vidéos des chaînes <b>Grafikart.fr</b> et <b>Graven — Développement</b>, classées selon le thème du jour.</p>
     </section>
     <section class="panel">
       <h2><span class="magnetish" style="background:var(--peach)"></span> Travaux pratiques</h2>
@@ -2572,6 +2602,81 @@ window.GLOSS = {
 };
 
 </script>
+<script data-src="videos.js">
+// videos.js — compléments vidéo YouTube, classés par jour
+// Chaînes sélectionnées : Grafikart.fr (g) et Graven - Développement (v)
+// Format : n: [['g'|'v', 'titre court', 'videoId'], ...] — chaque lien ouvre la vidéo sur YouTube.
+window.YT_VIDEOS = {
+  1:  [['v', 'Comment créer un site web ? (tuto débutant)', 'yHoI0n2VxMU'],
+       ['g', 'Par quel langage débuter ?', '-NTOGTyznYw']],
+  2:  [['g', 'HTML : la syntaxe', 'XRoFTzGcCsw'],
+       ['v', 'Créer un site : HTML/CSS #1 — les bases', 'J9w-cir5a6U']],
+  3:  [['g', 'HTML : les éléments textuels (body)', 'LkZ-KqxgVQ4']],
+  4:  [['g', 'HTML : les liens hypertextes', 'gJ_G-gxQRRk'],
+       ['g', 'HTML : les images', '7T9H-P45REg']],
+  5:  [['g', 'HTML : les tableaux', 'g_u3U2BtK88'],
+       ['g', 'HTML : les formulaires', 'r-X7DutXeIY']],
+  6:  [['g', 'HTML : div & span', 'M34IhS0Pfj8']],
+  7:  [['g', 'TP : créer ses premières pages', 'vj-5-_h_E8w'],
+       ['v', 'Créer son premier site (tuto complet)', '6hCGTJCo_Uo']],
+  8:  [['g', 'CSS : introduction', 'fwyKJwScbus'],
+       ['g', 'CSS : les sélecteurs', 'fEgYZlDKCyI'],
+       ['v', 'Les bases du CSS', 'CadRnbEVjiQ']],
+  9:  [['g', 'CSS : les couleurs', 'Ep-ybLlHf38'],
+       ['g', 'CSS : les unités de mesure', 'ceAqxop872w']],
+  10: [['g', 'CSS : le modèle de boîte', 'dDXnoMbMjuk']],
+  11: [['g', 'CSS : le positionnement', 'xGcCJZEWTyI']],
+  12: [['g', 'CSS : les flexbox', '6I29C_6FPPA']],
+  13: [['g', 'CSS : les grilles (grid)', 'RuhP2caU8iQ']],
+  14: [['g', 'CSS : le design responsive', '7OT57h_7-4A']],
+  15: [['g', 'Pratiquer : première maquette responsive', 'sGnKNx1pLH8']],
+  16: [['g', 'CSS : les animations', 'eeTWce8phR0'],
+       ['g', 'CSS : les transformations', 'mvFwjZg0rdo']],
+  17: [['g', 'Pratiquer : première maquette', 'XKIRAfU_ysU']],
+  18: [['g', 'Pratiquer : maquette de restaurant', 'x3oIY4OVWSA']],
+  19: [['g', 'Git : qu\'est-ce que git ? (1/18)', 'rP3T0Ee6pLU'],
+       ['v', 'Les bases de Git', 'gp_k0UVOYMw']],
+  20: [['g', 'Git : workflow', 'hKXxfHkOfnA']],
+  21: [['g', 'Git : les branches (7/18)', 'THsj6g_kG10']],
+  22: [['g', 'Git : les remotes (10/18)', 'k-9Tf2enyFc']],
+  23: [['g', 'JS : introduction à la formation', 'gUYfRJ-v_1Y'],
+       ['g', 'JS : les variables', 'GU8kxJ3P67I']],
+  25: [['g', 'JS : les conditions', 'zwLmRotDdu8']],
+  26: [['g', 'JS : les boucles', 'kLdQAsrcyvk']],
+  27: [['g', 'JS : les fonctions', 'EvHAiskwHvE'],
+       ['g', 'JS : pratiquons les fonctions', 'wVuJTS8aQyA']],
+  28: [['g', 'Algorithmique : les tableaux (6/10)', '8jI5L8Ku36A']],
+  29: [['g', 'JS : les classes (objets)', '2HAPViIAYjc']],
+  30: [['v', '32 idées de projets de programmation', 'gpR77W_9_PM']],
+  31: [['g', 'JS : la portée des variables (scope)', 'qYuvcK8QU4c']],
+  32: [['g', 'JS : le sucre syntaxique (arrow functions…)', 'Qvr6Nh7rtAI']],
+  33: [['g', 'JS : les fonctions usuelles (méthodes)', 'ZocfMM0qofA']],
+  38: [['g', 'JS : les promesses (Promise)', '05mKXSdkCJg']],
+  40: [['g', 'JS : les erreurs', 'OSHPfiuDbqM']],
+  41: [['g', 'TP : créer un carousel (1/4)', '1hHVvuShsGo']],
+  42: [['g', 'TP carousel : pagination (2/4)', 'WXaDeTmZTgk']],
+  43: [['g', 'TP : ScrollSpy', '3Hrhuz8-w2M']],
+  44: [['g', 'TP : système de commentaire', '__3lzaZS3yc']],
+  45: [['v', 'Créer un jeu en JS : Mémori', '4fbNvn4a9oU']],
+  46: [['g', 'JavaScript côté navigateur', 'Kh0drIcQ2UI'],
+       ['g', 'Manipuler le DOM', 'sXwPfnsKGiE']],
+  47: [['g', 'Les écouteurs d\'évènements', '55EXq7ZjL4Q']],
+  48: [['g', 'Fonctions usuelles du DOM', 'p2UW7Wptlow']],
+  49: [['g', 'Local Storage', 'PmrHg7q5raw']],
+  50: [['g', 'Appel HTTP avec fetch()', 'z9pcgJX1DdY']],
+  51: [['g', 'TP : une TodoList', 'Rm8kxBf5Eoc']],
+  52: [['g', 'Les templates HTML', 'TicxcEDiP3U']],
+  53: [['g', 'Les évènements personnalisés', '7e4EMDOeiYE']],
+  54: [['g', 'IntersectionObserver', 'N3l-kV4nczo']],
+  55: [['g', 'Inspecter son code JavaScript', 'rcShQM00mIM']],
+  56: [['g', 'React : introduction', 'NT0s0aOHu0Q']],
+  57: [['g', 'React : la syntaxe JSX', 'TAuiJHmvPAQ']],
+  58: [['g', 'React : le flux de données (props)', 'FkPLzu0RlgA']],
+  59: [['g', 'React : le hook useState', 'ilqxZiXnwD8']],
+  60: [['g', 'TP React : liste de produits', 'elMAnc8lH_I']]
+};
+
+</script>
 <script data-src="core.js">
 // core.js — thème, stockage local, comptes Supabase + synchronisation (local-first, offline-aware)
 /* eslint-env browser */
@@ -3074,6 +3179,14 @@ function theoryHTML(les) {
   }
   return iconify(t);   // emojis de l'interface → icônes SVG
 }
+/* pastilles vidéo YouTube (Grafikart.fr · Graven — Développement) */
+function ytPills(n) {
+  const vids = (window.YT_VIDEOS && window.YT_VIDEOS[n]) || [];
+  if (!vids.length) return '';
+  const YT_ICON = '<svg class="ico yt-ico" viewBox="0 0 24 24" aria-hidden="true"><path fill="#ff4d4d" d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31.3 31.3 0 0 0 0 12a31.3 31.3 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31.3 31.3 0 0 0 24 12a31.3 31.3 0 0 0-.5-5.8z"/><path fill="#fff" d="M9.6 15.6V8.4L15.8 12z"/></svg>';
+  return vids.map(([c, t, id]) =>
+    `<a class="yt-pill" href="https://www.youtube.com/watch?v=${id}" target="_blank" rel="noopener" title="Ouvrir la vidéo sur YouTube">${YT_ICON}<span class="yt-t">${t}</span><span class="yt-ch">${c === 'v' ? 'Graven' : 'Grafikart'}</span></a>`).join('');
+}
 
 /* ---------- rendu ---------- */
 function monthDayStats(mi) {
@@ -3160,6 +3273,11 @@ function openDay(n) {
   $('#dayTitle').textContent = 'Jour ' + n + ' — ' + D.title;
   $('#dayMeta').textContent = MONTHS.find(m => n >= m.range[0] && n <= m.range[1]).title;
   $('#theory').innerHTML = theoryHTML(les);
+
+  /* pastilles vidéo YouTube du jour */
+  const pillsHTML = ytPills(n);
+  $('#vidPills').innerHTML = pillsHTML;
+  $('#vidPan').hidden = !pillsHTML;
 
   $('#theory').addEventListener('click', e => {
     const b = e.target.closest('.term'); if (!b) return;

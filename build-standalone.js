@@ -7,7 +7,7 @@ const read = p => fs.readFileSync(p, 'utf8');
 
 const sources = [
   'config.js', 'lessons-d1-15.js', 'lessons-d16-30.js', 'lessons-d31-45.js',
-  'lessons-d46-60.js', 'data.js', 'figures.js', 'core.js', 'standalone-src.js'
+  'lessons-d46-60.js', 'data.js', 'figures.js', 'videos.js', 'core.js', 'standalone-src.js'
 ];
 
 // le contenu inline ne doit jamais fermer le <script> hôte
@@ -59,6 +59,11 @@ ${safe(read('style.css'))}
     <section class="panel">
       <h2><span class="magnetish" style="background:var(--lilac)"></span> Cours du jour</h2>
       <div class="theory" id="theory"></div>
+    </section>
+    <section class="panel vidpan" id="vidPan" hidden>
+      <h2><span class="magnetish" style="background:#ff8a8a"></span> Vidéos complémentaires</h2>
+      <div class="yt-pills" id="vidPills"></div>
+      <p class="vid-note">Sélection de vidéos des chaînes <b>Grafikart.fr</b> et <b>Graven — Développement</b>, classées selon le thème du jour.</p>
     </section>
     <section class="panel">
       <h2><span class="magnetish" style="background:var(--peach)"></span> Travaux pratiques</h2>

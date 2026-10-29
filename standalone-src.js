@@ -51,6 +51,14 @@ function theoryHTML(les) {
   }
   return iconify(t);   // emojis de l'interface → icônes SVG
 }
+/* pastilles vidéo YouTube (Grafikart.fr · Graven — Développement) */
+function ytPills(n) {
+  const vids = (window.YT_VIDEOS && window.YT_VIDEOS[n]) || [];
+  if (!vids.length) return '';
+  const YT_ICON = '<svg class="ico yt-ico" viewBox="0 0 24 24" aria-hidden="true"><path fill="#ff4d4d" d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31.3 31.3 0 0 0 0 12a31.3 31.3 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31.3 31.3 0 0 0 24 12a31.3 31.3 0 0 0-.5-5.8z"/><path fill="#fff" d="M9.6 15.6V8.4L15.8 12z"/></svg>';
+  return vids.map(([c, t, id]) =>
+    `<a class="yt-pill" href="https://www.youtube.com/watch?v=${id}" target="_blank" rel="noopener" title="Ouvrir la vidéo sur YouTube">${YT_ICON}<span class="yt-t">${t}</span><span class="yt-ch">${c === 'v' ? 'Graven' : 'Grafikart'}</span></a>`).join('');
+}
 
 /* ---------- rendu ---------- */
 function monthDayStats(mi) {
@@ -137,6 +145,11 @@ function openDay(n) {
   $('#dayTitle').textContent = 'Jour ' + n + ' — ' + D.title;
   $('#dayMeta').textContent = MONTHS.find(m => n >= m.range[0] && n <= m.range[1]).title;
   $('#theory').innerHTML = theoryHTML(les);
+
+  /* pastilles vidéo YouTube du jour */
+  const pillsHTML = ytPills(n);
+  $('#vidPills').innerHTML = pillsHTML;
+  $('#vidPan').hidden = !pillsHTML;
 
   $('#theory').addEventListener('click', e => {
     const b = e.target.closest('.term'); if (!b) return;

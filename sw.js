@@ -1,8 +1,8 @@
 // sw.js — PWA service worker : network-first pour les pages (toujours frais), cache-first pour les assets, hors ligne géré
-const V = 'pbd-v12';   // v12 : mise a jour auto (controllerchange reload) + core.js network-first
+const V = 'pbd-v13';   // v13 : pastilles vidéo YouTube (Grafikart/Graven) dans les pages de cours
 const SHELL = [
   'index.html', 'app.html', 'day.html', 'start.html', 'login.html', 'credits.html',
-  'style.css', 'core.js', 'app.js', 'day.js', 'data.js', 'figures.js', 'config.js', 'login.js',
+  'style.css', 'core.js', 'app.js', 'day.js', 'data.js', 'figures.js', 'videos.js', 'config.js', 'login.js',
   'lessons-d1-15.js', 'lessons-d16-30.js', 'lessons-d31-45.js', 'lessons-d46-60.js',
   'manifest.webmanifest', 'icons/logo.svg',
   'icons/icon-192.png', 'icons/icon-512.png', 'icons/icon-180.png',

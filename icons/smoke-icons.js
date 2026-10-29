@@ -78,7 +78,8 @@ const PAGES = [
     localStorage.setItem('pbd.state.v2', JSON.stringify({ progress, pending: {} }));
   });
   await mp.goto(BASE + '/day.html?d=2', { waitUntil: 'networkidle' });
-  const mobScan = await mp.evaluate(() => [...new Set(((document.body.innerText || '').match(/\p{Extended_Pictographic}|[\u{1F1E6}-\u{1F1FF}]{2}/gu) || []))]);
+  // le drapeau 🇨🇬 du footer est volontaire (demande utilisateur) — mêmes exceptions que le scan desktop
+  const mobScan = await mp.evaluate(() => [...new Set(((document.body.innerText || '').match(/\p{Extended_Pictographic}|[\u{1F1E6}-\u{1F1FF}]{2}/gu) || []))].filter(e => !['↔', '↗', '🇨🇬'].includes(e)));
   console.log('mobile day2 · emojis restants:', mobScan.length ? mobScan.join(' ') : '0', merrs.length ? '· ⚠ ' + merrs.join(' | ') : '· OK');
   if (merrs.length) problems.push('mobile → ' + merrs.join(' | '));
   if (mobScan.length) problems.push('mobile → emojis restants : ' + mobScan.join(' '));
