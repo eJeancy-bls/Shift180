@@ -671,7 +671,7 @@ html[data-theme="system"] .magnet.today::after { color: #26243a; }
 .field input:focus { outline: none; border-color: var(--brand); box-shadow: 0 0 0 3px var(--brand-soft); }
 .auth-row { display: flex; gap: 10px; flex-wrap: wrap; margin: 10px 0 4px; }
 .auth-row .btn { flex: 1; min-width: 140px; }
-.oauth-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 12px 0 4px; }
+.oauth-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: 10px; margin: 12px 0 4px; }
 .oauth-row .btn { width: 100%; }
 .form-msg { font: 600 13.5px var(--font); margin: 10px 0 0; min-height: 20px; }
 .form-msg.err { color: var(--peach-strong); }
