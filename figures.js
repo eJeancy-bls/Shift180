@@ -162,7 +162,7 @@ window.FIGS = {
       <text x="240" y="108" text-anchor="middle" font-size="12" font-weight="700" fill="var(--butter-ink)">padding (coussin)</text>
       <rect x="185" y="116" width="110" height="32" rx="6" fill="var(--card)" stroke="var(--line-strong)"/>
       <text x="240" y="137" text-anchor="middle" font-size="12" font-weight="700" fill="var(--ink)">contenu</text>
-      <text x="240" y="208" text-anchor="middle" font-size="12" font-fill="var(--muted)" font-weight="600" fill="var(--muted)">la largeur réelle = contenu + paddings + bordures (sauf box-sizing)</text>
+      <text x="240" y="208" text-anchor="middle" font-size="12" fill="var(--muted)" font-weight="600">la largeur réelle = contenu + paddings + bordures (sauf box-sizing)</text>
     </svg>`
   },
   devmode: {

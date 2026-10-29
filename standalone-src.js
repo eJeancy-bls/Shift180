@@ -15,7 +15,7 @@ function glossify(html) {
   if (!glossRe2) {
     const keys = Object.keys(GLOSS).filter(k => GLOSS[k]).sort((a, b) => b.length - a.length)
       .map(k => k.replace(/[.*+?^${}()|[\]\\/]/g, '\\$&'));
-    glossRe2 = new RegExp(`(?<![A-Za-zÀ-ÿ])(${keys.join('|')})(?![A-Za-zÀ-ÿ])`);
+    glossRe2 = new RegExp(`(?<![A-Za-zÀ-ÿ])(${keys.join('|')})(?![A-Za-zÀ-ÿ])`, 'g');
   }
   const parts = html.split(/(<[^>]*>)/g);
   let skip = 0;
@@ -137,7 +137,7 @@ function renderDashboard() {
 
 function openDay(n) {
   const st = Store.status(n);
-  if (st === 'locked') { toast('Le Jour ' + n + ' s\'ouvrira après la validation du Jour ' + (n - 1) + '.'); return; }
+  if (st === 'locked' || st === 'wait') { toast('Le Jour ' + n + ' n\'est pas encore disponible.'); return; }
   $('#tableau').hidden = true;
   $('#dayView').hidden = false;
   window.scrollTo(0, 0);

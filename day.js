@@ -9,7 +9,7 @@ function glossRegex() {
   if (glossRe) return glossRe;
   const keys = Object.keys(GLOSS).filter(k => GLOSS[k]).sort((a, b) => b.length - a.length)
     .map(k => k.replace(/[.*+?^${}()|[\]\\/]/g, '\\$&'));
-  glossRe = new RegExp(`(?<![A-Za-zÀ-ÿ])(${keys.join('|')})(?![A-Za-zÀ-ÿ])`);
+  glossRe = new RegExp(`(?<![A-Za-zÀ-ÿ])(${keys.join('|')})(?![A-Za-zÀ-ÿ])`, 'g');
   return glossRe;
 }
 function glossify(html) {
