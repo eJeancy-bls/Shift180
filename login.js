@@ -109,6 +109,8 @@ function renderConnected() {
     </div>
     <p style="text-align:center;margin-top:18px"><a class="btn" href="${nextURL()}">Tableau de bord →</a></p>`);
   $('#signOut').onclick = async () => { await Sync.signOut(); render(); };
+  const instBtn = document.createElement('button'); instBtn.className = 'btn btn-ghost'; instBtn.textContent = '📲 Installer l\'app'; instBtn.onclick = () => window.PWAInstall && window.PWAInstall.open();
+  const row = root.querySelector('.auth-card .auth-row'); if (row) row.appendChild(instBtn);
   $('#forceSync').onclick = async () => {
     await Sync.pull(); await Sync.pushSoon(true); toast('Progression synchronisée ✓'); render();
   };
