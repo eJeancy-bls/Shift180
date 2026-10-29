@@ -19,3 +19,7 @@ release/
 
 # Supports de cours de la formation (© tiers : Morel OYERE / CFI-CIRAS, Wikibooks) — ne pas publier
 resource/
+
+# Vidéo teaser : binaires lourds (MP4, captures d'interface) — régénération via video/*.js
+video/assets/
+video/out/
