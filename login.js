@@ -24,7 +24,7 @@ function oauthBtns() {
       <button class="btn lilac has-logo" id="btnGithub">${LOGO_GITHUB}GitHub</button>
       <button class="btn lilac has-logo" id="btnFacebook">${LOGO_FACEBOOK}Facebook</button>
       <button class="btn lilac has-logo" id="btnDiscord">${LOGO_DISCORD}Discord</button>
-      <button class="btn lilac has-logo" id="btnSpotify">${LOGO_SPOTIFY}Spotify</button>
+      <button class="btn lilac has-logo btn-wide" id="btnSpotify">${LOGO_SPOTIFY}Spotify</button>
     </div>
     <p class="auth-note" id="oauthNote">🔒 Connexion en 1 clic via Google, GitHub, Facebook, Discord ou Spotify.</p>`;
 }
