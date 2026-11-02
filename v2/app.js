@@ -32,7 +32,7 @@ function renderPills() {
   });
 }
 
-/* grille du mois : 1 aimant par jour, la matière raconte l'état */
+/* chemin Duolingo : nœuds zigzag reliés, la couleur raconte l'état */
 const LOCK_PATH = `<path d="M8 11V7a4 4 0 0 1 8 0v4"/><rect x="5" y="11" width="14" height="10" rx="2"/>`;
 function renderGrid() {
   const m = MONTHS.find(x => x.n === curMonth);
@@ -40,12 +40,14 @@ function renderGrid() {
     { length: m.range[1] - m.range[0] + 1 }, (_, i) => {
       const nd = m.range[0] + i;
       const st = Store.status(nd);
-      const sub = { done: 'posé', open: 'à faire', wait: 'pause', locked: `<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${LOCK_PATH}</svg>` }[st];
+      const lock = `<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${LOCK_PATH}</svg>`;
+      const node = st === 'done' ? '✓' : st === 'locked' ? lock : nd;
+      const badge = st === 'open' ? `<span class="node-badge">Aujourd'hui</span>` : '';
       const href = st === 'open' || st === 'done' ? `day.html?d=${nd}` : 'javascript:void(0)';
-      return `<a class="mday ${st}" href="${href}" data-n="${nd}" aria-label="Jour ${nd} : ${st === 'locked' ? 'verrouillé' : sub.replace(/<[^>]*>/g, '')}">
-        <span>${st === 'done' ? '✓' : nd}</span><small>${sub}</small></a>`;
+      return `<a class="node ${st}" href="${href}" data-n="${nd}" aria-label="Jour ${nd} : ${st === 'locked' ? 'verrouillé' : st === 'done' ? 'posé' : st === 'wait' ? 'pause' : 'à faire'}">
+        ${node}${badge}</a>`;
     }).join('');
-  $('#monthGrid').querySelectorAll('.mday[data-n]').forEach(a => {
+  $('#monthGrid').querySelectorAll('.node[data-n]').forEach(a => {
     const nd = +a.dataset.n;
     if (Store.status(nd) === 'locked' || Store.status(nd) === 'wait') a.onclick = e => { e.preventDefault(); openLockSheet(nd, Store.status(nd)); };
   });
