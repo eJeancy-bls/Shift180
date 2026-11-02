@@ -1,5 +1,6 @@
 // v2/app.js — Tableau de bord v2 · pills mois + grille ultra-tactile + stats + badge réseau
-const $ = s => document.querySelector(s);
+/* $ et $$ sont fournis par core.js */
+const QS = $$;
 
 function haptic(ms = 12) { if (navigator.vibrate) { try { navigator.vibrate(ms); } catch (e) {} } }
 

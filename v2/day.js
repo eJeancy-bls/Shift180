@@ -1,5 +1,6 @@
 // v2/day.js — Page de cours v2 · 3 onglets, éditeur live + FAB, ressources, feedback riche
-const $ = s => document.querySelector(s), QS = s => document.querySelectorAll(s);
+/* $ et $$ sont fournis par core.js */
+const QS = $$;
 const n = +(new URLSearchParams(location.search).get('d') || 1);
 const haptic = ms => { if (navigator.vibrate) { try { navigator.vibrate(ms); } catch (e) {} } };
 
@@ -55,7 +56,6 @@ function showTab(name) { document.querySelector(`.tabs button[data-tab="${name}"
 
 /* ---------- éditeur + preview ---------- */
 function run() {
-  haptic(14);
   const code = $('#ed').value;
   const capture = `<script>(function(){const P=parent;const send=(l,a)=>{try{P.postMessage({src:'v2console',l:l,a:a.map(x=>String(x))},'*')}catch(e){}};['log','warn','error'].forEach(k=>{const o=console[k].bind(console);console[k]=(...a)=>{o(...a);send(k,a)}});window.onerror=(m)=>{send('error',[m]);return false};})()<\/script>`;
   const jsMode = codeMode === 'js';
@@ -144,6 +144,7 @@ function boot() {
   $('#dayTitle').textContent = `Jour ${n} — ${D.title}`;
   $('#dayMeta').textContent = (MONTHS.find(m => n >= m.range[0] && n <= m.range[1]) || {}).title || '';
   $('#theory').innerHTML = theoryHTML(les);
+  $('#app').classList.remove('hidden');
   document.querySelector('#theory').addEventListener('click', e => {
     const b = e.target.closest('.term'); if (!b) return;
     haptic(5); const d = b.querySelector('.term-def'); if (d) d.hidden = !d.hidden;

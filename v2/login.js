@@ -1,5 +1,5 @@
 // v2/login.js — Compte v2 · OAuth + email, vue profil avec install PWA
-const $ = s => document.querySelector(s);
+/* $ et toast viennent de core.js */
 
 function go(provider) {
   Sync.signInOAuth(provider).catch(err => {

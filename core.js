@@ -388,7 +388,10 @@ function setupAutoUpdate() {
     refreshing = true;
     window.location.reload();
   });
-  navigator.serviceWorker.register('sw.js').then(reg => {
+  /* sw.js vit à la racine du site ; on le résout depuis le manifest (fonctionne aussi sous /v2/) */
+  const man = document.querySelector('link[rel="manifest"]');
+  const swURL = man ? new URL('sw.js', man.href).pathname : 'sw.js';
+  navigator.serviceWorker.register(swURL).then(reg => {
     if (!reg) return;
     const check = () => { try { reg.update(); } catch (e) {} };
     setInterval(check, 60 * 60 * 1000); // vérification toutes les heures
