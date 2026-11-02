@@ -7,7 +7,7 @@
 <link rel="icon" href="../icons/logo.svg" type="image/svg+xml">
 <link rel="manifest" href="../manifest.webmanifest">
 <meta name="theme-color" content="#fbf6ed">
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style.css?v=3">
 </head>
 <body>
 
@@ -30,21 +30,25 @@
   </section>
 
   <section id="board">
-    <h1 style="margin:18px 0 6px">Ton tableau d'aimants 🧲</h1>
-    <p id="streakLine" style="color:var(--muted);margin:0 0 8px"></p>
-    <div class="dash">
-      <aside class="stats" aria-label="Statistiques">
-        <div class="stat"><b id="stDone">0</b><span>jours posés</span></div>
-        <div class="stat"><b id="stStreak">0</b><span>série actuelle</span></div>
-        <div class="stat"><b id="stPct">0 %</b><span>roadmap</span></div>
-      </aside>
-      <div>
-        <div class="pills" id="monthPills" role="tablist" aria-label="Choisir le mois"></div>
-        <div class="mgrid" id="monthGrid"></div>
-        <p style="text-align:center;color:var(--muted);font-size:13px;margin-top:14px">
-          ✅ posée · 🔓 en cours (pulse) · ⏳ en attente de date · 🔒 verrouillée</p>
-      </div>
+    <h1 style="margin:22px 0 4px">Ton tableau d'aimants</h1>
+    <p style="color:var(--ink-soft);margin:0 0 14px" id="streakLine"></p>
+    <div class="hero-line">
+      <svg class="ring" viewBox="0 0 44 44" id="srRing" aria-hidden="true">
+        <circle cx="22" cy="22" r="18" fill="none" stroke="var(--board)" stroke-width="6"/>
+        <circle id="srRingVal" cx="22" cy="22" r="18" fill="none" stroke="var(--brand)" stroke-width="6" stroke-linecap="round" stroke-dasharray="0 113" transform="rotate(-90 22 22)" style="transition:stroke-dasharray .6s var(--ease)"/>
+      </svg>
+      <div class="counters" id="stCounters"></div>
     </div>
+    <div class="board-wrap">
+      <div class="pills" id="monthPills" role="tablist" aria-label="Choisir le mois" style="margin-bottom:14px"></div>
+      <div class="mgrid" id="monthGrid"></div>
+    </div>
+    <p style="display:flex;gap:16px;justify-content:center;color:var(--ink-soft);font-size:12.5px;font-weight:600;margin-top:14px;flex-wrap:wrap">
+      <span>aimant posé <i class="dot" style="display:inline-block;width:10px;height:10px;border-radius:4px;background:var(--mint)"></i></span>
+      <span>à faire <i style="display:inline-block;width:10px;height:10px;border-radius:4px;background:var(--peach)"></i></span>
+      <span>pause <i style="display:inline-block;width:10px;height:10px;border-radius:4px;background:var(--butter)"></i></span>
+      <span>à venir <i style="display:inline-block;width:10px;height:10px;border-radius:4px;background:transparent;border:1.5px dashed var(--ink-soft)"></i></span>
+    </p>
   </section>
 </div>
 
@@ -64,8 +68,11 @@
 <script src="../figures.js"></script>
 <script src="../videos.js"></script>
 <script src="../core.js"></script>
-<script src="icons.js"></script>
+<script src="icons.js?v=3"></script>
 <script src="../install.js"></script>
-<script src="app.js"></script>
+<script src="app.js?v=3"></script>
 </body>
 </html>
+
+
+

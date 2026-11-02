@@ -9,6 +9,8 @@ const V2_ICONS = {
   'wifi': `<path d="M5 12.5a15 15 0 0 1 14 0"/><path d="M8.5 16a9 9 0 0 1 7 0"/><circle cx="12" cy="19.5" r="1"/>`,
   'wifi-off': `<path d="M5 12.5a15 15 0 0 1 11-1.5"/><path d="m3 3 18 18"/><path d="M8.5 16a9 9 0 0 1 6-1"/><circle cx="12" cy="19.5" r="1"/>`,
   'magnet': `<path d="M6 3v8a6 6 0 0 0 12 0V3"/><path d="M6 3h4v4H6zM14 3h4v4h-4z"/>`,
+  'terminal': `<path d="m6 8 4 4-4 4"/><path d="M13 17h5"/><rect x="2" y="3" width="20" height="18" rx="3"/>`,
+  'monitor-play': `<circle cx="12" cy="12" r="9"/><path d="M10 8.5 15.5 12 10 15.5z"/>`,
   'lock': `<rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/>`,
   'clock': `<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>`,
   'check': `<path d="M20 6 9 17l-5-5"/>`,

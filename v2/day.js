@@ -40,7 +40,7 @@ function theoryHTML(les) {
 }
 function pcHTML(pc) {
   const figs = (pc.flys || []).map(f => (window.FIGS || {})[f] || '').join('');
-  return `<details class="pconly" style="margin-top:12px"><summary>🖱 Partie complète sur PC</summary><p style="color:var(--muted);font-size:13px">💾 Sur téléphone ces actions attendent une session PC.</p>${figs}<ol>${(pc.steps || pc.s || []).map(s => `<li>${s}</li>`).join('')}</ol>${pc.note ? `<p>${pc.note}</p>` : ''}</details>`;
+  return `<details class="pconly" style="margin-top:12px"><summary>🖱 Partie complète sur PC</summary><p style="color:var(--ink-soft);font-size:13px">💾 Sur téléphone ces actions attendent une session PC.</p>${figs}<ol>${(pc.steps || pc.s || []).map(s => `<li>${s}</li>`).join('')}</ol>${pc.note ? `<p>${pc.note}</p>` : ''}</details>`;
 }
 
 /* ---------- onglets ---------- */
@@ -79,23 +79,28 @@ function renderTasks(list) {
     `<label class="task"><input type="checkbox" data-i="${i}"><span>${t}</span></label>`).join('');
   const box = QS('#tasks input');
   box.forEach(b => b.onchange = () => {
-    haptic(6); updatePoseBtn(list);
-    if (![...box].some(b2 => !b2.checked)) toast('Tous les TP sont cochés — pose ton aimant ! 🧲');
+    haptic(6); updatePoseBtn();
+    if (![...box].some(b2 => !b2.checked)) toast2('Tous les TP sont cochés — l\u2019aimant attend.');
   });
 }
-function updatePoseBtn(list) {
+function updatePoseBtn() {
   const ok = [...QS('#tasks input')].every(b => b.checked);
   const btn = $('#poseBtn'); btn.disabled = !ok;
-  $('#poseHint').textContent = ok ? 'Prêt à le poser ?' : 'Complète tous les TP pour débloquer.';
+  const left = [...QS('#tasks input')].filter(b => !b.checked).length;
+  $('#poseHint').textContent = ok
+    ? 'TP faits — l\u2019aimant n\u2019attend plus que toi.'
+    : `${left} TP${left > 1 ? 's' : ''} restant${left > 1 ? 's' : ''} avant de poser l\u2019aimant.`;
 }
 function pose() {
   /* re-vérifie le gating des TP : le verrou est côté UI + Store */
   if ([...QS('#tasks input')].some(b => !b.checked)) return toast2('Complète tous les TP pour poser l\u2019aimant.');
   Store.validate(n);
   haptic(50);
-  document.querySelector('#poseBtn').textContent = '✓ Aimant posé';
+  const btn = document.querySelector('#poseBtn');
+  btn.textContent = 'Aimant posé ✓';
+  btn.classList.add('settled');
   confetti();
-  toast2('Aimant posé ! Prochaine leçon bientôt disponible. 🎉');
+  toast2('Aimant posé ! La prochaine leçon arrive au rythme régulier. 🎉');
   setTimeout(() => location.href = 'app.html', 1500);
 }
 
@@ -104,9 +109,9 @@ const YT_ICON = '<svg class="ico" viewBox="0 0 24 24" width="18" height="18" ari
 function renderVids() {
   const vids = (window.YT_VIDEOS && window.YT_VIDEOS[n]) || [];
   $('#vidsP').innerHTML = `
-    <h3>🎥 Compléments vidéo</h3>` + (vids.length
+    <h2>Compléments vidéo</h2>` + (vids.length
     ? vids.map(([c, t, id]) => `<button class="yt-pill" data-id="${id}">${YT_ICON}<span>${t}</span></button>`).join('')
-    : `<p style="color:var(--muted)">Pas de vidéo complémentaire pour ce jour.</p>`);
+    : `<p style="color:var(--ink-soft)">Pas de vidéo complémentaire pour ce jour.</p>`);
   QS('.yt-pill').forEach(b => b.onclick = () => playVid(b.dataset.id));
 }
 function playVid(id) {
@@ -127,7 +132,7 @@ function netBadge() {
   const t = $('#netTxt'); if (!t) return;
   const online = navigator.onLine, pend = Object.keys(Store.pending).length;
   $('#netBadge').classList.toggle('off', !online);
-  t.textContent = online ? (pend ? `Sync · ${pend}` : 'En ligne') : `Hors ligne · ${pend}`;
+  t.textContent = online ? 'En ligne' : `Hors ligne · ${pend} en file`;
 }
 function toast2(msg) { toast(msg); haptic(10); }
 
@@ -149,13 +154,14 @@ function boot() {
     const b = e.target.closest('.term'); if (!b) return;
     haptic(5); const d = b.querySelector('.term-def'); if (d) d.hidden = !d.hidden;
   });
-  const TPs = les && Array.isArray(les.x) ? les.x : [`Relis la théorie du jour`, `Note en 3 lignes ce que tu as appris`];
-  renderTasks(TPs); updatePoseBtn(TPs);
+  const TPs = les && Array.isArray(les.x) ? les.x : ['Relis la théorie du jour', 'Note en 3 lignes ce que tu as appris'];
+  renderTasks(TPs);
   codeMode = n > 0 && n < 22 ? 'html' : 'js';
   $('#ed').value = (les && les.s) || (codeMode === 'html' ? '<!-- Écris ici… -->' : '// Ton code ici');
   run();
   tabs(); renderVids(); netBadge();
   $('#poseBtn').onclick = pose;
+  $('#runFab').innerHTML = `<svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor" aria-hidden="true"><path d="M7 4.5 21 12 7 19.5z"/></svg>`;
   $('#runFab').onclick = run; $('#runBtn').onclick = run;
   $('#ed').addEventListener('keydown', e => { if (e.ctrlKey && e.key === 'Enter') { e.preventDefault(); run(); } });
   consoleFrame();

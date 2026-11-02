@@ -14,10 +14,10 @@ function netBadge() {
   const online = navigator.onLine;
   const pend = Object.keys(Store.pending).length;
   b.classList.toggle('off', !online);
-  t.textContent = online
-    ? (pend ? `Sync · ${pend} en attente` : 'En ligne · synchro')
-    : `Hors ligne · ${pend || 0} en attente`;
-  b.title = online ? 'Ta progression est synchronisée' : 'Travail sauvegardé localement, renvoyé au retour du réseau';
+  t.textContent = online ? 'En ligne' : `Hors ligne · ${pend} en file`;
+  b.title = online
+    ? (pend ? `${pend} validation(s) attendent le retour du réseau pour partir au compte` : 'Ta progression est synchronisée')
+    : 'Ton travail est sauvegardé dans le navigateur et repartira à la reconnexion';
 }
 
 /* pills des 6 mois (scroll-snap, sélection = grille) */
@@ -32,22 +32,22 @@ function renderPills() {
   });
 }
 
-/* grille du mois : 1 carte par jour, états ultra-visuels */
-const LABEL = { done: 'posée ✓', open: 'ouvrir', wait: 'pause', locked: '🔒' };
+/* grille du mois : 1 aimant par jour, la matière raconte l'état */
+const LOCK_PATH = `<path d="M8 11V7a4 4 0 0 1 8 0v4"/><rect x="5" y="11" width="14" height="10" rx="2"/>`;
 function renderGrid() {
   const m = MONTHS.find(x => x.n === curMonth);
   $('#monthGrid').innerHTML = Array.from(
     { length: m.range[1] - m.range[0] + 1 }, (_, i) => {
-      const n = m.range[0] + i, st = Store.status(n);
-      const sub = st === 'done' ? LABEL.done : st === 'open' ? LABEL.open : st === 'wait' ? '⏳' : LABEL.locked;
-      const href = st === 'open' || st === 'done' ? `day.html?d=${n}` : 'javascript:void(0)';
-      return `<a class="mday ${st}" href="${href}" data-n="${n}" aria-label="Jour ${n} : ${st === 'locked' ? 'verrouillé' : sub}">
-        <span>${st === 'done' ? '✓' : n}</span><small>${st === 'done' ? 'Jour ' + n : sub}</small></a>`;
+      const nd = m.range[0] + i;
+      const st = Store.status(nd);
+      const sub = { done: 'posé', open: 'à faire', wait: 'pause', locked: `<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${LOCK_PATH}</svg>` }[st];
+      const href = st === 'open' || st === 'done' ? `day.html?d=${nd}` : 'javascript:void(0)';
+      return `<a class="mday ${st}" href="${href}" data-n="${nd}" aria-label="Jour ${nd} : ${st === 'locked' ? 'verrouillé' : sub.replace(/<[^>]*>/g, '')}">
+        <span>${st === 'done' ? '✓' : nd}</span><small>${sub}</small></a>`;
     }).join('');
   $('#monthGrid').querySelectorAll('.mday[data-n]').forEach(a => {
-    const n = +a.dataset.n, st = Store.status(n);
-    if (st === 'open' && LESSONS[n]) a.onclick = e => { e.preventDefault(); haptic(18); location.href = a.href; };
-    else if (st === 'locked' || st === 'wait') a.onclick = e => { e.preventDefault(); openLockSheet(n, st); };
+    const nd = +a.dataset.n;
+    if (Store.status(nd) === 'locked' || Store.status(nd) === 'wait') a.onclick = e => { e.preventDefault(); openLockSheet(nd, Store.status(nd)); };
   });
 }
 
@@ -55,11 +55,11 @@ function renderGrid() {
 function openLockSheet(n, st) {
   haptic(24);
   openSheet(`
-    <h2 style="margin-top:0">${st === 'wait' ? '⏳ Jour de pause — Jour ' + n : '🔒 Verrouillé — Jour ' + n}</h2>
+    <h2 style="margin-top:0">${st === 'wait' ? 'Jour de pause — Jour ' + n : 'Encore verrouillé — Jour ' + n}</h2>
     ${st === 'wait'
       ? `<p>Ce jour est une pause planifiée dans la roadmap. Il s'ouvre automatiquement à sa date.</p>`
-      : `<p>Le silo tient la cadence&nbsp;: la leçon <b>Jour ${n}</b> s'ouvrira après la validation du Jour ${n - 1}${Store.progress[n - 1] ? ' le <b>' + fmtDate(Store.progress[n - 1]) + '</b> + attente d\'un jour.' : ''}.</p>`}
-    <button class="btn btn-primary" style="width:100%" onclick="closeSheet()">Compris</button>`);
+      : `<p>La roadmap tient la cadence&nbsp;: la leçon <b>Jour ${n}</b> s'ouvre après la validation du Jour ${n - 1}${Store.progress[n - 1] ? ' posée le <b>' + fmtDate(Store.progress[n - 1]) + '</b>, puis un jour d\u2019attente pour laisser la leçon se décanter.' : ''}.</p>`}
+    <button class="btn" style="width:100%" onclick="closeSheet()">Compris</button>`);
 }
 
 function openSheet(html) {
@@ -80,18 +80,23 @@ function openSheet(html) {
 
 function closeSheet() { const s = document.querySelector('.sheet'); if (s) s.classList.remove('open'); }
 
+function nInRange(m, n) { return n >= m.range[0] && n <= m.range[1]; }
 function renderStats() {
   const done = Object.keys(Store.progress).length;
   const pct = Math.round(done / 1.8);
-  $('#stDone').textContent = done;
-  $('#stPct').textContent = pct + ' %';
-  $('#stStreak').textContent = Store.streak();
-  curMonth = MONTHS.find(m => nInRange(m, done + 1))?.n || 6;
+  const streak = Store.streak();
+  $('#stCounters').innerHTML =
+    `<b>${done}</b> aimant${done > 1 ? 's' : ''} posé${done > 1 ? 's' : ''} · ` +
+    `<b>${streak}</b> de série · ` +
+    `<b>${pct}&nbsp;%</b> du parcours`;
+  const ringVal = $('#srRingVal');
+  ringVal.setAttribute('stroke-dasharray', (pct ? `${(pct / 100 * 113).toFixed(1)} 113` : '0 121'));
+  ringVal.style.opacity = pct ? '1' : '0';
+  curMonth = (MONTHS.find(m => nInRange(m, done + 1)) || MONTHS[5]).n;
   $('#streakLine').textContent = done
-    ? `Dernier aimant posé : Jour ${Math.max(...Object.keys(Store.progress).map(Number))} — continue la série !`
-    : 'Commence par le Jour 1 — pose ton premier aimant aujourd\u2019hui.';
+    ? `Posé pour la dernière fois : Jour ${Math.max(...Object.keys(Store.progress).map(Number))} — continue la série, un aimant par jour.`
+    : 'Toute la roadmap se joue un aimant à la fois. Pose le premier aujourd\u2019hui.';
 }
-function nInRange(m, n) { return n >= m.range[0] && n <= m.range[1]; }
 
 /* le tab « Leçon » de la bottom-nav pointe vers le prochain jour ouvert */
 function setDayTab() {
@@ -101,20 +106,11 @@ function setDayTab() {
   if (target) link.href = `day.html?d=${target}`;
 }
 
-function confettiBurst() {
-  const c = document.createElement('div'); c.className = 'confetti';
-  for (let i = 0; i < 26; i++) {
-    const p = document.createElement('i');
-    p.style.cssText = `left:${Math.random() * 100}%;background:${['var(--lilac)', 'var(--mint)', 'var(--rose)', 'var(--sun)'][i % 4]};animation-delay:${Math.random() * 0.5}s`;
-    c.appendChild(p);
-  }
-  document.body.appendChild(c); setTimeout(() => c.remove(), 1900);
-}
-
 /* boot */
 awaitlessBoot();
 function awaitlessBoot() {
   bootCommon();
+  const bb = document.getElementById('backBar'); if (bb) bb.remove(); /* le tableau est la racine du flux */
   renderPills(); renderStats(); renderGrid(); setDayTab(); netBadge();
   window.addEventListener('online', netBadge); window.addEventListener('offline', netBadge);
   /* retour matériel/swipe : toujours ramener au tableau */

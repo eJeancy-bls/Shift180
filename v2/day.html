@@ -7,13 +7,13 @@
 <link rel="icon" href="../icons/logo.svg" type="image/svg+xml">
 <link rel="manifest" href="../manifest.webmanifest">
 <meta name="theme-color" content="#fbf6ed">
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style.css?v=3">
 </head>
 <body>
 
 <header class="topbar">
   <div class="topbar-inner">
-    <a class="chip is-ghost small" href="app.html" aria-label="Retour au tableau">← Retour</a>
+    <a class="brand" href="app.html"><img src="../icons/logo.svg" alt="" width="30" height="30"><b>Shift180</b></a>
     <span class="spacer"></span>
     <button class="net-badge" id="netBadge" type="button"><span class="dot"></span><span id="netTxt"></span></button>
     <span id="topbarAuth"></span>
@@ -34,18 +34,16 @@
     <p id="dayMeta" style="color:var(--muted);margin:0 0 10px"></p>
 
     <div class="tabs" role="tablist" aria-label="Sections de la leçon">
-      <button role="tab" aria-selected="true" data-tab="course">📘 Cours &amp; TP</button>
-      <button role="tab" aria-selected="false" data-tab="code">💻 Code &amp; Live</button>
-      <button role="tab" aria-selected="false" data-tab="res">🎥 Ressources</button>
+      <button role="tab" aria-selected="true" data-tab="course"><span data-icon="book-open" data-size="17"></span> Cours &amp; TP</button>
+      <button role="tab" aria-selected="false" data-tab="code"><span data-icon="terminal" data-size="17"></span> Code &amp; Live</button>
+      <button role="tab" aria-selected="false" data-tab="res"><span data-icon="monitor-play" data-size="17"></span> Ressources</button>
     </div>
 
     <div class="tabpan visible" id="panCourse" role="tabpanel">
       <div class="panel" id="theory"></div>
       <div class="panel">
-        <h3>✅ Tes tâches du jour</h3>
+        <h2>Tes tâches du jour</h2>
         <div id="tasks"></div>
-        <button class="btn btn-primary" id="poseBtn" style="width:100%;margin-top:12px" disabled>🧲 Poser ton aimant</button>
-        <p id="poseHint" style="color:var(--muted);font-size:13px;margin:8px 0 0;text-align:center">Complète tous les TP pour débloquer.</p>
       </div>
     </div>
 
@@ -64,6 +62,11 @@
   </section>
 </main>
 
+<div class="validate" id="validateBar">
+  <button class="btn" id="poseBtn" style="width:100%" disabled>Poser ton aimant</button>
+  <p id="poseHint" style="color:var(--ink-soft);font-size:12.5px;margin:6px 0 0;text-align:center">Complète les TP pour poser l'aimant du jour.</p>
+</div>
+
 <script id="consoleHook" type="text/plain"></script>
 <script src="../config.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -75,8 +78,11 @@
 <script src="../figures.js"></script>
 <script src="../videos.js"></script>
 <script src="../core.js"></script>
-<script src="icons.js"></script>
+<script src="icons.js?v=3"></script>
 <script src="../install.js"></script>
-<script src="day.js"></script>
+<script src="day.js?v=3"></script>
 </body>
 </html>
+
+
+

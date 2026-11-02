@@ -16,9 +16,9 @@ const LOGOS = {
 };
 
 function oauthRow() {
-  return `<div class="install-actions">${Object.entries(LOGOS).map(([p, L]) =>
+  return `<div class="oauth-row">${Object.entries(LOGOS).map(([p, L]) =>
     `<button class="btn btn-ghost" data-oauth="${p}" style="flex:1">${L.svg}<span class="hide-s" style="font-size:13px">${L.label}</span></button>`).join('')}</div>
-    <p style="color:var(--muted);font-size:13px;text-align:center">🔒 Connexion en 1 clic · ta progression locale partira au compte après connexion.</p>`;
+    <p style="color:var(--ink-soft);font-size:13px;text-align:center">🔒 Connexion en 1 clic · ta progression locale partira au compte après connexion.</p>`;
 }
 
 function render() {
@@ -27,13 +27,13 @@ function render() {
     try {
       root.innerHTML = `<div class="panel" style="text-align:center">
         <h2>Connecté ✓</h2>
-        <p style="color:var(--muted)">${Store.user.email}</p>
+        <p style="color:var(--ink-soft)">${Store.user.email}</p>
         <div class="install-actions">
           <button class="btn btn-ghost" id="signOut">Se déconnecter</button>
           <button class="btn btn-success" id="forceSync">Synchroniser maintenant</button>
         </div>
         <button class="btn btn-primary" id="instApp" style="width:100%;margin-top:10px">📲 Installer l'app</button>
-        <p style="color:var(--muted);font-size:13px;margin-top:10px" id="pendLine"></p>
+        <p style="color:var(--ink-soft);font-size:13px;margin-top:10px" id="pendLine"></p>
       </div>`;
       $('#signOut').onclick = async () => { await Sync.signOut(); render(); };
       $('#forceSync').onclick = async () => { await Sync.pull(); await Sync.pushSoon(true); toast('Progression synchronisée ✓'); render(); };
@@ -46,18 +46,18 @@ function render() {
   root.innerHTML = `
     <div class="panel">
       ${oauthRow()}
-      <form id="fIn" class="task" style="display:block">
-        <label><span style="display:block;font-size:13px;color:var(--muted);font-weight:700">Email</span>
-        <input type="email" required autocomplete="email" style="width:100%;min-height:48px;border-radius:10px;border:1px solid color-mix(in srgb, var(--muted) 30%, transparent);background:var(--bg);color:var(--text);padding:0 12px;font:inherit"></label>
-        <label style="margin-top:8px"><span style="display:block;font-size:13px;color:var(--muted);font-weight:700">Mot de passe</span>
-        <input type="password" required autocomplete="current-password" style="width:100%;min-height:48px;border-radius:10px;border:1px solid color-mix(in srgb, var(--muted) 30%, transparent);background:var(--bg);color:var(--text);padding:0 12px;font:inherit"></label>
+      <form id="fIn" class="panel" style="display:block">
+        <label><span style="display:block;font-size:13px;color:var(--ink-soft);font-weight:700">Email</span>
+        <input type="email" required autocomplete="email" style="width:100%;min-height:48px;border-radius:10px;border:1px solid color-mix(in srgb, var(--ink-soft) 30%, transparent);background:var(--board);color:var(--ink);padding:0 12px;font:inherit"></label>
+        <label style="margin-top:8px"><span style="display:block;font-size:13px;color:var(--ink-soft);font-weight:700">Mot de passe</span>
+        <input type="password" required autocomplete="current-password" style="width:100%;min-height:48px;border-radius:10px;border:1px solid color-mix(in srgb, var(--ink-soft) 30%, transparent);background:var(--board);color:var(--ink);padding:0 12px;font:inherit"></label>
         <button class="btn btn-primary" style="width:100%;margin-top:12px" type="submit">Se connecter</button>
       </form>
       <form id="fUp" hidden>
-        <label style="margin-top:8px;display:block"><span style="display:block;font-size:13px;color:var(--muted);font-weight:700">Email</span>
-        <input type="email" required autocomplete="email" style="width:100%;min-height:48px;border-radius:10px;border:1px solid color-mix(in srgb, var(--muted) 30%, transparent);background:var(--bg);color:var(--text);padding:0 12px;font:inherit"></label>
-        <label style="margin-top:8px"><span style="display:block;font-size:13px;color:var(--muted);font-weight:700">Mot de passe (6 min.)</span>
-        <input type="password" minlength="6" required autocomplete="new-password" style="width:100%;min-height:48px;border-radius:10px;border:1px solid color-mix(in srgb, var(--muted) 30%, transparent);background:var(--bg);color:var(--text);padding:0 12px;font:inherit"></label>
+        <label style="margin-top:8px;display:block"><span style="display:block;font-size:13px;color:var(--ink-soft);font-weight:700">Email</span>
+        <input type="email" required autocomplete="email" style="width:100%;min-height:48px;border-radius:10px;border:1px solid color-mix(in srgb, var(--ink-soft) 30%, transparent);background:var(--board);color:var(--ink);padding:0 12px;font:inherit"></label>
+        <label style="margin-top:8px"><span style="display:block;font-size:13px;color:var(--ink-soft);font-weight:700">Mot de passe (6 min.)</span>
+        <input type="password" minlength="6" required autocomplete="new-password" style="width:100%;min-height:48px;border-radius:10px;border:1px solid color-mix(in srgb, var(--ink-soft) 30%, transparent);background:var(--board);color:var(--ink);padding:0 12px;font:inherit"></label>
         <button class="btn btn-success" style="width:100%;margin-top:12px" type="submit">Créer mon compte</button>
       </form>
       <div class="install-actions">
@@ -97,3 +97,9 @@ function netBadgeW() {
 }
 window.addEventListener('online', netBadgeW); window.addEventListener('offline', netBadgeW);
 bootCommon().then(() => { render(); netBadgeW(); }).catch(e => console.error(e));
+
+
+
+
+
+
