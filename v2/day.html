@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="system">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Leçon · Shift180</title>
+<link rel="icon" href="../icons/logo.svg" type="image/svg+xml">
+<link rel="manifest" href="../manifest.webmanifest">
+<meta name="theme-color" content="#fbf6ed">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="chip is-ghost small" href="app.html" aria-label="Retour au tableau">← Retour</a>
+    <span class="spacer"></span>
+    <button class="net-badge" id="netBadge" type="button"><span class="dot"></span><span id="netTxt"></span></button>
+    <span id="topbarAuth"></span>
+  </div>
+</header>
+
+<main class="shell">
+  <section id="lockPage" class="hidden">
+    <div class="panel" style="text-align:center;margin-top:40px">
+      <h2>🔒 Pas encore accessible</h2>
+      <p id="lockWhy"></p>
+      <a class="btn btn-primary" href="app.html">← Tableau</a>
+    </div>
+  </section>
+
+  <section id="app" class="hidden">
+    <h1 id="dayTitle" style="margin:16px 0 4px">Jour</h1>
+    <p id="dayMeta" style="color:var(--muted);margin:0 0 10px"></p>
+
+    <div class="tabs" role="tablist" aria-label="Sections de la leçon">
+      <button role="tab" aria-selected="true" data-tab="course">📘 Cours &amp; TP</button>
+      <button role="tab" aria-selected="false" data-tab="code">💻 Code &amp; Live</button>
+      <button role="tab" aria-selected="false" data-tab="res">🎥 Ressources</button>
+    </div>
+
+    <div class="tabpan visible" id="panCourse" role="tabpanel">
+      <div class="panel" id="theory"></div>
+      <div class="panel">
+        <h3>✅ Tes tâches du jour</h3>
+        <div id="tasks"></div>
+        <button class="btn btn-primary" id="poseBtn" style="width:100%;margin-top:12px" disabled>🧲 Poser ton aimant</button>
+        <p id="poseHint" style="color:var(--muted);font-size:13px;margin:8px 0 0;text-align:center">Complète tous les TP pour débloquer.</p>
+      </div>
+    </div>
+
+    <div class="tabpan" id="panCode" role="tabpanel">
+      <div class="editor-wrap">
+        <textarea id="ed" spellcheck="false" aria-label="Éditeur de code"></textarea>
+        <iframe id="fr" sandbox="allow-scripts allow-modals" title="Aperçu live"></iframe>
+      </div>
+      <button class="btn btn-fab btn-primary" id="runFab" aria-label="Exécuter le code">▶</button>
+      <button class="btn btn-ghost hidden" id="runBtn" style="width:100%;margin-top:10px">▶ Exécuter (Ctrl+Entrée)</button>
+    </div>
+
+    <div class="tabpan" id="panRes" role="tabpanel">
+      <div class="panel" id="vidsP"></div>
+    </div>
+  </section>
+</main>
+
+<script id="consoleHook" type="text/plain"></script>
+<script src="../config.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../data.js"></script>
+<script src="../lessons-d1-15.js"></script>
+<script src="../lessons-d16-30.js"></script>
+<script src="../lessons-d31-45.js"></script>
+<script src="../lessons-d46-60.js"></script>
+<script src="../figures.js"></script>
+<script src="../videos.js"></script>
+<script src="../core.js"></script>
+<script src="../install.js"></script>
+<script src="day.js"></script>
+</body>
+</html>
